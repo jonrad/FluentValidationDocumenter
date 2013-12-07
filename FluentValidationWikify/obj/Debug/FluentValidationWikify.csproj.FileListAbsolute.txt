@@ -1,6 +1,0 @@
-c:\users\jon\documents\visual studio 2012\Projects\FluentValidationWikify\FluentValidationWikify\bin\Debug\FluentValidationWikify.exe.config
-c:\users\jon\documents\visual studio 2012\Projects\FluentValidationWikify\FluentValidationWikify\bin\Debug\FluentValidationWikify.exe
-c:\users\jon\documents\visual studio 2012\Projects\FluentValidationWikify\FluentValidationWikify\bin\Debug\FluentValidationWikify.pdb
-c:\users\jon\documents\visual studio 2012\Projects\FluentValidationWikify\FluentValidationWikify\obj\Debug\FluentValidationWikify.csprojResolveAssemblyReference.cache
-c:\users\jon\documents\visual studio 2012\Projects\FluentValidationWikify\FluentValidationWikify\obj\Debug\FluentValidationWikify.exe
-c:\users\jon\documents\visual studio 2012\Projects\FluentValidationWikify\FluentValidationWikify\obj\Debug\FluentValidationWikify.pdb
