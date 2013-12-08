@@ -5,19 +5,20 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
 {
-    public class PredicateDocumenter : IMethodDocumenter
+    public class RuleForDocumenter : IMethodDocumenter
     {
         public bool CanProcess(MethodDeclarationSyntax method)
         {
-            return method.Identifier.ValueText == "Must";
+            return method.Identifier.ValueText == "RuleFor";
         }
 
         public string Get(MethodDeclarationSyntax method)
         {
             var valueText = method
                 .ChildNodes().OfType<ParameterListSyntax>().First()
-                .ChildNodes().OfType<ParameterSyntax>().First()
-                .ChildNodes().OfType<IdentifierNameSyntax>().First()
+                .ChildNodes().OfType<ParameterSyntax>().Last()
+                .ChildNodes().OfType<QualifiedNameSyntax>().First()
+                .ChildNodes().OfType<IdentifierNameSyntax>().Last()
                 .Identifier.ValueText;
 
             if (valueText == null)
@@ -26,7 +27,7 @@ namespace FluentValidationWikify
             }
 
             valueText = Regex.Replace(valueText, "([a-z])([A-Z])", "$1 $2");
-            return "Must " + valueText;
+            return valueText;
         }
     }
 }
