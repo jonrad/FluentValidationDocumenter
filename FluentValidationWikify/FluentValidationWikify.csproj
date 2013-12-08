@@ -53,9 +53,11 @@
     <Compile Include="IMethodDocumenter.cs" />
     <Compile Include="ModelValidator.cs" />
     <Compile Include="PredicateDocumenter.cs" />
+    <Compile Include="PrintVisitor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NotEmptyDocumenter.cs" />
+    <Compile Include="TypeNameVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
