@@ -4,14 +4,14 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs
 {
-    [Subject(typeof(RuleForDocumenter))]
-    public class RuleForDocumenterSpecs
+    [Subject(typeof(RuleForMethodDocumenter))]
+    public class RuleForMethodDocumenterSpecs
     {
         Establish context = () =>
         {
             method = SyntaxTree.ParseText("RuleFor(m => m.Name)").GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First();
 
-            documenter = new RuleForDocumenter();
+            documenter = new RuleForMethodDocumenter();
         };
 
         It should_be_able_to_process =

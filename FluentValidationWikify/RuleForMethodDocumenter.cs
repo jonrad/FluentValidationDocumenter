@@ -5,7 +5,7 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
 {
-    public class RuleForDocumenter : IMethodDocumenter
+    public class RuleForMethodDocumenter : IMethodDocumenter
     {
         public bool CanProcess(MethodDeclarationSyntax method)
         {
