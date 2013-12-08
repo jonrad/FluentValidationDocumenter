@@ -5,8 +5,8 @@ using Machine.Specifications;
 
 namespace FluentValidationWikify.Specs
 {
-    [Subject(typeof(PropertyValidatorPretify))]
-    public class PropertyValidatorPretifySpecs
+    [Subject(typeof(NotEmptyDocumenter))]
+    public class NotEmptyDocumenterSpecs
     {
         Establish context = () =>
         {
@@ -15,19 +15,28 @@ namespace FluentValidationWikify.Specs
 
             propertyValidator = validator.CreateDescriptor().GetValidatorsForMember("Name").First();
 
-            pretify = new PropertyValidatorPretify();
+            documenter = new NotEmptyDocumenter();
         };
 
         Because of = () =>
-            result = pretify.Get(propertyValidator);
+        {
+            canProcess = documenter.CanProcess(propertyValidator);
+            result = documenter.Get(propertyValidator);
+        };
 
-        It should_return_expected_result =
+        It should_be_able_to_process =
+            () => canProcess.ShouldBeTrue();
+
+
+        It should_return_required =
             () => result.ShouldEqual("Required");
 
         static IPropertyValidator propertyValidator;
 
-        static PropertyValidatorPretify pretify;
+        static NotEmptyDocumenter documenter;
 
         static string result;
+
+        static bool canProcess;
     }
 }

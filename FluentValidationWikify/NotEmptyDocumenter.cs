@@ -3,7 +3,7 @@ using FluentValidation.Validators;
 
 namespace FluentValidationWikify
 {
-    public class PropertyValidatorPretify
+    public class NotEmptyDocumenter : IPropertyDocumenter
     {
         public bool CanProcess(IPropertyValidator propertyValidator)
         {
