@@ -17,6 +17,9 @@ namespace FluentValidationWikify
         {
             var methods = tree.DescendantNodes().OfType<MethodDeclarationSyntax>();
 
+            Rule rule = null;
+            List<string> details = null;
+
             // holy inefficiency batman
             foreach (var method in methods)
             {
@@ -24,12 +27,28 @@ namespace FluentValidationWikify
                 {
                     if (documenter.IsNewRule && documenter.CanProcess(method))
                     {
-                        yield return new Rule
+                        if (rule != null)
                         {
-                            Name = documenter.Get(method)
+                            yield return rule;
+                        }
+
+                        details = new List<string>();
+                        rule = new Rule
+                        {
+                            Name = documenter.Get(method),
+                            Details = details
                         };
                     }
+                    else if (rule != null && documenter.CanProcess(method))
+                    {
+                        details.Add(documenter.Get(method));
+                    }
                 }
+            }
+
+            if (rule != null)
+            {
+                yield return rule;
             }
         }
     }
