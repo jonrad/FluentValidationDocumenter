@@ -18,7 +18,7 @@ namespace FluentValidationWikify.Specs
             () => documenter.CanProcess(node).ShouldBeTrue();
 
         It should_return_required =
-            () => documenter.Get(node).ShouldEqual("Model");
+            () => documenter.Get(node).Name.ShouldEqual("Model");
 
         static ClassDocumenter documenter;
 

@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassDocumenterSpecs.cs" />
     <Compile Include="NotEmptyDocumenterSpecs.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="PredicateDocumenterSpecs.cs" />

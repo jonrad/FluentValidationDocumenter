@@ -10,13 +10,15 @@ namespace FluentValidationWikify
             return true;
         }
 
-        public string Get(ClassDeclarationSyntax node)
+        public ClassRules Get(ClassDeclarationSyntax node)
         {
-            return node
+            var name = node
                 .ChildNodes().OfType<BaseListSyntax>().First()
                 .ChildNodes().OfType<GenericNameSyntax>().First()
                 .ChildNodes().OfType<TypeArgumentListSyntax>().First()
                 .ChildNodes().OfType<IdentifierNameSyntax>().First().Identifier.ValueText;
+
+            return new ClassRules(name);
         }
     }
 }
