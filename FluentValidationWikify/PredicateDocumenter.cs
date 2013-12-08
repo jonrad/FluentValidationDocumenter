@@ -7,6 +7,11 @@ namespace FluentValidationWikify
 {
     public class PredicateDocumenter : IMethodDocumenter
     {
+        public bool IsNewRule
+        {
+            get { return false; }
+        }
+
         public bool CanProcess(MethodDeclarationSyntax method)
         {
             return method.Identifier.ValueText == "Must";

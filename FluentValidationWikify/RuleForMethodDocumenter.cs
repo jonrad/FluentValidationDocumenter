@@ -7,6 +7,11 @@ namespace FluentValidationWikify
 {
     public class RuleForMethodDocumenter : IMethodDocumenter
     {
+        public bool IsNewRule
+        {
+            get { return true; }
+        }
+
         public bool CanProcess(MethodDeclarationSyntax method)
         {
             return method.Identifier.ValueText == "RuleFor";

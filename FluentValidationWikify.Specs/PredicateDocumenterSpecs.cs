@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using FluentValidation.Validators;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
 
@@ -20,8 +19,6 @@ namespace FluentValidationWikify.Specs
 
         It should_return_required = () =>
             documenter.Get(method).ShouldEqual("Must Be Awesome");
-
-        static IPropertyValidator propertyValidator;
 
         static PredicateDocumenter documenter;
 
