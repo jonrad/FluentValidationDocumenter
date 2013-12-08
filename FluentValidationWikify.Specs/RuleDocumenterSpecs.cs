@@ -12,7 +12,7 @@ namespace FluentValidationWikify.Specs
         {
             Establish context = () =>
             {
-                tree = SyntaxTree.ParseText("RuleFor(m => m.Name).NotEmpty()").GetRoot();
+                tree = SyntaxTree.ParseText("RuleFor(m => m.Name).Required()").GetRoot();
             };
 
             Because of = () =>
@@ -41,11 +41,47 @@ namespace FluentValidationWikify.Specs
         }
 
         [Subject(typeof(RuleDocumenter))]
+        class for_single_rule_with_two_details : with_documenter
+        {
+            Establish context = () =>
+            {
+                tree = SyntaxTree.ParseText("RuleFor(m => m.Name).Required().Cool()").GetRoot();
+            };
+
+            Because of = () =>
+            {
+                rules = documenter.Get(tree).ToArray();
+                rule = rules[0];
+            };
+
+            It should_return_a_single_rule = () =>
+                rules.Length.ShouldEqual(1);
+
+            It should_return_required = () =>
+                rule.Name.ShouldEqual("Name");
+
+            It should_return_a_single_detail = () =>
+                rule.Details.Count().ShouldEqual(2);
+
+            It should_have_a_required_detail = () =>
+                rule.Details.First().ShouldEqual("Required");
+
+            It should_have_a_cool_detail = () =>
+                rule.Details.Last().ShouldEqual("Cool");
+
+            static SyntaxNode tree;
+
+            static Rule[] rules;
+
+            static Rule rule;
+        }
+
+        [Subject(typeof(RuleDocumenter))]
         class for_two_rule : with_documenter
         {
             Establish context = () =>
             {
-                tree = SyntaxTree.ParseText("RuleFor(m => m.Name).NotEmpty();RuleFor(m => m.Name).NotEmpty();").GetRoot();
+                tree = SyntaxTree.ParseText("RuleFor(m => m.Name).Required();RuleFor(m => m.Name).Required();").GetRoot();
             };
 
             Because of = () =>
@@ -92,7 +128,8 @@ namespace FluentValidationWikify.Specs
                 ruleDocumenter.WhenToldTo(r => r.Get(Param.IsAny<MethodDeclarationSyntax>())).Return("Name");
 
                 methodDocumenter.WhenToldTo(r => r.CanProcess(Param.IsAny<MethodDeclarationSyntax>())).Return(true);
-                methodDocumenter.WhenToldTo(r => r.Get(Param.IsAny<MethodDeclarationSyntax>())).Return("Required");
+                methodDocumenter.WhenToldTo(r => r.Get(Param.IsAny<MethodDeclarationSyntax>()))
+                    .Return<MethodDeclarationSyntax>(m => m.Identifier.ValueText);
 
                 documenter = new RuleDocumenter(new[] { ruleDocumenter, methodDocumenter });
             };
