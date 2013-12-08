@@ -2,7 +2,7 @@
 
 namespace FluentValidationWikify
 {
-    public class ClassRules : List<string>
+    public class ClassRules : List<Rule>
     {
         public ClassRules(string name)
         {

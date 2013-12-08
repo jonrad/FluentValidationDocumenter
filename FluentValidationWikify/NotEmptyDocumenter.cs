@@ -14,7 +14,7 @@ namespace FluentValidationWikify
             return method.Identifier.ValueText == "NotNull";
         }
 
-        public string Get(MethodDeclarationSyntax method)
+        public string Get(SyntaxNode node)
         {
             return "Required";
         }

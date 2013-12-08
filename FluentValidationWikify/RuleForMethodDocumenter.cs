@@ -17,9 +17,9 @@ namespace FluentValidationWikify
             return method.Identifier.ValueText == "RuleFor";
         }
 
-        public string Get(MethodDeclarationSyntax method)
+        public string Get(SyntaxNode node)
         {
-            var valueText = method
+            var valueText = node
                 .ChildNodes().OfType<ParameterListSyntax>().First()
                 .ChildNodes().OfType<ParameterSyntax>().Last()
                 .ChildNodes().OfType<QualifiedNameSyntax>().First()

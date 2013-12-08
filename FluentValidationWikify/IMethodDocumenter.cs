@@ -8,6 +8,6 @@ namespace FluentValidationWikify
 
         bool CanProcess(MethodDeclarationSyntax method);
 
-        string Get(MethodDeclarationSyntax method);
+        string Get(SyntaxNode node);
     }
 }
