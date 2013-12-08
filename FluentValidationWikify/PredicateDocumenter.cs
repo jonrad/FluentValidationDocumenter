@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
 using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
@@ -12,7 +13,13 @@ namespace FluentValidationWikify
 
         public string Get(MethodDeclarationSyntax method)
         {
-            throw new NotImplementedException();
+            var valueText = method
+                .ChildNodes().OfType<ParameterListSyntax>().First()
+                .ChildNodes().OfType<ParameterSyntax>().First()
+                .ChildNodes().OfType<IdentifierNameSyntax>().First()
+                .Identifier.ValueText;
+            valueText = Regex.Replace(valueText, "([a-z])([A-Z])", "$1 $2");
+            return "Must " + valueText;
         }
     }
 }
