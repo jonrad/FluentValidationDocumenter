@@ -53,6 +53,7 @@
     <Compile Include="ClassDocumenter.cs" />
     <Compile Include="ClassRules.cs" />
     <Compile Include="IMethodDocumenter.cs" />
+    <Compile Include="IRuleDocumenter.cs" />
     <Compile Include="ModelValidator.cs" />
     <Compile Include="PredicateDocumenter.cs" />
     <Compile Include="PrintVisitor.cs" />

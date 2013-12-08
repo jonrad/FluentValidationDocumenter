@@ -4,7 +4,7 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
 {
-    public class RuleDocumenter
+    public class RuleDocumenter : IRuleDocumenter
     {
         private readonly IEnumerable<IMethodDocumenter> methodDocumenters;
 

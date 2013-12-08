@@ -1,11 +1,12 @@
 ﻿using System.Linq;
+using Machine.Fakes;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs
 {
     [Subject(typeof(ClassDocumenter))]
-    public class ClassDocumenterSpecs
+    public class ClassDocumenterSpecs : WithFakes
     {
         class with_empty_class
         {
@@ -18,7 +19,7 @@ namespace FluentValidationWikify.Specs
                         .OfType<ClassDeclarationSyntax>()
                         .First();
 
-                documenter = new ClassDocumenter();
+                documenter = new ClassDocumenter(The<IRuleDocumenter>());
             };
 
             Because of = () =>

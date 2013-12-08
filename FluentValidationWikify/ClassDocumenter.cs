@@ -5,6 +5,10 @@ namespace FluentValidationWikify
 {
     public class ClassDocumenter
     {
+        public ClassDocumenter(IRuleDocumenter ruleDocumenter)
+        {
+        }
+
         public bool CanProcess(ClassDeclarationSyntax node)
         {
             return true;
