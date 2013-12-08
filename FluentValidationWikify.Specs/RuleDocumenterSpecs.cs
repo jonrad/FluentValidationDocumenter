@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Machine.Fakes;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs
 {
-    [Subject(typeof(RuleDocumenter))]
     public class RuleDocumenterSpecs : WithFakes
     {
+        [Subject(typeof(RuleDocumenter))]
         class for_single_rule : with_documenter
         {
             Establish context = () =>
@@ -39,6 +38,45 @@ namespace FluentValidationWikify.Specs
             static Rule[] rules;
 
             static Rule rule;
+        }
+
+        [Subject(typeof(RuleDocumenter))]
+        class for_two_rule : with_documenter
+        {
+            Establish context = () =>
+            {
+                tree = SyntaxTree.ParseText("RuleFor(m => m.Name).NotEmpty();RuleFor(m => m.Name).NotEmpty();").GetRoot();
+            };
+
+            Because of = () =>
+            {
+                rules = documenter.Get(tree).ToArray();
+            };
+
+            It should_return_two_rules = () =>
+                rules.Length.ShouldEqual(2);
+
+            It should_get_first_rules_name = () =>
+                rules[0].Name.ShouldEqual("Name");
+
+            It should_return_a_single_detail = () =>
+                rules[0].Details.Count().ShouldEqual(1);
+
+            It should_have_a_required_detail = () =>
+                rules[0].Details.First().ShouldEqual("Required");
+
+            It second_rule_should_return_required = () =>
+                rules[1].Name.ShouldEqual("Name");
+
+            It second_rule_should_return_a_single_detail = () =>
+                rules[1].Details.Count().ShouldEqual(1);
+
+            It second_rule_should_have_a_required_detail = () =>
+                rules[1].Details.First().ShouldEqual("Required");
+
+            static SyntaxNode tree;
+
+            static Rule[] rules;
         }
 
         class with_documenter
