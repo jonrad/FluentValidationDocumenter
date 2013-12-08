@@ -6,6 +6,6 @@ namespace FluentValidationWikify
     {
         bool CanProcess(IPropertyValidator propertyValidator);
 
-        string Get(IPropertyValidator propertyDocumenter);
+        string Get(IPropertyValidator propertyValidator);
     }
 }
