@@ -13,11 +13,11 @@ namespace FluentValidationWikify.Specs
             documenter = new RuleDocumenter();
         };
 
-        Because of =
-            () => rule = documenter.Get(tree);
+        Because of = () =>
+            rule = documenter.Get(tree);
 
-        It should_return_required =
-            () => rule.Name.ShouldEqual("Name");
+        It should_return_required = () =>
+            rule.Name.ShouldEqual("Name");
 
         static RuleDocumenter documenter;
 

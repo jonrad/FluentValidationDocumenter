@@ -14,11 +14,11 @@ namespace FluentValidationWikify.Specs
             documenter = new NotEmptyDocumenter();
         };
 
-        It should_be_able_to_process =
-            () => documenter.CanProcess(method).ShouldBeTrue();
+        It should_be_able_to_process = () =>
+            documenter.CanProcess(method).ShouldBeTrue();
 
-        It should_return_required =
-            () => documenter.Get(method).ShouldEqual("Required");
+        It should_return_required = () =>
+            documenter.Get(method).ShouldEqual("Required");
 
         static IMethodDocumenter documenter;
 

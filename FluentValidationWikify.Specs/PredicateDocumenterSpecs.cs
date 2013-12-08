@@ -15,11 +15,11 @@ namespace FluentValidationWikify.Specs
             documenter = new PredicateDocumenter();
         };
 
-        It should_be_able_to_process =
-            () => documenter.CanProcess(method).ShouldBeTrue();
+        It should_be_able_to_process = () =>
+            documenter.CanProcess(method).ShouldBeTrue();
 
-        It should_return_required =
-            () => documenter.Get(method).ShouldEqual("Must Be Awesome");
+        It should_return_required = () =>
+            documenter.Get(method).ShouldEqual("Must Be Awesome");
 
         static IPropertyValidator propertyValidator;
 
