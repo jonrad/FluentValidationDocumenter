@@ -38,10 +38,14 @@ namespace FluentValidationWikify
                             Name = documenter.Get(method),
                             Details = details
                         };
+
+                        break;
                     }
-                    else if (rule != null && documenter.CanProcess(method))
+
+                    if (rule != null && documenter.CanProcess(method))
                     {
                         details.Add(documenter.Get(method));
+                        break;
                     }
                 }
             }

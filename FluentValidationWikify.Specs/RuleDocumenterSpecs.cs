@@ -9,51 +9,63 @@ namespace FluentValidationWikify.Specs
     [Subject(typeof(RuleDocumenter))]
     public class RuleDocumenterSpecs : WithFakes
     {
-        Establish context = () =>
+        class for_single_rule : with_documenter
         {
-            tree = SyntaxTree.ParseText("RuleFor(m => m.Name).NotEmpty()").GetRoot();
+            Establish context = () =>
+            {
+                tree = SyntaxTree.ParseText("RuleFor(m => m.Name).NotEmpty()").GetRoot();
+            };
 
-            var methods = tree.DescendantNodes().OfType<MethodDeclarationSyntax>().ToArray();
-            var ruleMethod = methods[0];
-            var notEmptyMethod = methods[1];
+            Because of = () =>
+            {
+                rules = documenter.Get(tree).ToArray();
+                rule = rules[0];
+            };
 
-            var ruleDocumenter = An<IMethodDocumenter>();
-            var methodDocumenter = An<IMethodDocumenter>();
+            It should_return_a_single_rule = () =>
+                rules.Length.ShouldEqual(1);
 
-            ruleDocumenter.WhenToldTo(r => r.CanProcess(ruleMethod)).Return(true);
-            ruleDocumenter.WhenToldTo(r => r.IsNewRule).Return(true);
-            ruleDocumenter.WhenToldTo(r => r.Get(ruleMethod)).Return("Name");
+            It should_return_required = () =>
+                rule.Name.ShouldEqual("Name");
 
-            methodDocumenter.WhenToldTo(r => r.CanProcess(notEmptyMethod)).Return(true);
-            methodDocumenter.WhenToldTo(r => r.Get(notEmptyMethod)).Return("Required");
+            It should_return_a_single_detail = () =>
+                rule.Details.Count().ShouldEqual(1);
 
-            documenter = new RuleDocumenter(new[] { ruleDocumenter, methodDocumenter });
-        };
+            It should_have_a_required_detail = () =>
+                rule.Details.First().ShouldEqual("Required");
 
-        Because of = () =>
+            static SyntaxNode tree;
+
+            static Rule[] rules;
+
+            static Rule rule;
+        }
+
+        class with_documenter
         {
-            rules = documenter.Get(tree).ToArray();
-            rule = rules[0];
-        };
+            Establish context = () =>
+            {
+                var ruleDocumenter = An<IMethodDocumenter>();
+                var methodDocumenter = An<IMethodDocumenter>();
 
-        It should_return_a_single_rule = () =>
-            rules.Length.ShouldEqual(1);
+                ruleDocumenter.WhenToldTo(r => r.CanProcess(Param.IsAny<MethodDeclarationSyntax>()))
+                    .Return<MethodDeclarationSyntax>(m => m.Identifier.ValueText == "RuleFor");
+                ruleDocumenter.WhenToldTo(r => r.IsNewRule).Return(true);
+                ruleDocumenter.WhenToldTo(r => r.Get(Param.IsAny<MethodDeclarationSyntax>())).Return("Name");
 
-        It should_return_required = () =>
-            rule.Name.ShouldEqual("Name");
+                methodDocumenter.WhenToldTo(r => r.CanProcess(Param.IsAny<MethodDeclarationSyntax>())).Return(true);
+                methodDocumenter.WhenToldTo(r => r.Get(Param.IsAny<MethodDeclarationSyntax>())).Return("Required");
 
-        It should_return_a_single_detail = () =>
-            rule.Details.Count().ShouldEqual(1);
+                documenter = new RuleDocumenter(new[] { ruleDocumenter, methodDocumenter });
+            };
 
-        It should_have_a_required_detail = () =>
-            rule.Details.First().ShouldEqual("Required");
+            protected static RuleDocumenter documenter;
 
-        static RuleDocumenter documenter;
+            static SyntaxNode tree;
 
-        static SyntaxNode tree;
+            static Rule[] rules;
 
-        static Rule[] rules;
-
-        static Rule rule;
+            static Rule rule;
+        }
     }
 }
