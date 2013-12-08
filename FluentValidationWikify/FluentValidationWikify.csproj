@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassDocumenter.cs" />
     <Compile Include="IMethodDocumenter.cs" />
     <Compile Include="ModelValidator.cs" />
     <Compile Include="PredicateDocumenter.cs" />
