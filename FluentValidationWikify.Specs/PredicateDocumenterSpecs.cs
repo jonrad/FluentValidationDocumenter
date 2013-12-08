@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using FluentValidation;
 using FluentValidation.Validators;
 using Machine.Specifications;
+using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs
 {
@@ -10,27 +10,21 @@ namespace FluentValidationWikify.Specs
     {
         Establish context = () =>
         {
-            var validator = new InlineValidator<Model>();
-            validator.RuleFor(v => v.Name).Must(BeAwesome);
-
-            propertyValidator = validator.CreateDescriptor().GetValidatorsForMember("Name").First();
+            method = SyntaxTree.ParseText("Must(BeAwesome)").GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First();
 
             documenter = new PredicateDocumenter();
         };
 
-        static bool BeAwesome(string arg)
-        {
-            return arg == "Jon";
-        }
-
         It should_be_able_to_process =
-            () => documenter.CanProcess(propertyValidator).ShouldBeTrue();
+            () => documenter.CanProcess(method).ShouldBeTrue();
 
         It should_return_required =
-            () => documenter.Get(propertyValidator).ShouldEqual("Must Be Awesome");
+            () => documenter.Get(method).ShouldEqual("Must Be Awesome");
 
         static IPropertyValidator propertyValidator;
 
         static PredicateDocumenter documenter;
+
+        static MethodDeclarationSyntax method;
     }
 }

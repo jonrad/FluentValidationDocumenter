@@ -1,18 +1,17 @@
 ﻿using System;
-using FluentValidation.Validators;
+using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
 {
-    public class PredicateDocumenter : IPropertyDocumenter
+    public class PredicateDocumenter : IMethodDocumenter
     {
-        public bool CanProcess(IPropertyValidator propertyValidator)
+        public bool CanProcess(MethodDeclarationSyntax method)
         {
-            return propertyValidator is PredicateValidator;
+            return method.Identifier.ValueText == "Must";
         }
 
-        public string Get(IPropertyValidator propertyValidator)
+        public string Get(MethodDeclarationSyntax method)
         {
-            var predicate = (PredicateValidator)propertyValidator;
             throw new NotImplementedException();
         }
     }

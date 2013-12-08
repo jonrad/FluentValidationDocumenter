@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using FluentValidation;
-using FluentValidation.Validators;
 using Machine.Specifications;
+using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs
 {
@@ -10,22 +9,19 @@ namespace FluentValidationWikify.Specs
     {
         Establish context = () =>
         {
-            var validator = new InlineValidator<Model>();
-            validator.RuleFor(v => v.Name).NotEmpty();
-
-            propertyValidator = validator.CreateDescriptor().GetValidatorsForMember("Name").First();
+            method = SyntaxTree.ParseText("NotNull()").GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First();
 
             documenter = new NotEmptyDocumenter();
         };
 
         It should_be_able_to_process =
-            () => documenter.CanProcess(propertyValidator).ShouldBeTrue();
+            () => documenter.CanProcess(method).ShouldBeTrue();
 
         It should_return_required =
-            () => documenter.Get(propertyValidator).ShouldEqual("Required");
+            () => documenter.Get(method).ShouldEqual("Required");
 
-        static IPropertyValidator propertyValidator;
+        static IMethodDocumenter documenter;
 
-        static NotEmptyDocumenter documenter;
+        static MethodDeclarationSyntax method;
     }
 }

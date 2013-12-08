@@ -1,22 +1,16 @@
-﻿using System;
-using FluentValidation.Validators;
+﻿using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
 {
-    public class NotEmptyDocumenter : IPropertyDocumenter
+    public class NotEmptyDocumenter : IMethodDocumenter
     {
-        public bool CanProcess(IPropertyValidator propertyValidator)
+        public bool CanProcess(MethodDeclarationSyntax method)
         {
-            return propertyValidator is NotEmptyValidator;
+            return method.Identifier.ValueText == "NotNull";
         }
 
-        public string Get(IPropertyValidator propertyValidator)
+        public string Get(MethodDeclarationSyntax method)
         {
-            if (!CanProcess(propertyValidator))
-            {
-                throw new Exception();
-            }
-
             return "Required";
         }
     }
