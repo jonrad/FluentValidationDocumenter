@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D2326E
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentValidationWikify.Integration", "FluentValidationWikify.Integration\FluentValidationWikify.Integration.csproj", "{51701DB5-EBF6-427B-9A2B-E442815389AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{92F9A527-2714-4A6B-A98C-526761D85031}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92F9A527-2714-4A6B-A98C-526761D85031}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92F9A527-2714-4A6B-A98C-526761D85031}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51701DB5-EBF6-427B-9A2B-E442815389AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51701DB5-EBF6-427B-9A2B-E442815389AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51701DB5-EBF6-427B-9A2B-E442815389AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51701DB5-EBF6-427B-9A2B-E442815389AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
