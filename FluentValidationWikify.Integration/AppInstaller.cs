@@ -2,6 +2,7 @@
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using FluentValidationWikify.NodeDocumenters;
 
 namespace FluentValidationWikify.Integration
 {

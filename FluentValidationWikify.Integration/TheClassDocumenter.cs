@@ -10,7 +10,7 @@ namespace FluentValidationWikify.Integration
         [Test]
         public void ShouldWork()
         {
-            const string text = @"
+            const string Text = @"
                 public class ModelValidator : AbstractValidator<Model>
                 {
                     public ModelValidator()
@@ -22,7 +22,7 @@ namespace FluentValidationWikify.Integration
 
             var result =
                 documenter.Get(
-                    SyntaxTree.ParseText(text).GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().First());
+                    SyntaxTree.ParseText(Text).GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().First());
 
             Assert.That(result.Name, Is.EqualTo("Model"));
 
