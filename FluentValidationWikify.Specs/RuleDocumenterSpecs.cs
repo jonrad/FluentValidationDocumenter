@@ -13,7 +13,7 @@ namespace FluentValidationWikify.Specs
             Establish context = () =>
             {
                 // RuleFor(x => x.Name).Required()
-                SingleRuleTree = Syntax.InvocationExpression(
+                tree = Syntax.InvocationExpression(
                     Syntax.MemberAccessExpression(
                         SyntaxKind.MemberAccessExpression,
                         RuleFor,
@@ -23,7 +23,7 @@ namespace FluentValidationWikify.Specs
 
             Because of = () =>
             {
-                rules = documenter.Get(SingleRuleTree).ToArray();
+                rules = documenter.Get(tree).ToArray();
                 rule = rules[0];
             };
 
@@ -39,7 +39,7 @@ namespace FluentValidationWikify.Specs
             It should_have_a_required_detail = () =>
                 rule.Details.First().ShouldEqual("Required");
 
-            protected static InvocationExpressionSyntax SingleRuleTree;
+            private static InvocationExpressionSyntax tree;
 
             static Rule[] rules;
 
@@ -176,12 +176,6 @@ namespace FluentValidationWikify.Specs
             };
 
             protected static RuleDocumenter documenter;
-
-            static SyntaxNode tree;
-
-            static Rule[] rules;
-
-            static Rule rule;
 
             protected static InvocationExpressionSyntax RuleFor;
         }
