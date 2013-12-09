@@ -76,9 +76,6 @@ namespace FluentValidationWikify.Specs
             It should_return_required = () =>
                 classRules.Name.ShouldEqual("Model");
 
-            It should_have_one_rule = () =>
-                classRules.Count.ShouldEqual(1);
-
             It should_have_attempted_to_get_rules = () =>
                 The<IRuleDocumenter>().WasToldTo(r => r.Get(Param.IsAny<SyntaxNode>())).OnlyOnce();
 

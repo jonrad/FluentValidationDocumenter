@@ -6,7 +6,7 @@ namespace FluentValidationWikify
 {
     public class RuleDocumenter : IRuleDocumenter
     {
-        private Visitor visitor;
+        private readonly Visitor visitor;
 
         public RuleDocumenter(IEnumerable<INodeDocumenter> documenters)
         {
@@ -86,7 +86,7 @@ namespace FluentValidationWikify
                 {
                     if (documenter.CanProcess(node))
                     {
-                        yield return new Handler()
+                        yield return new Handler
                         {
                             Node = node,
                             Documenter = documenter
