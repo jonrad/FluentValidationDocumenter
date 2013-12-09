@@ -6,9 +6,9 @@ namespace FluentValidationWikify
 {
     public class RuleDocumenter : IRuleDocumenter
     {
-        private readonly IEnumerable<IMethodDocumenter> methodDocumenters;
+        private readonly IEnumerable<INodeDocumenter> methodDocumenters;
 
-        public RuleDocumenter(IEnumerable<IMethodDocumenter> methodDocumenters)
+        public RuleDocumenter(IEnumerable<INodeDocumenter> methodDocumenters)
         {
             this.methodDocumenters = methodDocumenters;
         }

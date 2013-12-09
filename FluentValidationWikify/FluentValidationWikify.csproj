@@ -52,7 +52,8 @@
   <ItemGroup>
     <Compile Include="ClassDocumenter.cs" />
     <Compile Include="ClassRules.cs" />
-    <Compile Include="IMethodDocumenter.cs" />
+    <Compile Include="INodeDocumenter.cs" />
+    <Compile Include="InvocationExpressionDocumenter.cs" />
     <Compile Include="IRuleDocumenter.cs" />
     <Compile Include="ModelValidator.cs" />
     <Compile Include="PredicateDocumenter.cs" />
@@ -62,7 +63,7 @@
     <Compile Include="NotEmptyDocumenter.cs" />
     <Compile Include="Rule.cs" />
     <Compile Include="RuleDocumenter.cs" />
-    <Compile Include="RuleForMethodDocumenter.cs" />
+    <Compile Include="RuleForDocumenter.cs" />
     <Compile Include="TypeNameVisitor.cs" />
   </ItemGroup>
   <ItemGroup>

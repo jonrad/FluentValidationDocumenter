@@ -2,19 +2,19 @@
 
 namespace FluentValidationWikify
 {
-    public class NotEmptyDocumenter : IMethodDocumenter
+    public class NotEmptyDocumenter : InvocationExpressionDocumenter
     {
-        public bool IsNewRule
+        public override bool IsNewRule
         {
             get { return false; }
         }
 
-        public bool CanProcess(MethodDeclarationSyntax method)
+        public override string MethodName
         {
-            return method.Identifier.ValueText == "NotNull";
+            get { return "NotNull"; }
         }
 
-        public string Get(SyntaxNode node)
+        public override string Get(SyntaxNode node)
         {
             return "Required";
         }

@@ -119,8 +119,8 @@ namespace FluentValidationWikify.Specs
         {
             Establish context = () =>
             {
-                var ruleDocumenter = An<IMethodDocumenter>();
-                var methodDocumenter = An<IMethodDocumenter>();
+                var ruleDocumenter = An<INodeDocumenter>();
+                var methodDocumenter = An<INodeDocumenter>();
 
                 ruleDocumenter.WhenToldTo(r => r.CanProcess(Param.IsAny<MethodDeclarationSyntax>()))
                     .Return<MethodDeclarationSyntax>(m => m.Identifier.ValueText == "RuleFor");

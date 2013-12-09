@@ -2,11 +2,11 @@
 
 namespace FluentValidationWikify
 {
-    public interface IMethodDocumenter
+    public interface INodeDocumenter
     {
         bool IsNewRule { get; }
 
-        bool CanProcess(MethodDeclarationSyntax method);
+        bool CanProcess(SyntaxNode node);
 
         string Get(SyntaxNode node);
     }

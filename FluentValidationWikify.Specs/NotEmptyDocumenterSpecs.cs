@@ -9,19 +9,19 @@ namespace FluentValidationWikify.Specs
     {
         Establish context = () =>
         {
-            method = SyntaxTree.ParseText("NotNull()").GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First();
+            node = Syntax.InvocationExpression(Syntax.IdentifierName("NotNull"));
 
             documenter = new NotEmptyDocumenter();
         };
 
         It should_be_able_to_process = () =>
-            documenter.CanProcess(method).ShouldBeTrue();
+            documenter.CanProcess(node).ShouldBeTrue();
 
         It should_return_required = () =>
-            documenter.Get(method).ShouldEqual("Required");
+            documenter.Get(node).ShouldEqual("Required");
 
-        static IMethodDocumenter documenter;
+        static INodeDocumenter documenter;
 
-        static MethodDeclarationSyntax method;
+        static SyntaxNode node;
     }
 }

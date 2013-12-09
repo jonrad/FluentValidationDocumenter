@@ -69,7 +69,7 @@
     <Compile Include="PredicateDocumenterSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleDocumenterSpecs.cs" />
-    <Compile Include="RuleForMethodDocumenterSpecs.cs" />
+    <Compile Include="RuleForDocumenterSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

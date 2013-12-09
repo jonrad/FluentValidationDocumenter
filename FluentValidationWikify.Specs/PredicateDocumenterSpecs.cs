@@ -9,19 +9,24 @@ namespace FluentValidationWikify.Specs
     {
         Establish context = () =>
         {
-            method = SyntaxTree.ParseText("Must(BeAwesome)").GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First();
+            node = Syntax.InvocationExpression(
+                Syntax.IdentifierName("Must"),
+                Syntax.ArgumentList(
+                    Syntax.SeparatedList(
+                        Syntax.Argument(
+                            Syntax.IdentifierName("BeAwesome")))));
 
             documenter = new PredicateDocumenter();
         };
 
         It should_be_able_to_process = () =>
-            documenter.CanProcess(method).ShouldBeTrue();
+            documenter.CanProcess(node).ShouldBeTrue();
 
         It should_return_required = () =>
-            documenter.Get(method).ShouldEqual("Must Be Awesome");
+            documenter.Get(node).ShouldEqual("Must Be Awesome");
 
         static PredicateDocumenter documenter;
 
-        static MethodDeclarationSyntax method;
+        static SyntaxNode node;
     }
 }
