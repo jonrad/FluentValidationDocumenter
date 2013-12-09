@@ -64,12 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassDocumenterSpecs.cs" />
-    <Compile Include="NotEmptyDocumenterSpecs.cs" />
-    <Compile Include="Model.cs" />
-    <Compile Include="PredicateDocumenterSpecs.cs" />
+    <Compile Include="NodeDocumenters\NotEmptyDocumenterSpecs.cs" />
+    <Compile Include="NodeDocumenters\PredicateDocumenterSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleDocumenterSpecs.cs" />
-    <Compile Include="RuleForDocumenterSpecs.cs" />
+    <Compile Include="NodeDocumenters\RuleForDocumenterSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
