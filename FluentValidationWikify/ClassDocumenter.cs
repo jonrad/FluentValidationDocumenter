@@ -33,7 +33,7 @@ namespace FluentValidationWikify
             return rules;
         }
 
-        class Visitor : SyntaxVisitor<IEnumerable<Rule>>
+        private class Visitor : SyntaxVisitor<IEnumerable<Rule>>
         {
             private readonly IRuleDocumenter ruleDocumenter;
 
