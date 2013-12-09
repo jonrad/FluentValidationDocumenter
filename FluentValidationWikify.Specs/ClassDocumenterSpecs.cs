@@ -76,7 +76,7 @@ namespace FluentValidationWikify.Specs
             It should_return_required = () =>
                 classRules.Name.ShouldEqual("Model");
 
-            It should_have_no_rules = () =>
+            It should_have_one_rule = () =>
                 classRules.Count.ShouldEqual(1);
 
             It should_have_attempted_to_get_rules = () =>
