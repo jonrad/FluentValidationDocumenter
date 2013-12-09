@@ -5,7 +5,7 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
 {
-    public class PredicateDocumenter : InvocationExpressionDocumenter
+    public class PredicateDocumenter : MemberAccessExpressionDocumenter
     {
         public override string MethodName
         {

@@ -12,12 +12,18 @@ namespace FluentValidationWikify.Specs
         {
             Establish context = () =>
             {
-                tree = SyntaxTree.ParseText("RuleFor(m => m.Name).Required()").GetRoot();
+                // RuleFor(x => x.Name).Required()
+                SingleRuleTree = Syntax.InvocationExpression(
+                    Syntax.MemberAccessExpression(
+                        SyntaxKind.MemberAccessExpression,
+                        RuleFor,
+                        Syntax.IdentifierName("Required")),
+                    Syntax.ArgumentList());
             };
 
             Because of = () =>
             {
-                rules = documenter.Get(tree).ToArray();
+                rules = documenter.Get(SingleRuleTree).ToArray();
                 rule = rules[0];
             };
 
@@ -33,7 +39,7 @@ namespace FluentValidationWikify.Specs
             It should_have_a_required_detail = () =>
                 rule.Details.First().ShouldEqual("Required");
 
-            static SyntaxNode tree;
+            protected static InvocationExpressionSyntax SingleRuleTree;
 
             static Rule[] rules;
 
@@ -45,7 +51,18 @@ namespace FluentValidationWikify.Specs
         {
             Establish context = () =>
             {
-                tree = SyntaxTree.ParseText("RuleFor(m => m.Name).Required().Cool()").GetRoot();
+                // RuleFor(x => x.Name).Required().Cool()
+                tree = Syntax.InvocationExpression(
+                    Syntax.MemberAccessExpression(
+                        SyntaxKind.MemberAccessExpression,
+                        Syntax.InvocationExpression(
+                            Syntax.MemberAccessExpression(
+                                SyntaxKind.MemberAccessExpression,
+                                RuleFor,
+                                Syntax.IdentifierName("Required")),
+                            Syntax.ArgumentList()),
+                        Syntax.IdentifierName("Cool")),
+                    Syntax.ArgumentList());
             };
 
             Because of = () =>
@@ -81,7 +98,14 @@ namespace FluentValidationWikify.Specs
         {
             Establish context = () =>
             {
-                tree = SyntaxTree.ParseText("RuleFor(m => m.Name).Required();RuleFor(m => m.Name).Required();").GetRoot();
+                var singleRule = Syntax.ExpressionStatement(
+                    Syntax.InvocationExpression(
+                        Syntax.MemberAccessExpression(
+                            SyntaxKind.MemberAccessExpression,
+                            RuleFor,
+                            Syntax.IdentifierName("Required")),
+                        Syntax.ArgumentList()));
+                tree = Syntax.Block(new StatementSyntax[] { singleRule, singleRule });
             };
 
             Because of = () =>
@@ -119,17 +143,34 @@ namespace FluentValidationWikify.Specs
         {
             Establish context = () =>
             {
+                RuleFor = Syntax.InvocationExpression(
+                    Syntax.IdentifierName("RuleFor"),
+                    Syntax.ArgumentList(
+                        Syntax.SeparatedList(
+                            Syntax.Argument(
+                                Syntax.SimpleLambdaExpression(
+                                    Syntax.Parameter(Syntax.Identifier("m")),
+                                    Syntax.MemberAccessExpression(
+                                        SyntaxKind.MemberAccessExpression,
+                                        Syntax.IdentifierName("m"),
+                                        Syntax.IdentifierName("Name")))))));
+
                 var ruleDocumenter = An<INodeDocumenter>();
                 var methodDocumenter = An<INodeDocumenter>();
 
-                ruleDocumenter.WhenToldTo(r => r.CanProcess(Param.IsAny<MethodDeclarationSyntax>()))
-                    .Return<MethodDeclarationSyntax>(m => m.Identifier.ValueText == "RuleFor");
+                ruleDocumenter.WhenToldTo(r => r.CanProcess(Param.IsAny<SyntaxNode>()))
+                    .Return<SyntaxNode>(m =>
+                    {
+                        var identifier = m.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault();
+                        return identifier != null && identifier.Identifier.ValueText == "RuleFor";
+                    });
                 ruleDocumenter.WhenToldTo(r => r.IsNewRule).Return(true);
-                ruleDocumenter.WhenToldTo(r => r.Get(Param.IsAny<MethodDeclarationSyntax>())).Return("Name");
+                ruleDocumenter.WhenToldTo(r => r.Get(Param.IsAny<SyntaxNode>())).Return("Name");
 
-                methodDocumenter.WhenToldTo(r => r.CanProcess(Param.IsAny<MethodDeclarationSyntax>())).Return(true);
-                methodDocumenter.WhenToldTo(r => r.Get(Param.IsAny<MethodDeclarationSyntax>()))
-                    .Return<MethodDeclarationSyntax>(m => m.Identifier.ValueText);
+                methodDocumenter.WhenToldTo(r => r.CanProcess(Param.IsAny<SyntaxNode>())).Return<SyntaxNode>(
+                    n => n is MemberAccessExpressionSyntax);
+                methodDocumenter.WhenToldTo(r => r.Get(Param.IsAny<SyntaxNode>()))
+                    .Return<SyntaxNode>(m => m.ChildNodes().OfType<IdentifierNameSyntax>().First().Identifier.ValueText);
 
                 documenter = new RuleDocumenter(new[] { ruleDocumenter, methodDocumenter });
             };
@@ -141,6 +182,8 @@ namespace FluentValidationWikify.Specs
             static Rule[] rules;
 
             static Rule rule;
+
+            protected static InvocationExpressionSyntax RuleFor;
         }
     }
 }

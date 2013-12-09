@@ -55,6 +55,7 @@
     <Compile Include="INodeDocumenter.cs" />
     <Compile Include="InvocationExpressionDocumenter.cs" />
     <Compile Include="IRuleDocumenter.cs" />
+    <Compile Include="MemberAccessExpressionDocumenter.cs" />
     <Compile Include="ModelValidator.cs" />
     <Compile Include="PredicateDocumenter.cs" />
     <Compile Include="PrintVisitor.cs" />

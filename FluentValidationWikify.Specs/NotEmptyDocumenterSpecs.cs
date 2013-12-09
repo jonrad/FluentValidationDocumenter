@@ -9,7 +9,12 @@ namespace FluentValidationWikify.Specs
     {
         Establish context = () =>
         {
-            node = Syntax.InvocationExpression(Syntax.IdentifierName("NotNull"));
+            node = 
+                Syntax.InvocationExpression(
+                    Syntax.MemberAccessExpression(
+                        SyntaxKind.MemberAccessExpression,
+                        Syntax.IdentifierName("x"),
+                        Syntax.IdentifierName("NotNull")));
 
             documenter = new NotEmptyDocumenter();
         };

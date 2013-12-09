@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Machine.Specifications;
+﻿using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs
@@ -9,9 +8,13 @@ namespace FluentValidationWikify.Specs
     {
         Establish context = () =>
         {
-            node = Syntax.InvocationExpression(
-                Syntax.IdentifierName("Must"),
-                Syntax.ArgumentList(
+            node = 
+                Syntax.InvocationExpression(
+                    Syntax.MemberAccessExpression(
+                        SyntaxKind.MemberAccessExpression,
+                        Syntax.IdentifierName("x"),
+                        Syntax.IdentifierName("Must")),
+                    Syntax.ArgumentList(
                     Syntax.SeparatedList(
                         Syntax.Argument(
                             Syntax.IdentifierName("BeAwesome")))));

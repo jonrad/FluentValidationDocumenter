@@ -6,47 +6,37 @@ namespace FluentValidationWikify
 {
     public class RuleDocumenter : IRuleDocumenter
     {
-        private readonly IEnumerable<INodeDocumenter> methodDocumenters;
+        private Visitor visitor;
 
-        public RuleDocumenter(IEnumerable<INodeDocumenter> methodDocumenters)
+        public RuleDocumenter(IEnumerable<INodeDocumenter> documenters)
         {
-            this.methodDocumenters = methodDocumenters;
+            visitor = new Visitor(documenters);
         }
 
         public IEnumerable<Rule> Get(SyntaxNode tree)
         {
-            var methods = tree.DescendantNodes().OfType<MethodDeclarationSyntax>();
-
             Rule rule = null;
             List<string> details = null;
 
-            // holy inefficiency batman
-            foreach (var method in methods)
+            foreach (var handler in visitor.Visit(tree))
             {
-                foreach (var documenter in methodDocumenters)
+                if (handler.Documenter.IsNewRule)
                 {
-                    if (documenter.IsNewRule && documenter.CanProcess(method))
+                    if (rule != null)
                     {
-                        if (rule != null)
-                        {
-                            yield return rule;
-                        }
-
-                        details = new List<string>();
-                        rule = new Rule
-                        {
-                            Name = documenter.Get(method),
-                            Details = details
-                        };
-
-                        break;
+                        yield return rule;
                     }
 
-                    if (rule != null && documenter.CanProcess(method))
+                    details = new List<string>();
+                    rule = new Rule
                     {
-                        details.Add(documenter.Get(method));
-                        break;
-                    }
+                        Name = handler.Documenter.Get(handler.Node),
+                        Details = details
+                    };
+                }
+                else if (rule != null)
+                {
+                    details.Add(handler.Documenter.Get(handler.Node));
                 }
             }
 
@@ -54,6 +44,65 @@ namespace FluentValidationWikify
             {
                 yield return rule;
             }
+        }
+
+        private class Visitor : SyntaxVisitor<IEnumerable<Handler>>
+        {
+            private readonly IEnumerable<INodeDocumenter> documenters;
+
+            public Visitor(IEnumerable<INodeDocumenter> documenters)
+            {
+                this.documenters = documenters;
+            }
+
+            public override IEnumerable<Handler> VisitBlock(BlockSyntax node)
+            {
+                return RecursivelyVisit(node);
+            }
+
+            public override IEnumerable<Handler> VisitExpressionStatement(ExpressionStatementSyntax node)
+            {
+                return RecursivelyVisit(node);
+            }
+
+            public override IEnumerable<Handler> VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
+            {
+                return RecursivelyVisit(node);
+            }
+
+            public override IEnumerable<Handler> VisitInvocationExpression(InvocationExpressionSyntax node)
+            {
+                return RecursivelyVisit(node);
+            }
+
+            private IEnumerable<Handler> RecursivelyVisit(SyntaxNode node)
+            {
+                foreach (var result in node.ChildNodes().Select(Visit).Where(v => v != null).SelectMany(v => v))
+                {
+                    yield return result;
+                }
+
+                foreach (var documenter in documenters)
+                {
+                    if (documenter.CanProcess(node))
+                    {
+                        yield return new Handler()
+                        {
+                            Node = node,
+                            Documenter = documenter
+                        };
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        private class Handler
+        {
+            public SyntaxNode Node { get; set; }
+
+            public INodeDocumenter Documenter { get; set; }
         }
     }
 }
