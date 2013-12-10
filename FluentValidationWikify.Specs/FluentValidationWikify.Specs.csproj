@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassDocumenterSpecs.cs" />
+    <Compile Include="NodeDocumenters\MustDocumenterSpecs.cs" />
     <Compile Include="NodeDocumenters\NotNullDocumenterSpecs.cs" />
     <Compile Include="NodeDocumenters\PredicateDocumenterSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

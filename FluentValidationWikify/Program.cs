@@ -12,11 +12,11 @@ namespace FluentValidationWikify
     {
         public ModelValidator()
         {
-            RuleFor(m => m.Name).NotEmpty();
+            RuleFor(m => m.Name).NotEmpty().When(Cool);
         }
     }
 ";
-            var tree = SyntaxTree.ParseText("RuleFor(m => m.Name);");
+            var tree = SyntaxTree.ParseText(text);
             var printer = new PrintVisitor(new TypeNameVisitor());
             printer.Visit(tree.GetRoot());
             Console.ReadLine();

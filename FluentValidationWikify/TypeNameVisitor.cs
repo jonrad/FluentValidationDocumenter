@@ -1,4 +1,5 @@
-﻿using Roslyn.Compilers.CSharp;
+﻿using System.Linq;
+using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
 {
@@ -6,7 +7,7 @@ namespace FluentValidationWikify
     {
         public override string Visit(SyntaxNode node)
         {
-            return node.GetType().Name;
+            return node.GetType().Name + " " + node.GetText().Lines.First();
         }
     }
 }
