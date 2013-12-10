@@ -60,6 +60,7 @@
     <Compile Include="NodeDocumenters\MemberAccessExpressionDocumenter.cs" />
     <Compile Include="NodeDocumenters\PredicateDocumenter.cs" />
     <Compile Include="NodeDocumenters\PredicateDocumenterBase.cs" />
+    <Compile Include="NodeDocumenters\RequiredDocumenter.cs" />
     <Compile Include="NodeDocumenters\WhenDocumenter.cs" />
     <Compile Include="PrintVisitor.cs" />
     <Compile Include="Program.cs" />
