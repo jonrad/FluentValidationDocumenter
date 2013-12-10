@@ -51,18 +51,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassDocumenter.cs" />
-    <Compile Include="ClassRules.cs" />
+    <Compile Include="Models\ClassRules.cs" />
     <Compile Include="IClassDocumenter.cs" />
     <Compile Include="NodeDocumenters\INodeDocumenter.cs" />
-    <Compile Include="InvocationExpressionDocumenter.cs" />
+    <Compile Include="NodeDocumenters\InvocationExpressionDocumenter.cs" />
     <Compile Include="IRuleDocumenter.cs" />
-    <Compile Include="MemberAccessExpressionDocumenter.cs" />
+    <Compile Include="NodeDocumenters\MemberAccessExpressionDocumenter.cs" />
     <Compile Include="NodeDocumenters\PredicateDocumenter.cs" />
     <Compile Include="PrintVisitor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NodeDocumenters\NotEmptyDocumenter.cs" />
-    <Compile Include="Rule.cs" />
+    <Compile Include="Models\Rule.cs" />
     <Compile Include="RuleDocumenter.cs" />
     <Compile Include="NodeDocumenters\RuleForDocumenter.cs" />
     <Compile Include="TypeNameVisitor.cs" />

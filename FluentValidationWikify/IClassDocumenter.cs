@@ -1,4 +1,5 @@
-﻿using Roslyn.Compilers.CSharp;
+﻿using FluentValidationWikify.Models;
+using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
 {

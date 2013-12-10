@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FluentValidationWikify.Models;
 using Machine.Fakes;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
