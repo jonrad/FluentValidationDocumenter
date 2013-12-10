@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassDocumenter.cs" />
+    <Compile Include="ITextDocumenter.cs" />
     <Compile Include="Models\ClassRules.cs" />
     <Compile Include="IClassDocumenter.cs" />
     <Compile Include="NodeDocumenters\INodeDocumenter.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Models\Rule.cs" />
     <Compile Include="RuleDocumenter.cs" />
     <Compile Include="NodeDocumenters\RuleForDocumenter.cs" />
+    <Compile Include="TextDocumenter.cs" />
     <Compile Include="TypeNameVisitor.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,9 +6,9 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs
 {
-    [Subject(typeof(ClassDocumenter))]
     public class ClassDocumenterSpecs : WithFakes
     {
+        [Subject(typeof(ClassDocumenter))]
         class with_empty_class
         {
             Establish context = () =>
@@ -45,6 +45,7 @@ namespace FluentValidationWikify.Specs
             static ClassDeclarationSyntax node;
         }
 
+        [Subject(typeof(ClassDocumenter))]
         class with_class_containing_ctor_rules
         {
             Establish context = () =>
