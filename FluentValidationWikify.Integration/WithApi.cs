@@ -6,15 +6,15 @@ namespace FluentValidationWikify.Integration
 {
     public class WithApi
     {
-        private static readonly Lazy<IClassDocumenter> ClassDocumenter = new Lazy<IClassDocumenter>(() =>
+        private static readonly Lazy<ITextDocumenter> TextDocumenter = new Lazy<ITextDocumenter>(() =>
         {
             var container = new WindsorContainer().Install(FromAssembly.This());
-            return container.Resolve<IClassDocumenter>();
+            return container.Resolve<ITextDocumenter>();
         });
 
-        public IClassDocumenter Init()
+        public ITextDocumenter Init()
         {
-            return ClassDocumenter.Value;
+            return TextDocumenter.Value;
         }
     }
 }

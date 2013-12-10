@@ -1,11 +1,10 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Integration
 {
     [TestFixture]
-    public class TheClassDocumenter : WithApi
+    public class TheTextDocumenter : WithApi
     {
         [Test]
         public void ShouldWork()
@@ -20,9 +19,12 @@ namespace FluentValidationWikify.Integration
                 }";
             var documenter = Init();
 
-            var result =
-                documenter.Get(
-                    SyntaxTree.ParseText(Text).GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().First());
+            var results =
+                documenter.Get(Text).ToArray();
+
+            Assert.That(results.Length, Is.EqualTo(1));
+
+            var result = results[0];
 
             Assert.That(result.Name, Is.EqualTo("Model"));
 

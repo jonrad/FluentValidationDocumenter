@@ -12,6 +12,7 @@ namespace FluentValidationWikify.Integration
         {
             container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
             container.Register(
+                Component.For<ITextDocumenter>().ImplementedBy<TextDocumenter>(),
                 Component.For<IClassDocumenter>().ImplementedBy<ClassDocumenter>(),
                 Component.For<IRuleDocumenter>().ImplementedBy<RuleDocumenter>(),
                 Classes.FromAssembly(typeof(INodeDocumenter).Assembly).BasedOn<INodeDocumenter>().WithService.FromInterface(typeof(INodeDocumenter)));
