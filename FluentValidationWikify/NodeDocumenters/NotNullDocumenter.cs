@@ -2,7 +2,7 @@
 
 namespace FluentValidationWikify.NodeDocumenters
 {
-    public class NotEmptyDocumenter : MemberAccessExpressionDocumenter
+    public class NotNullDocumenter : MemberAccessExpressionDocumenter
     {
         public override bool IsNewRule
         {

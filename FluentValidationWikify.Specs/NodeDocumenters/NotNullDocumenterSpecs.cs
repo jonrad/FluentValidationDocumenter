@@ -4,8 +4,8 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs.NodeDocumenters
 {
-    [Subject(typeof(NotEmptyDocumenter))]
-    public class NotEmptyDocumenterSpecs
+    [Subject(typeof(NotNullDocumenter))]
+    public class NotNullDocumenterSpecs
     {
         Establish context = () =>
         {
@@ -16,7 +16,7 @@ namespace FluentValidationWikify.Specs.NodeDocumenters
                         Syntax.IdentifierName("x"),
                         Syntax.IdentifierName("NotNull")));
 
-            documenter = new NotEmptyDocumenter();
+            documenter = new NotNullDocumenter();
         };
 
         It should_be_able_to_process = () =>

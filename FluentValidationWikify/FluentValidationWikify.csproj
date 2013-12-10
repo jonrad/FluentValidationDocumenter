@@ -62,7 +62,7 @@
     <Compile Include="PrintVisitor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NodeDocumenters\NotEmptyDocumenter.cs" />
+    <Compile Include="NodeDocumenters\NotNullDocumenter.cs" />
     <Compile Include="Models\Rule.cs" />
     <Compile Include="RuleDocumenter.cs" />
     <Compile Include="NodeDocumenters\RuleForDocumenter.cs" />

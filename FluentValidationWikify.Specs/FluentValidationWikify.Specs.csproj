@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassDocumenterSpecs.cs" />
-    <Compile Include="NodeDocumenters\NotEmptyDocumenterSpecs.cs" />
+    <Compile Include="NodeDocumenters\NotNullDocumenterSpecs.cs" />
     <Compile Include="NodeDocumenters\PredicateDocumenterSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleDocumenterSpecs.cs" />
