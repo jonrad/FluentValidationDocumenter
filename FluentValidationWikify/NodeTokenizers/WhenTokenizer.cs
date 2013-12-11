@@ -1,6 +1,6 @@
-﻿namespace FluentValidationWikify.NodeDocumenters
+﻿namespace FluentValidationWikify.NodeTokenizers
 {
-    public class WhenDocumenter : PredicateDocumenterBase
+    public class WhenTokenizer : PredicateTokenizerBase
     {
         public override string MethodName
         {

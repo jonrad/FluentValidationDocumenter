@@ -1,11 +1,11 @@
-﻿using FluentValidationWikify.NodeDocumenters;
+﻿using FluentValidationWikify.NodeTokenizers;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Specs.NodeDocumenters
+namespace FluentValidationWikify.Specs.NodeTokenizers
 {
-    [Subject(typeof(PredicateDocumenter))]
-    public class PredicateDocumenterSpecs
+    [Subject(typeof(PredicateTokenizer))]
+    public class PredicateTokenizerSpecs
     {
         Establish context = () =>
         {
@@ -20,7 +20,7 @@ namespace FluentValidationWikify.Specs.NodeDocumenters
                         Syntax.Argument(
                             Syntax.IdentifierName("BeAwesome")))));
 
-            documenter = new PredicateDocumenter();
+            documenter = new PredicateTokenizer();
         };
 
         It should_be_able_to_process = () =>
@@ -32,7 +32,7 @@ namespace FluentValidationWikify.Specs.NodeDocumenters
         It should_return_be_aweomse = () =>
             documenter.Get(node).Info.ShouldEqual("BeAwesome");
 
-        static PredicateDocumenter documenter;
+        static PredicateTokenizer documenter;
 
         static SyntaxNode node;
     }

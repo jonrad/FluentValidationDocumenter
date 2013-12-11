@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentValidationWikify.Models;
-using FluentValidationWikify.NodeDocumenters;
+using FluentValidationWikify.NodeTokenizers;
 using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
 {
-    public class RuleDocumenter : IRuleDocumenter
+    public class RuleTokenizer : IRuleTokenizer
     {
         private readonly Visitor visitor;
 
-        public RuleDocumenter(IEnumerable<INodeDocumenter> documenters)
+        public RuleTokenizer(IEnumerable<INodeTokenizer> documenters)
         {
             visitor = new Visitor(documenters);
         }
@@ -18,27 +18,27 @@ namespace FluentValidationWikify
         public IEnumerable<Rule> Get(SyntaxNode tree)
         {
             Rule rule = null;
-            List<Doc> details = null;
+            List<Token> details = null;
 
             foreach (var handler in visitor.Visit(tree))
             {
-                if (handler.Documenter.IsNewRule)
+                if (handler.Tokenizer.IsNewRule)
                 {
                     if (rule != null)
                     {
                         yield return rule;
                     }
 
-                    details = new List<Doc>();
+                    details = new List<Token>();
                     rule = new Rule
                     {
-                        Name = handler.Documenter.Get(handler.Node).Info.ToString(), //FIX
+                        Name = handler.Tokenizer.Get(handler.Node).Info.ToString(), //FIX
                         Details = details
                     };
                 }
                 else if (rule != null)
                 {
-                    details.Add(handler.Documenter.Get(handler.Node));
+                    details.Add(handler.Tokenizer.Get(handler.Node));
                 }
             }
 
@@ -50,9 +50,9 @@ namespace FluentValidationWikify
 
         private class Visitor : SyntaxVisitor<IEnumerable<Handler>>
         {
-            private readonly IEnumerable<INodeDocumenter> documenters;
+            private readonly IEnumerable<INodeTokenizer> documenters;
 
-            public Visitor(IEnumerable<INodeDocumenter> documenters)
+            public Visitor(IEnumerable<INodeTokenizer> documenters)
             {
                 this.documenters = documenters;
             }
@@ -91,7 +91,7 @@ namespace FluentValidationWikify
                         yield return new Handler
                         {
                             Node = node,
-                            Documenter = documenter
+                            Tokenizer = documenter
                         };
 
                         break;
@@ -104,7 +104,7 @@ namespace FluentValidationWikify
         {
             public SyntaxNode Node { get; set; }
 
-            public INodeDocumenter Documenter { get; set; }
+            public INodeTokenizer Tokenizer { get; set; }
         }
     }
 }

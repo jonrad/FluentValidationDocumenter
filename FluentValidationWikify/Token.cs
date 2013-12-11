@@ -1,13 +1,13 @@
 ﻿namespace FluentValidationWikify
 {
-    public class Doc
+    public class Token
     {
-        public Doc(string id)
+        public Token(string id)
             : this(id, null)
         {
         }
 
-        public Doc(string id, object info)
+        public Token(string id, object info)
         {
             Id = id;
             Info = info;

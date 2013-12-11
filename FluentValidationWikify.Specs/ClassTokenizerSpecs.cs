@@ -6,9 +6,9 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs
 {
-    public class ClassDocumenterSpecs : WithFakes
+    public class ClassTokenizerSpecs : WithFakes
     {
-        [Subject(typeof(ClassDocumenter))]
+        [Subject(typeof(ClassTokenizer))]
         class with_empty_class
         {
             Establish context = () =>
@@ -20,7 +20,7 @@ namespace FluentValidationWikify.Specs
                         .OfType<ClassDeclarationSyntax>()
                         .First();
 
-                documenter = new ClassDocumenter(The<IRuleDocumenter>());
+                documenter = new ClassTokenizer(The<IRuleTokenizer>());
             };
 
             Because of = () =>
@@ -36,16 +36,16 @@ namespace FluentValidationWikify.Specs
                 classRules.Count.ShouldEqual(0);
 
             It should_have_attempted_to_get_rules = () =>
-                The<IRuleDocumenter>().WasNotToldTo(r => r.Get(Param.IsAny<SyntaxNode>()));
+                The<IRuleTokenizer>().WasNotToldTo(r => r.Get(Param.IsAny<SyntaxNode>()));
 
             static ClassRules classRules;
 
-            static ClassDocumenter documenter;
+            static ClassTokenizer documenter;
 
             static ClassDeclarationSyntax node;
         }
 
-        [Subject(typeof(ClassDocumenter))]
+        [Subject(typeof(ClassTokenizer))]
         class with_class_containing_ctor_rules
         {
             Establish context = () =>
@@ -66,7 +66,7 @@ namespace FluentValidationWikify.Specs
                         .OfType<ClassDeclarationSyntax>()
                         .First();
 
-                documenter = new ClassDocumenter(The<IRuleDocumenter>());
+                documenter = new ClassTokenizer(The<IRuleTokenizer>());
             };
 
             Because of = () =>
@@ -79,11 +79,11 @@ namespace FluentValidationWikify.Specs
                 classRules.Name.ShouldEqual("Model");
 
             It should_have_attempted_to_get_rules = () =>
-                The<IRuleDocumenter>().WasToldTo(r => r.Get(Param.IsAny<SyntaxNode>())).OnlyOnce();
+                The<IRuleTokenizer>().WasToldTo(r => r.Get(Param.IsAny<SyntaxNode>())).OnlyOnce();
 
             static ClassRules classRules;
 
-            static ClassDocumenter documenter;
+            static ClassTokenizer documenter;
 
             static ClassDeclarationSyntax node;
         }

@@ -3,9 +3,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.NodeDocumenters
+namespace FluentValidationWikify.NodeTokenizers
 {
-    public class RuleForDocumenter : InvocationExpressionDocumenter
+    public class RuleForTokenizer : InvocationExpressionTokenizer
     {
         public override string MethodName
         {
@@ -17,7 +17,7 @@ namespace FluentValidationWikify.NodeDocumenters
             get { return true; }
         }
 
-        public override Doc Get(SyntaxNode node)
+        public override Token Get(SyntaxNode node)
         {
             var valueText = node
                 .DescendantNodes()
@@ -31,7 +31,7 @@ namespace FluentValidationWikify.NodeDocumenters
             }
 
             valueText = Regex.Replace(valueText, "([a-z])([A-Z])", "$1 $2");
-            return new Doc("RuleFor", valueText);
+            return new Token("RuleFor", valueText);
         }
     }
 }

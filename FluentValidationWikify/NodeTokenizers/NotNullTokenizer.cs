@@ -1,6 +1,6 @@
-﻿namespace FluentValidationWikify.NodeDocumenters
+﻿namespace FluentValidationWikify.NodeTokenizers
 {
-    public class NotNullDocumenter : RequiredDocumenter
+    public class NotNullTokenizer : RequiredTokenizer
     {
         public override string MethodName
         {

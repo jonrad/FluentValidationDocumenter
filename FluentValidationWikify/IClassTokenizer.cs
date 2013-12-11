@@ -3,7 +3,7 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
 {
-    public interface IClassDocumenter
+    public interface IClassTokenizer
     {
         ClassRules Get(ClassDeclarationSyntax node);
     }

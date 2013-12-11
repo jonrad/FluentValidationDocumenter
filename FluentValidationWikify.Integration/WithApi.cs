@@ -6,13 +6,13 @@ namespace FluentValidationWikify.Integration
 {
     public class WithApi
     {
-        private static readonly Lazy<ITextDocumenter> TextDocumenter = new Lazy<ITextDocumenter>(() =>
+        private static readonly Lazy<ITextTokenizer> TextDocumenter = new Lazy<ITextTokenizer>(() =>
         {
             var container = new WindsorContainer().Install(FromAssembly.This());
-            return container.Resolve<ITextDocumenter>();
+            return container.Resolve<ITextTokenizer>();
         });
 
-        public ITextDocumenter Init()
+        public ITextTokenizer Init()
         {
             return TextDocumenter.Value;
         }

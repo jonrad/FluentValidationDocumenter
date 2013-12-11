@@ -4,7 +4,7 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
 {
-    public interface IRuleDocumenter
+    public interface IRuleTokenizer
     {
         IEnumerable<Rule> Get(SyntaxNode tree);
     }

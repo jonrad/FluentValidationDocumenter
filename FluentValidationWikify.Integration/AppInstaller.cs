@@ -2,7 +2,7 @@
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using FluentValidationWikify.NodeDocumenters;
+using FluentValidationWikify.NodeTokenizers;
 
 namespace FluentValidationWikify.Integration
 {
@@ -12,10 +12,10 @@ namespace FluentValidationWikify.Integration
         {
             container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
             container.Register(
-                Component.For<ITextDocumenter>().ImplementedBy<TextDocumenter>(),
-                Component.For<IClassDocumenter>().ImplementedBy<ClassDocumenter>(),
-                Component.For<IRuleDocumenter>().ImplementedBy<RuleDocumenter>(),
-                Classes.FromAssembly(typeof(INodeDocumenter).Assembly).BasedOn<INodeDocumenter>().WithService.FromInterface(typeof(INodeDocumenter)));
+                Component.For<ITextTokenizer>().ImplementedBy<TextTokenizer>(),
+                Component.For<IClassTokenizer>().ImplementedBy<ClassTokenizer>(),
+                Component.For<IRuleTokenizer>().ImplementedBy<RuleTokenizer>(),
+                Classes.FromAssembly(typeof(INodeTokenizer).Assembly).BasedOn<INodeTokenizer>().WithService.FromInterface(typeof(INodeTokenizer)));
         }
     }
 }

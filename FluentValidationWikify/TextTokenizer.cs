@@ -5,11 +5,11 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
 {
-    public class TextDocumenter : ITextDocumenter
+    public class TextTokenizer : ITextTokenizer
     {
-        private readonly IClassDocumenter classDocumenter;
+        private readonly IClassTokenizer classDocumenter;
 
-        public TextDocumenter(IClassDocumenter classDocumenter)
+        public TextTokenizer(IClassTokenizer classDocumenter)
         {
             this.classDocumenter = classDocumenter;
         }

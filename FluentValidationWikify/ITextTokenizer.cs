@@ -3,7 +3,7 @@ using FluentValidationWikify.Models;
 
 namespace FluentValidationWikify
 {
-    public interface ITextDocumenter
+    public interface ITextTokenizer
     {
         IEnumerable<ClassRules> Get(string text);
     }

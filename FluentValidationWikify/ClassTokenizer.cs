@@ -5,11 +5,11 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify
 {
-    public class ClassDocumenter : IClassDocumenter
+    public class ClassTokenizer : IClassTokenizer
     {
         private readonly Visitor visitor;
 
-        public ClassDocumenter(IRuleDocumenter ruleDocumenter)
+        public ClassTokenizer(IRuleTokenizer ruleDocumenter)
         {
             visitor = new Visitor(ruleDocumenter);
         }
@@ -36,9 +36,9 @@ namespace FluentValidationWikify
 
         private class Visitor : SyntaxVisitor<IEnumerable<Rule>>
         {
-            private readonly IRuleDocumenter ruleDocumenter;
+            private readonly IRuleTokenizer ruleDocumenter;
 
-            public Visitor(IRuleDocumenter ruleDocumenter)
+            public Visitor(IRuleTokenizer ruleDocumenter)
             {
                 this.ruleDocumenter = ruleDocumenter;
             }

@@ -1,11 +1,11 @@
-﻿using FluentValidationWikify.NodeDocumenters;
+﻿using FluentValidationWikify.NodeTokenizers;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Specs.NodeDocumenters
+namespace FluentValidationWikify.Specs.NodeTokenizers
 {
-    [Subject(typeof(RuleForDocumenter))]
-    public class RuleForDocumenterSpecs
+    [Subject(typeof(RuleForTokenizer))]
+    public class RuleForTokenizerSpecs
     {
         Establish context = () =>
         {
@@ -22,7 +22,7 @@ namespace FluentValidationWikify.Specs.NodeDocumenters
                                     Syntax.IdentifierName("m"),
                                     Syntax.IdentifierName("Name")))))));
 
-            documenter = new RuleForDocumenter();
+            documenter = new RuleForTokenizer();
         };
 
         It should_be_able_to_process = () =>
@@ -31,7 +31,7 @@ namespace FluentValidationWikify.Specs.NodeDocumenters
         It should_return_required = () =>
             documenter.Get(node).Info.ShouldEqual("Name");
 
-        static INodeDocumenter documenter;
+        static INodeTokenizer documenter;
 
         static SyntaxNode node;
     }

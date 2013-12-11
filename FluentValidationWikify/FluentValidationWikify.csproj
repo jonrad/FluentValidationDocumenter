@@ -50,27 +50,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassDocumenter.cs" />
-    <Compile Include="Doc.cs" />
-    <Compile Include="ITextDocumenter.cs" />
+    <Compile Include="ClassTokenizer.cs" />
+    <Compile Include="Token.cs" />
+    <Compile Include="ITextTokenizer.cs" />
     <Compile Include="Models\ClassRules.cs" />
-    <Compile Include="IClassDocumenter.cs" />
-    <Compile Include="NodeDocumenters\INodeDocumenter.cs" />
-    <Compile Include="NodeDocumenters\InvocationExpressionDocumenter.cs" />
-    <Compile Include="IRuleDocumenter.cs" />
-    <Compile Include="NodeDocumenters\MemberAccessExpressionDocumenter.cs" />
-    <Compile Include="NodeDocumenters\PredicateDocumenter.cs" />
-    <Compile Include="NodeDocumenters\PredicateDocumenterBase.cs" />
-    <Compile Include="NodeDocumenters\RequiredDocumenter.cs" />
-    <Compile Include="NodeDocumenters\WhenDocumenter.cs" />
+    <Compile Include="IClassTokenizer.cs" />
+    <Compile Include="NodeTokenizers\INodeTokenizer.cs" />
+    <Compile Include="NodeTokenizers\InvocationExpressionTokenizer.cs" />
+    <Compile Include="IRuleTokenizer.cs" />
+    <Compile Include="NodeTokenizers\MemberAccessExpressionTokenizer.cs" />
+    <Compile Include="NodeTokenizers\PredicateTokenizer.cs" />
+    <Compile Include="NodeTokenizers\PredicateTokenizerBase.cs" />
+    <Compile Include="NodeTokenizers\RequiredTokenizer.cs" />
+    <Compile Include="NodeTokenizers\WhenTokenizer.cs" />
     <Compile Include="PrintVisitor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NodeDocumenters\NotNullDocumenter.cs" />
+    <Compile Include="NodeTokenizers\NotNullTokenizer.cs" />
     <Compile Include="Models\Rule.cs" />
-    <Compile Include="RuleDocumenter.cs" />
-    <Compile Include="NodeDocumenters\RuleForDocumenter.cs" />
-    <Compile Include="TextDocumenter.cs" />
+    <Compile Include="RuleTokenizer.cs" />
+    <Compile Include="NodeTokenizers\RuleForTokenizer.cs" />
+    <Compile Include="TextTokenizer.cs" />
     <Compile Include="TypeNameVisitor.cs" />
   </ItemGroup>
   <ItemGroup>

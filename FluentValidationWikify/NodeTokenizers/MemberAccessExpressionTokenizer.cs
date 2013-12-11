@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.NodeDocumenters
+namespace FluentValidationWikify.NodeTokenizers
 {
-    public abstract class MemberAccessExpressionDocumenter : INodeDocumenter
+    public abstract class MemberAccessExpressionTokenizer : INodeTokenizer
     {
         public abstract string MethodName { get; }
 
@@ -27,6 +27,6 @@ namespace FluentValidationWikify.NodeDocumenters
             return identifier != null && identifier.Identifier.ValueText == MethodName;
         }
 
-        public abstract Doc Get(SyntaxNode node);
+        public abstract Token Get(SyntaxNode node);
     }
 }

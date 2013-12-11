@@ -1,15 +1,15 @@
 ﻿using System.Linq;
 using FluentValidationWikify.Models;
-using FluentValidationWikify.NodeDocumenters;
+using FluentValidationWikify.NodeTokenizers;
 using Machine.Fakes;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs
 {
-    public class RuleDocumenterSpecs : WithFakes
+    public class RuleTokenizerSpecs : WithFakes
     {
-        [Subject(typeof(RuleDocumenter))]
+        [Subject(typeof(RuleTokenizer))]
         class for_single_rule : with_documenter
         {
             Establish context = () =>
@@ -48,7 +48,7 @@ namespace FluentValidationWikify.Specs
             static Rule rule;
         }
 
-        [Subject(typeof(RuleDocumenter))]
+        [Subject(typeof(RuleTokenizer))]
         class for_single_rule_with_two_details : with_documenter
         {
             Establish context = () =>
@@ -95,7 +95,7 @@ namespace FluentValidationWikify.Specs
             static Rule rule;
         }
 
-        [Subject(typeof(RuleDocumenter))]
+        [Subject(typeof(RuleTokenizer))]
         class for_two_rule : with_documenter
         {
             Establish context = () =>
@@ -157,8 +157,8 @@ namespace FluentValidationWikify.Specs
                                         Syntax.IdentifierName("m"),
                                         Syntax.IdentifierName("Name")))))));
 
-                var ruleDocumenter = An<INodeDocumenter>();
-                var methodDocumenter = An<INodeDocumenter>();
+                var ruleDocumenter = An<INodeTokenizer>();
+                var methodDocumenter = An<INodeTokenizer>();
 
                 ruleDocumenter.WhenToldTo(r => r.CanProcess(Param.IsAny<SyntaxNode>()))
                     .Return<SyntaxNode>(m =>
@@ -167,17 +167,17 @@ namespace FluentValidationWikify.Specs
                         return identifier != null && identifier.Identifier.ValueText == "RuleFor";
                     });
                 ruleDocumenter.WhenToldTo(r => r.IsNewRule).Return(true);
-                ruleDocumenter.WhenToldTo(r => r.Get(Param.IsAny<SyntaxNode>())).Return(new Doc("RuleFor", "Name"));
+                ruleDocumenter.WhenToldTo(r => r.Get(Param.IsAny<SyntaxNode>())).Return(new Token("RuleFor", "Name"));
 
                 methodDocumenter.WhenToldTo(r => r.CanProcess(Param.IsAny<SyntaxNode>())).Return<SyntaxNode>(
                     n => n is MemberAccessExpressionSyntax);
                 methodDocumenter.WhenToldTo(r => r.Get(Param.IsAny<SyntaxNode>()))
-                    .Return<SyntaxNode>(m => new Doc(m.ChildNodes().OfType<IdentifierNameSyntax>().First().Identifier.ValueText));
+                    .Return<SyntaxNode>(m => new Token(m.ChildNodes().OfType<IdentifierNameSyntax>().First().Identifier.ValueText));
 
-                documenter = new RuleDocumenter(new[] { ruleDocumenter, methodDocumenter });
+                documenter = new RuleTokenizer(new[] { ruleDocumenter, methodDocumenter });
             };
 
-            protected static RuleDocumenter documenter;
+            protected static RuleTokenizer documenter;
 
             protected static InvocationExpressionSyntax RuleFor;
         }
