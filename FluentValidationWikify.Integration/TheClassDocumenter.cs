@@ -34,7 +34,7 @@ namespace FluentValidationWikify.Integration
 
             Assert.That(result[0].Details.Count(), Is.EqualTo(1));
 
-            Assert.That(result[0].Details.First(), Is.EqualTo("Required"));
+            Assert.That(result[0].Details.First().Id, Is.EqualTo("Required"));
         }
     }
 }

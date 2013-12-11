@@ -27,6 +27,6 @@ namespace FluentValidationWikify.NodeDocumenters
             return identifier != null && identifier.Identifier.ValueText == MethodName;
         }
 
-        public abstract string Get(SyntaxNode node);
+        public abstract Doc Get(SyntaxNode node);
     }
 }

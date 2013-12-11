@@ -26,8 +26,11 @@ namespace FluentValidationWikify.Specs.NodeDocumenters
         It should_be_able_to_process = () =>
             documenter.CanProcess(node).ShouldBeTrue();
 
-        It should_return_required = () =>
-            documenter.Get(node).ShouldEqual("Must Be Awesome");
+        It should_return_must = () =>
+            documenter.Get(node).Id.ShouldEqual("Must");
+
+        It should_return_be_aweomse = () =>
+            documenter.Get(node).Info.ShouldEqual("BeAwesome");
 
         static PredicateDocumenter documenter;
 

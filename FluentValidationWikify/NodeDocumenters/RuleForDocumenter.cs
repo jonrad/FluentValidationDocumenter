@@ -17,7 +17,7 @@ namespace FluentValidationWikify.NodeDocumenters
             get { return true; }
         }
 
-        public override string Get(SyntaxNode node)
+        public override Doc Get(SyntaxNode node)
         {
             var valueText = node
                 .DescendantNodes()
@@ -31,7 +31,7 @@ namespace FluentValidationWikify.NodeDocumenters
             }
 
             valueText = Regex.Replace(valueText, "([a-z])([A-Z])", "$1 $2");
-            return valueText;
+            return new Doc("RuleFor", valueText);
         }
     }
 }

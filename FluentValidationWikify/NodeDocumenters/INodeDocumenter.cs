@@ -8,6 +8,6 @@ namespace FluentValidationWikify.NodeDocumenters
 
         bool CanProcess(SyntaxNode node);
 
-        string Get(SyntaxNode node);
+        Doc Get(SyntaxNode node);
     }
 }

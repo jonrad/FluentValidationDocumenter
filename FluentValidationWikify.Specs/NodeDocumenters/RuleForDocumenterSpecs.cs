@@ -29,7 +29,7 @@ namespace FluentValidationWikify.Specs.NodeDocumenters
             documenter.CanProcess(node).ShouldBeTrue();
 
         It should_return_required = () =>
-            documenter.Get(node).ShouldEqual("Name");
+            documenter.Get(node).Info.ShouldEqual("Name");
 
         static INodeDocumenter documenter;
 

@@ -39,7 +39,7 @@ namespace FluentValidationWikify.Specs
                 rule.Details.Count().ShouldEqual(1);
 
             It should_have_a_required_detail = () =>
-                rule.Details.First().ShouldEqual("Required");
+                rule.Details.First().Id.ShouldEqual("Required");
 
             private static InvocationExpressionSyntax tree;
 
@@ -83,10 +83,10 @@ namespace FluentValidationWikify.Specs
                 rule.Details.Count().ShouldEqual(2);
 
             It should_have_a_required_detail = () =>
-                rule.Details.First().ShouldEqual("Required");
+                rule.Details.First().Id.ShouldEqual("Required");
 
             It should_have_a_cool_detail = () =>
-                rule.Details.Last().ShouldEqual("Cool");
+                rule.Details.Last().Id.ShouldEqual("Cool");
 
             static SyntaxNode tree;
 
@@ -125,7 +125,7 @@ namespace FluentValidationWikify.Specs
                 rules[0].Details.Count().ShouldEqual(1);
 
             It should_have_a_required_detail = () =>
-                rules[0].Details.First().ShouldEqual("Required");
+                rules[0].Details.First().Id.ShouldEqual("Required");
 
             It second_rule_should_return_required = () =>
                 rules[1].Name.ShouldEqual("Name");
@@ -134,7 +134,7 @@ namespace FluentValidationWikify.Specs
                 rules[1].Details.Count().ShouldEqual(1);
 
             It second_rule_should_have_a_required_detail = () =>
-                rules[1].Details.First().ShouldEqual("Required");
+                rules[1].Details.First().Id.ShouldEqual("Required");
 
             static SyntaxNode tree;
 
@@ -167,12 +167,12 @@ namespace FluentValidationWikify.Specs
                         return identifier != null && identifier.Identifier.ValueText == "RuleFor";
                     });
                 ruleDocumenter.WhenToldTo(r => r.IsNewRule).Return(true);
-                ruleDocumenter.WhenToldTo(r => r.Get(Param.IsAny<SyntaxNode>())).Return("Name");
+                ruleDocumenter.WhenToldTo(r => r.Get(Param.IsAny<SyntaxNode>())).Return(new Doc("RuleFor", "Name"));
 
                 methodDocumenter.WhenToldTo(r => r.CanProcess(Param.IsAny<SyntaxNode>())).Return<SyntaxNode>(
                     n => n is MemberAccessExpressionSyntax);
                 methodDocumenter.WhenToldTo(r => r.Get(Param.IsAny<SyntaxNode>()))
-                    .Return<SyntaxNode>(m => m.ChildNodes().OfType<IdentifierNameSyntax>().First().Identifier.ValueText);
+                    .Return<SyntaxNode>(m => new Doc(m.ChildNodes().OfType<IdentifierNameSyntax>().First().Identifier.ValueText));
 
                 documenter = new RuleDocumenter(new[] { ruleDocumenter, methodDocumenter });
             };

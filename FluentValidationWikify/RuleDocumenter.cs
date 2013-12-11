@@ -18,7 +18,7 @@ namespace FluentValidationWikify
         public IEnumerable<Rule> Get(SyntaxNode tree)
         {
             Rule rule = null;
-            List<string> details = null;
+            List<Doc> details = null;
 
             foreach (var handler in visitor.Visit(tree))
             {
@@ -29,10 +29,10 @@ namespace FluentValidationWikify
                         yield return rule;
                     }
 
-                    details = new List<string>();
+                    details = new List<Doc>();
                     rule = new Rule
                     {
-                        Name = handler.Documenter.Get(handler.Node),
+                        Name = handler.Documenter.Get(handler.Node).Info.ToString(), //FIX
                         Details = details
                     };
                 }

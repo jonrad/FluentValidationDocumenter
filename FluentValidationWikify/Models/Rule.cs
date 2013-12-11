@@ -6,6 +6,6 @@ namespace FluentValidationWikify.Models
     {
         public string Name { get; set; }
 
-        public IEnumerable<string> Details { get; set; }
+        public IEnumerable<Doc> Details { get; set; }
     }
 }

@@ -9,9 +9,9 @@ namespace FluentValidationWikify.NodeDocumenters
             get { return false; }
         }
 
-        public override string Get(SyntaxNode node)
+        public override Doc Get(SyntaxNode node)
         {
-            return "Required";
+            return new Doc("Required", null);
         }
     }
 }

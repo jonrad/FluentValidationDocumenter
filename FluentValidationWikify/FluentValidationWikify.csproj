@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassDocumenter.cs" />
+    <Compile Include="Doc.cs" />
     <Compile Include="ITextDocumenter.cs" />
     <Compile Include="Models\ClassRules.cs" />
     <Compile Include="IClassDocumenter.cs" />

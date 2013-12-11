@@ -12,7 +12,7 @@ namespace FluentValidationWikify.NodeDocumenters
             get { return false; }
         }
 
-        public override string Get(SyntaxNode node)
+        public override Doc Get(SyntaxNode node)
         {
             var valueText = node
                 .ChildNodes().OfType<ArgumentListSyntax>().First()
@@ -25,8 +25,7 @@ namespace FluentValidationWikify.NodeDocumenters
                 throw new NotImplementedException();
             }
 
-            valueText = Regex.Replace(valueText, "([a-z])([A-Z])", "$1 $2");
-            return MethodName + " " + valueText;
+            return new Doc(MethodName, valueText);
         }
     }
 }
