@@ -16,7 +16,8 @@ namespace FluentValidationWikify.Documenters
             tokenStringifiers = new Dictionary<string, Func<Token, string>>
             {
                 {"required", t => "is required"},
-                {"must", MustParser}
+                {"must", MustParser},
+                {"when", WhenParser},
             };
         }
 
@@ -28,7 +29,12 @@ namespace FluentValidationWikify.Documenters
                 return string.Empty;
             }
 
-            return rule.Name + " " + string.Join(" and ", tokens.Select(HandleToken));
+            var ruleDetails = string.Join(" and ", tokens.Where(w => w.Id != "when").Select(HandleToken));
+            var conditionalDetails = string.Join(" and ", tokens.Where(w => w.Id == "when").Select(HandleToken));
+            return rule.Name + " " +
+                   ruleDetails +
+                   (ruleDetails != string.Empty && conditionalDetails != string.Empty ? " " : string.Empty) +
+                   conditionalDetails;
         }
 
         private string HandleToken(Token token)
@@ -47,6 +53,11 @@ namespace FluentValidationWikify.Documenters
         private string MustParser(Token token)
         {
             return "must " + Friendly(token.Info as string);
+        }
+
+        private string WhenParser(Token token)
+        {
+            return "when " + Friendly(token.Info as string);
         }
 
         private string Friendly(string data)

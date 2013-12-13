@@ -76,6 +76,23 @@ namespace FluentValidationWikify.Specs
         }
 
         [Subject(typeof(SimpleSentenceDocumenter))]
+        public class with_when_and_must_tokens : with_documenter
+        {
+            Establish context = () =>
+                rule = new Rule("Name", new Token("must", "BeAwesome"), new Token("when", "NotEmpty"));
+
+            Because of = () =>
+                result = Documenter.ToString(rule);
+
+            It should_return_required = () =>
+                result.ShouldEqual("Name must be awesome when not empty");
+
+            static string result;
+
+            static Rule rule;
+        }
+
+        [Subject(typeof(SimpleSentenceDocumenter))]
         public class with_documenter
         {
             Establish context = () =>
