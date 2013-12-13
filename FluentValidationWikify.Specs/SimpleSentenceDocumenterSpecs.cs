@@ -11,11 +11,7 @@ namespace FluentValidationWikify.Specs
         public class with_no_details : with_documenter
         {
             Establish context = () =>
-                rule = new Rule()
-                {
-                    Name = "Name",
-                    Details = Enumerable.Empty<Token>()
-                };
+                rule = new Rule("Name");
 
             Because of = () =>
                 result = Documenter.ToString(rule);
@@ -32,14 +28,7 @@ namespace FluentValidationWikify.Specs
         public class with_required_token : with_documenter
         {
             Establish context = () =>
-                rule = new Rule()
-                {
-                    Name = "Name",
-                    Details = new[]
-                    {
-                        new Token("required")
-                    }
-                };
+                rule = new Rule("Name", new Token("required"));
 
             Because of = () =>
                 result = Documenter.ToString(rule);
@@ -56,14 +45,7 @@ namespace FluentValidationWikify.Specs
         public class with_must_token : with_documenter
         {
             Establish context = () =>
-                rule = new Rule()
-                {
-                    Name = "Name",
-                    Details = new[]
-                    {
-                        new Token("must", "BeAwesome")
-                    }
-                };
+                rule = new Rule("Name", new Token("must", "BeAwesome"));
 
             Because of = () =>
                 result = Documenter.ToString(rule);
@@ -80,15 +62,7 @@ namespace FluentValidationWikify.Specs
         public class with_must_token_and_required_token : with_documenter
         {
             Establish context = () =>
-                rule = new Rule()
-                {
-                    Name = "Name",
-                    Details = new[]
-                    {
-                        new Token("must", "BeAwesome"),
-                        new Token("required")
-                    }
-                };
+                rule = new Rule("Name", new Token("must", "BeAwesome"), new Token("required"));
 
             Because of = () =>
                 result = Documenter.ToString(rule);
