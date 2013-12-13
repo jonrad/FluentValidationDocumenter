@@ -70,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleTokenizerSpecs.cs" />
     <Compile Include="NodeTokenizers\RuleForTokenizerSpecs.cs" />
+    <Compile Include="SimpleSentenceDocumenterSpecs.cs" />
     <Compile Include="TextTokenizerSpecs.cs" />
   </ItemGroup>
   <ItemGroup>

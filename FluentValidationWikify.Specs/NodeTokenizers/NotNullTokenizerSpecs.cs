@@ -23,7 +23,7 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
             documenter.CanProcess(node).ShouldBeTrue();
 
         It should_return_required = () =>
-            documenter.Get(node).Id.ShouldEqual("Required");
+            documenter.Get(node).Id.ShouldEqual("required");
 
         static INodeTokenizer documenter;
 

@@ -11,7 +11,7 @@ namespace FluentValidationWikify.NodeTokenizers
 
         public override Token Get(SyntaxNode node)
         {
-            return new Token("Required", null);
+            return new Token("required", null);
         }
     }
 }

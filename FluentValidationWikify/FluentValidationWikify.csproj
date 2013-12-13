@@ -51,6 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassTokenizer.cs" />
+    <Compile Include="Documenters\IClassDocumenter.cs" />
+    <Compile Include="Documenters\IRuleDocumenter.cs" />
+    <Compile Include="Documenters\SimpleSentenceDocumenter.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="ITextTokenizer.cs" />
     <Compile Include="Models\ClassRules.cs" />

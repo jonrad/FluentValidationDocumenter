@@ -25,18 +25,18 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
                 documenter = new WhenTokenizer();
             };
 
-            private It should_be_able_to_process = () =>
+            It should_be_able_to_process = () =>
                 documenter.CanProcess(node).ShouldBeTrue();
 
-            private It should_return_when = () =>
+            It should_return_when = () =>
                 documenter.Get(node).Id.ShouldEqual("When");
 
-            private It should_return_isawesome_for_info = () =>
+            It should_return_isawesome_for_info = () =>
                 documenter.Get(node).Info.ShouldEqual("IsAwesome");
 
-            private static WhenTokenizer documenter;
+            static WhenTokenizer documenter;
 
-            private static SyntaxNode node;
+            static SyntaxNode node;
         }
     }
 }
