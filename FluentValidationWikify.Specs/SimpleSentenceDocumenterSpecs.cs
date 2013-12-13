@@ -29,7 +29,7 @@ namespace FluentValidationWikify.Specs
         }
 
         [Subject(typeof(SimpleSentenceDocumenter))]
-        public class with_required_detail : with_documenter
+        public class with_required_token : with_documenter
         {
             Establish context = () =>
                 rule = new Rule()
@@ -37,7 +37,7 @@ namespace FluentValidationWikify.Specs
                     Name = "Name",
                     Details = new[]
                     {
-                        new Token("required"),
+                        new Token("required")
                     }
                 };
 
@@ -46,6 +46,30 @@ namespace FluentValidationWikify.Specs
 
             It should_return_required = () =>
                 result.ShouldEqual("Name is required");
+
+            static string result;
+
+            static Rule rule;
+        }
+
+        [Subject(typeof(SimpleSentenceDocumenter))]
+        public class with_must_token : with_documenter
+        {
+            Establish context = () =>
+                rule = new Rule()
+                {
+                    Name = "Name",
+                    Details = new[]
+                    {
+                        new Token("must", "BeAwesome")
+                    }
+                };
+
+            Because of = () =>
+                result = Documenter.ToString(rule);
+
+            It should_return_required = () =>
+                result.ShouldEqual("Name must be awesome");
 
             static string result;
 
