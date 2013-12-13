@@ -28,20 +28,20 @@ namespace FluentValidationWikify.Documenters
                 return string.Empty;
             }
 
-            var result = new StringBuilder(rule.Name);
+            return rule.Name + " " + string.Join(" and ", tokens.Select(HandleToken));
+        }
 
-            foreach (var token in tokens)
+        private string HandleToken(Token token)
+        {
+            Func<Token, string> handler;
+            tokenStringifiers.TryGetValue(token.Id, out handler);
+
+            if (handler != null)
             {
-                Func<Token, string> handler;
-                tokenStringifiers.TryGetValue(token.Id, out handler);
-
-                if (handler != null)
-                {
-                    result.AppendFormat(" " + handler(token));
-                }
+                return handler(token);
             }
 
-            return result.ToString();
+            return null;
         }
 
         private string MustParser(Token token)
