@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FluentValidationWikify.Models;
 using FluentValidationWikify.NodeTokenizers;
+using FluentValidationWikify.Specs.NodeTokenizers;
 using Machine.Fakes;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
@@ -18,7 +19,7 @@ namespace FluentValidationWikify.Specs
                 tree = Syntax.InvocationExpression(
                     Syntax.MemberAccessExpression(
                         SyntaxKind.MemberAccessExpression,
-                        RuleFor,
+                        Tokens.RuleForName,
                         Syntax.IdentifierName("Required")),
                     Syntax.ArgumentList());
             };
@@ -60,7 +61,7 @@ namespace FluentValidationWikify.Specs
                         Syntax.InvocationExpression(
                             Syntax.MemberAccessExpression(
                                 SyntaxKind.MemberAccessExpression,
-                                RuleFor,
+                                Tokens.RuleForName,
                                 Syntax.IdentifierName("Required")),
                             Syntax.ArgumentList()),
                         Syntax.IdentifierName("Cool")),
@@ -104,7 +105,7 @@ namespace FluentValidationWikify.Specs
                     Syntax.InvocationExpression(
                         Syntax.MemberAccessExpression(
                             SyntaxKind.MemberAccessExpression,
-                            RuleFor,
+                            Tokens.RuleForName,
                             Syntax.IdentifierName("Required")),
                         Syntax.ArgumentList()));
                 tree = Syntax.Block(new StatementSyntax[] { singleRule, singleRule });
@@ -145,18 +146,6 @@ namespace FluentValidationWikify.Specs
         {
             Establish context = () =>
             {
-                RuleFor = Syntax.InvocationExpression(
-                    Syntax.IdentifierName("RuleFor"),
-                    Syntax.ArgumentList(
-                        Syntax.SeparatedList(
-                            Syntax.Argument(
-                                Syntax.SimpleLambdaExpression(
-                                    Syntax.Parameter(Syntax.Identifier("m")),
-                                    Syntax.MemberAccessExpression(
-                                        SyntaxKind.MemberAccessExpression,
-                                        Syntax.IdentifierName("m"),
-                                        Syntax.IdentifierName("Name")))))));
-
                 var ruleDocumenter = An<INodeTokenizer>();
                 var methodDocumenter = An<INodeTokenizer>();
 
@@ -178,8 +167,6 @@ namespace FluentValidationWikify.Specs
             };
 
             protected static RuleTokenizer documenter;
-
-            protected static InvocationExpressionSyntax RuleFor;
         }
     }
 }

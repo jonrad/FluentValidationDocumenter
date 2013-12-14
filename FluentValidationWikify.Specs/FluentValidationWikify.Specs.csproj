@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassTokenizerSpecs.cs" />
+    <Compile Include="Tokens.cs" />
     <Compile Include="NodeTokenizers\WhenTokenizerSpecs.cs" />
     <Compile Include="NodeTokenizers\NotNullTokenizerSpecs.cs" />
     <Compile Include="NodeTokenizers\PredicateTokenizerSpecs.cs" />

@@ -10,17 +10,7 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
         Establish context = () =>
         {
             // RuleFor(m => m.Name)
-            node = Syntax.InvocationExpression(
-                Syntax.IdentifierName("RuleFor"),
-                Syntax.ArgumentList(
-                    Syntax.SeparatedList(
-                        Syntax.Argument(
-                            Syntax.SimpleLambdaExpression(
-                                Syntax.Parameter(Syntax.Identifier("m")),
-                                Syntax.MemberAccessExpression(
-                                    SyntaxKind.MemberAccessExpression,
-                                    Syntax.IdentifierName("m"),
-                                    Syntax.IdentifierName("Name")))))));
+            node = Tokens.RuleForName;
 
             documenter = new RuleForTokenizer();
         };
