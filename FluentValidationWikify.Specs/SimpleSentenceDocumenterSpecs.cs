@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using FluentValidationWikify.Documenters;
+﻿using FluentValidationWikify.Documenters;
 using FluentValidationWikify.Models;
 using Machine.Specifications;
 
