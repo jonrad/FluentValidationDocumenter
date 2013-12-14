@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using FluentValidationWikify.Models;
 
@@ -15,9 +14,9 @@ namespace FluentValidationWikify.Documenters
         {
             tokenStringifiers = new Dictionary<string, Func<Token, string>>
             {
-                {"required", t => "is required"},
-                {"must", MustParser},
-                {"when", WhenParser},
+                { "required", t => "is required" },
+                { "must", MustParser },
+                { "when", WhenParser },
             };
         }
 
