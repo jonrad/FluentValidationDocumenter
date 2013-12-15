@@ -4,9 +4,9 @@ using Machine.Specifications;
 
 namespace FluentValidationWikify.Specs
 {
-    public class SimpleSentenceDocumenterSpecs
+    public class SimpleSentenceRuleDocumenterSpecs
     {
-        [Subject(typeof(SimpleSentenceDocumenter))]
+        [Subject(typeof(SimpleSentenceRuleDocumenter))]
         public class with_no_details : with_documenter
         {
             Establish context = () =>
@@ -23,7 +23,7 @@ namespace FluentValidationWikify.Specs
             static Rule rule;
         }
 
-        [Subject(typeof(SimpleSentenceDocumenter))]
+        [Subject(typeof(SimpleSentenceRuleDocumenter))]
         public class with_required_token : with_documenter
         {
             Establish context = () =>
@@ -40,7 +40,7 @@ namespace FluentValidationWikify.Specs
             static Rule rule;
         }
 
-        [Subject(typeof(SimpleSentenceDocumenter))]
+        [Subject(typeof(SimpleSentenceRuleDocumenter))]
         public class with_must_token : with_documenter
         {
             Establish context = () =>
@@ -57,7 +57,24 @@ namespace FluentValidationWikify.Specs
             static Rule rule;
         }
 
-        [Subject(typeof(SimpleSentenceDocumenter))]
+        [Subject(typeof(SimpleSentenceRuleDocumenter))]
+        public class with_equal_token : with_documenter
+        {
+            Establish context = () =>
+                rule = new Rule("Age", new Token("equal", 100));
+
+            Because of = () =>
+                result = Documenter.ToString(rule);
+
+            It should_return_required = () =>
+                result.ShouldEqual("Age must equal 100");
+
+            static string result;
+
+            static Rule rule;
+        }
+
+        [Subject(typeof(SimpleSentenceRuleDocumenter))]
         public class with_must_token_and_required_token : with_documenter
         {
             Establish context = () =>
@@ -74,7 +91,7 @@ namespace FluentValidationWikify.Specs
             static Rule rule;
         }
 
-        [Subject(typeof(SimpleSentenceDocumenter))]
+        [Subject(typeof(SimpleSentenceRuleDocumenter))]
         public class with_when_and_must_tokens : with_documenter
         {
             Establish context = () =>
@@ -91,7 +108,7 @@ namespace FluentValidationWikify.Specs
             static Rule rule;
         }
 
-        [Subject(typeof(SimpleSentenceDocumenter))]
+        [Subject(typeof(SimpleSentenceRuleDocumenter))]
         public class with_two_when_and_must_tokens : with_documenter
         {
             Establish context = () =>
@@ -108,13 +125,13 @@ namespace FluentValidationWikify.Specs
             static Rule rule;
         }
 
-        [Subject(typeof(SimpleSentenceDocumenter))]
+        [Subject(typeof(SimpleSentenceRuleDocumenter))]
         public class with_documenter
         {
             Establish context = () =>
-                Documenter = new SimpleSentenceDocumenter();
+                Documenter = new SimpleSentenceRuleDocumenter();
 
-            protected static SimpleSentenceDocumenter Documenter;
+            protected static SimpleSentenceRuleDocumenter Documenter;
         }
     }
 }

@@ -6,17 +6,18 @@ using FluentValidationWikify.Models;
 
 namespace FluentValidationWikify.Documenters
 {
-    public class SimpleSentenceDocumenter : IRuleDocumenter
+    public class SimpleSentenceRuleDocumenter : IRuleDocumenter
     {
         private readonly Dictionary<string, Func<Token, string>> tokenStringifiers;
 
-        public SimpleSentenceDocumenter()
+        public SimpleSentenceRuleDocumenter()
         {
             tokenStringifiers = new Dictionary<string, Func<Token, string>>
             {
                 { "required", t => "is required" },
                 { "must", MustParser },
                 { "when", WhenParser },
+                { "equal", EqualParser }
             };
         }
 
@@ -57,6 +58,11 @@ namespace FluentValidationWikify.Documenters
         private string WhenParser(Token token)
         {
             return "when " + Friendly(token.Info as string);
+        }
+
+        private string EqualParser(Token token)
+        {
+            return "must equal " + token.Info;
         }
 
         private string Friendly(string data)

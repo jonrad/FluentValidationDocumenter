@@ -2,6 +2,7 @@
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using FluentValidationWikify.Documenters;
 using FluentValidationWikify.NodeTokenizers;
 
 namespace FluentValidationWikify.Integration
@@ -15,6 +16,8 @@ namespace FluentValidationWikify.Integration
                 Component.For<ITextTokenizer>().ImplementedBy<TextTokenizer>(),
                 Component.For<IClassTokenizer>().ImplementedBy<ClassTokenizer>(),
                 Component.For<IRuleTokenizer>().ImplementedBy<RuleTokenizer>(),
+                Component.For<IRuleDocumenter>().ImplementedBy<SimpleSentenceRuleDocumenter>(),
+                Component.For<IClassDocumenter>().ImplementedBy<SimpleSentenceClassDocumenter>(),
                 Classes.FromAssembly(typeof(INodeTokenizer).Assembly).BasedOn<INodeTokenizer>().WithService.FromInterface(typeof(INodeTokenizer)));
         }
     }

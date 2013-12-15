@@ -17,7 +17,7 @@ namespace FluentValidationWikify.Integration
                         RuleFor(m => m.Name).NotNull();
                     }
                 }";
-            var documenter = Init();
+            var documenter = InitTokenizer();
 
             var results =
                 documenter.Get(Text).ToArray();

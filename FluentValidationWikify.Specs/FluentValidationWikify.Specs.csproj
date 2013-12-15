@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassTokenizerSpecs.cs" />
+    <Compile Include="SimpleSentenceClassDocumenterSpecs.cs" />
     <Compile Include="Tokens.cs" />
     <Compile Include="NodeTokenizers\WhenTokenizerSpecs.cs" />
     <Compile Include="NodeTokenizers\NotNullTokenizerSpecs.cs" />
@@ -71,7 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleTokenizerSpecs.cs" />
     <Compile Include="NodeTokenizers\RuleForTokenizerSpecs.cs" />
-    <Compile Include="SimpleSentenceDocumenterSpecs.cs" />
+    <Compile Include="SimpleSentenceRuleDocumenterSpecs.cs" />
     <Compile Include="TextTokenizerSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
