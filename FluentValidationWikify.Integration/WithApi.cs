@@ -16,10 +16,10 @@ namespace FluentValidationWikify.Integration
             return container.Resolve<ITextTokenizer>();
         });
 
-        private static readonly Lazy<IClassDocumenter> TextDocumenter = new Lazy<IClassDocumenter>(() =>
+        private static readonly Lazy<ITextDocumenter> TextDocumenter = new Lazy<ITextDocumenter>(() =>
         {
             var container = Container.Value;
-            return container.Resolve<IClassDocumenter>();
+            return container.Resolve<ITextDocumenter>();
         });
 
         public ITextTokenizer InitTokenizer()
@@ -27,7 +27,7 @@ namespace FluentValidationWikify.Integration
             return TextTokenizer.Value;
         }
 
-        public IClassDocumenter InitDocumenter()
+        public ITextDocumenter InitDocumenter()
         {
             return TextDocumenter.Value;
         }

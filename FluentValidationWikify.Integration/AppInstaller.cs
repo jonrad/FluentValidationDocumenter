@@ -18,6 +18,7 @@ namespace FluentValidationWikify.Integration
                 Component.For<IRuleTokenizer>().ImplementedBy<RuleTokenizer>(),
                 Component.For<IRuleDocumenter>().ImplementedBy<SimpleSentenceRuleDocumenter>(),
                 Component.For<IClassDocumenter>().ImplementedBy<SimpleSentenceClassDocumenter>(),
+                Component.For<ITextDocumenter>().ImplementedBy<SimpleSentenceTextDocumenter>(),
                 Classes.FromAssembly(typeof(INodeTokenizer).Assembly).BasedOn<INodeTokenizer>().WithService.FromInterface(typeof(INodeTokenizer)));
         }
     }

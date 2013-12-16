@@ -19,12 +19,9 @@ namespace FluentValidationWikify.Integration
                     }
                 }";
 
-            var tokenizer = InitTokenizer();
             var documenter = InitDocumenter();
 
-            var classRules = tokenizer.Get(Text).First();
-
-            var results = documenter.ToString(classRules);
+            var results = documenter.ToString(Text);
 
             Assert.That(results, Is.EqualTo(@"Rules for Model" + Environment.NewLine + "Name is required"));
         }
