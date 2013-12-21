@@ -1,39 +1,55 @@
-﻿using FluentValidationWikify.NodeTokenizers;
+﻿using System.Linq.Expressions;
+using FluentValidationWikify.NodeTokenizers;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs.NodeTokenizers
 {
-    [Subject(typeof(PredicateTokenizer))]
+    [Subject(typeof (PredicateTokenizer))]
     public class PredicateTokenizerSpecs
     {
-        Establish context = () =>
+
+        [Subject(typeof (PredicateTokenizer))]
+        private class in_simple_case
         {
-            node = 
-                Syntax.InvocationExpression(
-                    Syntax.MemberAccessExpression(
-                        SyntaxKind.MemberAccessExpression,
-                        Syntax.IdentifierName("x"),
-                        Syntax.IdentifierName("Must")),
-                    Syntax.ArgumentList(
-                    Syntax.SeparatedList(
-                        Syntax.Argument(
-                            Syntax.IdentifierName("BeAwesome")))));
+            private Establish context = () =>
+            {
 
-            documenter = new PredicateTokenizer();
-        };
+                var lamda = Syntax.SimpleLambdaExpression(
+                    Syntax.Parameter(Syntax.Identifier("t")),
+                    Syntax.ObjectCreationExpression(Syntax.ParseTypeName("Person")));
 
-        It should_be_able_to_process = () =>
-            documenter.CanProcess(node).ShouldBeTrue();
+                node =
+                    Syntax.InvocationExpression(
+                        Syntax.MemberAccessExpression(
+                            SyntaxKind.MemberAccessExpression,
+                            Syntax.IdentifierName("x"),
+                            Syntax.IdentifierName("Must")),
+                        Syntax.ArgumentList(
+                            Syntax.SeparatedList(
+                                Syntax.Argument(
+                                    Syntax.InvocationExpression(
+                                        Syntax.IdentifierName("Exist"),
+                                        Syntax.ArgumentList(
+                                            Syntax.SeparatedList(
+                                                Syntax.Argument(lamda))))))));
 
-        It should_return_must = () =>
-            documenter.Get(node).Id.ShouldEqual("Must");
+                documenter = new PredicateTokenizer();
+            };
 
-        It should_return_be_aweomse = () =>
-            documenter.Get(node).Info.ShouldEqual("BeAwesome");
+            It should_be_able_to_process = () =>
+                documenter.CanProcess(node).ShouldBeTrue();
 
-        static PredicateTokenizer documenter;
+            It should_return_must = () =>
+                documenter.Get(node).Id.ShouldEqual("must");
 
-        static SyntaxNode node;
+            It should_return_be_aweomse = () =>
+                documenter.Get(node).Info.ShouldEqual("Exist");
+
+            private static PredicateTokenizer documenter;
+
+        }
+
+        private static SyntaxNode node;
     }
 }

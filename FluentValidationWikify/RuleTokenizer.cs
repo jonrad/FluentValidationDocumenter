@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Castle.Core.Logging;
 using FluentValidationWikify.Models;
 using FluentValidationWikify.NodeTokenizers;
 using Roslyn.Compilers.CSharp;
@@ -13,7 +15,11 @@ namespace FluentValidationWikify
         public RuleTokenizer(IEnumerable<INodeTokenizer> documenters)
         {
             visitor = new Visitor(documenters);
+
+            Logger = NullLogger.Instance;
         }
+
+        public ILogger Logger { get; set; }
 
         public IEnumerable<Rule> Get(SyntaxNode tree)
         {
@@ -22,6 +28,8 @@ namespace FluentValidationWikify
 
             foreach (var handler in visitor.Visit(tree))
             {
+                Logger.DebugFormat("Using {0}", handler.Tokenizer.GetType());
+
                 if (handler.Tokenizer.IsNewRule)
                 {
                     if (rule != null)
@@ -32,7 +40,7 @@ namespace FluentValidationWikify
                     details = new List<Token>();
                     rule = new Rule
                     {
-                        Name = handler.Tokenizer.Get(handler.Node).Info.ToString(), //FIX
+                        Name = handler.Tokenizer.Get(handler.Node).Info.ToString(), // FIX
                         Details = details
                     };
                 }

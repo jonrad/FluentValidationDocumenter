@@ -29,7 +29,7 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
                 documenter.CanProcess(node).ShouldBeTrue();
 
             It should_return_when = () =>
-                documenter.Get(node).Id.ShouldEqual("When");
+                documenter.Get(node).Id.ShouldEqual("when");
 
             It should_return_isawesome_for_info = () =>
                 documenter.Get(node).Info.ShouldEqual("IsAwesome");

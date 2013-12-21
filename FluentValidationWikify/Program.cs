@@ -12,7 +12,8 @@ namespace FluentValidationWikify
     {
         public ModelValidator()
         {
-            RuleFor(m => m.Name).NotEmpty().When(Cool);
+            RuleFor(t => t.Name)
+                .Must(Exist(t => new Person(t.Name)));
         }
     }
 ";

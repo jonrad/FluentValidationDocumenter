@@ -13,18 +13,21 @@ namespace FluentValidationWikify.NodeTokenizers
 
         public override Token Get(SyntaxNode node)
         {
-            var valueText = node
+            var argument = node
                 .ChildNodes().OfType<ArgumentListSyntax>().First()
-                .ChildNodes().OfType<ArgumentSyntax>().First()
-                .ChildNodes().OfType<IdentifierNameSyntax>().First()
-                .Identifier.ValueText;
+                .ChildNodes().OfType<ArgumentSyntax>().First();
 
-            if (valueText == null)
+            var identifier = argument.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault();
+            if (identifier == null)
             {
-                throw new NotImplementedException();
+                // this is really quite crap
+                SyntaxNode child = argument.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault() ??
+                                   (SyntaxNode)argument.ChildNodes().OfType<InvocationExpressionSyntax>().First();
+
+                identifier = child.ChildNodes().OfType<IdentifierNameSyntax>().First();
             }
 
-            return new Token(MethodName, valueText);
+            return new Token(MethodName.ToLower(), identifier.Identifier.ValueText);
         }
     }
 }
