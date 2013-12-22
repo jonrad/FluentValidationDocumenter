@@ -1,10 +1,19 @@
 ﻿using System;
+using System.IO;
+using FluentValidationWikify.Documenters;
 using NDesk.Options;
 
 namespace FluentValidationWikify.Console
 {
     public class Shell : IShell
     {
+        private readonly ITextDocumenter documenter;
+
+        public Shell(ITextDocumenter documenter)
+        {
+            this.documenter = documenter;
+        }
+
         public void Run(params string[] args)
         {
             var verbose = 0;
@@ -20,8 +29,11 @@ namespace FluentValidationWikify.Console
                 ShowHelp();
             }
 
-            System.Console.WriteLine("Here");
-            System.Console.ReadLine();
+            foreach (var file in files)
+            {
+                var text = File.ReadAllText(file);
+                System.Console.WriteLine(documenter.ToString(text));
+            }
         }
 
         private void ShowHelp()

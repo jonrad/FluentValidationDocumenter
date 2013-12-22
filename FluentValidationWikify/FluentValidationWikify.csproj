@@ -67,7 +67,7 @@
   <ItemGroup>
     <Compile Include="ClassTokenizer.cs" />
     <Compile Include="Documenters\IClassDocumenter.cs" />
-    <Compile Include="Documenters\IFileDocumenter.cs" />
+    <Compile Include="Documenters\ITextDocumenter.cs" />
     <Compile Include="Documenters\IRuleDocumenter.cs" />
     <Compile Include="Documenters\SimpleSentenceClassDocumenter.cs" />
     <Compile Include="Documenters\SimpleSentenceRuleDocumenter.cs" />

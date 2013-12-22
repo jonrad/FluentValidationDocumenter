@@ -14,6 +14,8 @@ namespace FluentValidationWikify.Console
             shell.Run(args);
 
             container.Dispose();
+
+            System.Console.ReadLine();
         }
     }
 }
