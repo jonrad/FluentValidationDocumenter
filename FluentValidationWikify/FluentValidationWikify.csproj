@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7B7F8C46-5060-4429-ADBE-26F5147A757E}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FluentValidationWikify</RootNamespace>
     <AssemblyName>FluentValidationWikify</AssemblyName>
@@ -30,6 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
@@ -72,8 +75,10 @@
     <Compile Include="Documenters\SimpleSentenceClassDocumenter.cs" />
     <Compile Include="Documenters\SimpleSentenceRuleDocumenter.cs" />
     <Compile Include="Documenters\SimpleSentenceTextDocumenter.cs" />
+    <Compile Include="NodeTokenizers\GreaterThanOrEqualToTokenizer.cs" />
     <Compile Include="NodeTokenizers\GreaterThanTokenizer.cs" />
     <Compile Include="NodeTokenizers\EqualsTokenizer.cs" />
+    <Compile Include="NodeTokenizers\InclusiveBetweenTokenizer.cs" />
     <Compile Include="NodeTokenizers\SingleArgumentTokenizer.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="ITextTokenizer.cs" />
@@ -88,7 +93,6 @@
     <Compile Include="NodeTokenizers\RequiredTokenizer.cs" />
     <Compile Include="NodeTokenizers\WhenTokenizer.cs" />
     <Compile Include="PrintVisitor.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NodeTokenizers\NotNullTokenizer.cs" />
     <Compile Include="Models\Rule.cs" />

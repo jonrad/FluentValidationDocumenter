@@ -30,13 +30,15 @@ namespace FluentValidationWikify.Console.Installers
                 return;
             }
 
+            var level = verbose >= 2 ? LogLevel.Debug : LogLevel.Warn;
+
             var config = new LoggingConfiguration();
             var target = new ConsoleTarget
             {
                 Layout = "${message}"
             };
 
-            var rule = new LoggingRule("*", LogLevel.Debug, target);
+            var rule = new LoggingRule("*", level, target);
             config.LoggingRules.Add(rule);
             config.AddTarget("console", target);
             LogManager.Configuration = config;

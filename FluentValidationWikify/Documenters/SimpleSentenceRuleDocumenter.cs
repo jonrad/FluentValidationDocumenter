@@ -17,8 +17,10 @@ namespace FluentValidationWikify.Documenters
                 { "required", t => "is required" },
                 { "must", MustParser },
                 { "when", WhenParser },
-                { "equal", EqualParser },
-                { "greaterthan", GreaterThan },
+                { "equal", t => ArgumentParser(t, "equal") },
+                { "greaterthan", t => ArgumentParser(t, "greater than") },
+                { "greaterthanorequalto", t => ArgumentParser(t, "greater than or equal to") },
+                { "inclusivebetween", t => BetweenParser(t, "inclusive") },
             };
         }
 
@@ -61,14 +63,15 @@ namespace FluentValidationWikify.Documenters
             return "when " + Friendly(token.Info as string);
         }
 
-        private string EqualParser(Token token)
+        private string ArgumentParser(Token token, string text)
         {
-            return "must equal " + token.Info;
+            return string.Concat("must ", text, " ", token.Info);
         }
 
-        private string GreaterThan(Token token)
+        private string BetweenParser(Token token, string type)
         {
-            return "must be greater than " + token.Info;
+            var args = (object[]) token.Info;
+            return string.Format("must be between {0} and {1} ({2})", args[0], args[1], type);
         }
 
         private string Friendly(string data)

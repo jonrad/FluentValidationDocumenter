@@ -1,10 +1,10 @@
 ﻿namespace FluentValidationWikify.NodeTokenizers
 {
-    public class GreaterThanTokenizer : SingleArgumentTokenizer
+    public class GreaterThanOrEqualToTokenizer : SingleArgumentTokenizer
     {
         public override string MethodName
         {
-            get { return "GreaterThan"; }
+            get { return "GreaterThanOrEqualTo"; }
         }
 
         public override bool IsNewRule

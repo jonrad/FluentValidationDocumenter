@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Castle.Core.Logging;
 using FluentValidationWikify.Documenters;
 using NDesk.Options;
 
@@ -17,10 +16,8 @@ namespace FluentValidationWikify.Console
 
         public void Run(params string[] args)
         {
-            var verbose = 0;
             var options = new OptionSet
             {
-                { "v|verbose", v => verbose++ },
                 { "h|help|?", v => ShowHelp() }
             };
 
