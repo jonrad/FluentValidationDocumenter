@@ -70,7 +70,7 @@ namespace FluentValidationWikify.Documenters
 
         private string BetweenParser(Token token, string type)
         {
-            var args = (object[]) token.Info;
+            var args = (object[])token.Info;
             return string.Format("must be between {0} and {1} ({2})", args[0], args[1], type);
         }
 

@@ -14,6 +14,7 @@ namespace FluentValidationWikify.Console
                 var printer = new PrintVisitor(new TypeNameVisitor());
                 printer.Visit(tree.GetRoot());
             }
+
             System.Console.WriteLine();
             System.Console.WriteLine("Press any key");
             System.Console.Read();

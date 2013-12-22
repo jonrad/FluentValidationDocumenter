@@ -67,7 +67,7 @@ namespace FluentValidationWikify
                 Logger = NullLogger.Instance;
             }
 
-            public ILogger Logger { get; set; }
+            public ILogger Logger { private get; set; }
 
             public override IEnumerable<Handler> VisitBlock(BlockSyntax node)
             {

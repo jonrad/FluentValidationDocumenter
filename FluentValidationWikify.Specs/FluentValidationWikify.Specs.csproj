@@ -67,6 +67,7 @@
     <Compile Include="NodeTokenizers\EqualsTokenizerSpecs.cs" />
     <Compile Include="NodeTokenizers\InclusiveBetweenTokenizerSpecs.cs" />
     <Compile Include="SimpleSentenceClassDocumenterSpecs.cs" />
+    <Compile Include="SimpleSentenceTextDocumenterSpecs.cs" />
     <Compile Include="Tokens.cs" />
     <Compile Include="NodeTokenizers\WhenTokenizerSpecs.cs" />
     <Compile Include="NodeTokenizers\NotNullTokenizerSpecs.cs" />
