@@ -25,6 +25,8 @@ namespace FluentValidationWikify
             Rule rule = null;
             List<Token> details = null;
 
+            visitor.Logger = Logger;
+
             foreach (var handler in visitor.Visit(tree))
             {
                 Logger.DebugFormat("Using {0}", handler.Tokenizer.GetType());
@@ -62,7 +64,10 @@ namespace FluentValidationWikify
             public Visitor(IEnumerable<INodeTokenizer> documenters)
             {
                 this.documenters = documenters;
+                Logger = NullLogger.Instance;
             }
+
+            public ILogger Logger { get; set; }
 
             public override IEnumerable<Handler> VisitBlock(BlockSyntax node)
             {
@@ -91,18 +96,19 @@ namespace FluentValidationWikify
                     yield return result;
                 }
 
-                foreach (var documenter in documenters)
-                {
-                    if (documenter.CanProcess(node))
-                    {
-                        yield return new Handler
-                        {
-                            Node = node,
-                            Tokenizer = documenter
-                        };
+                var documenter = documenters.FirstOrDefault(d => d.CanProcess(node));
 
-                        break;
-                    }
+                if (documenter != null)
+                {
+                    yield return new Handler
+                    {
+                        Node = node,
+                        Tokenizer = documenter
+                    };
+                }
+                else if (node is InvocationExpressionSyntax)
+                {
+                    Logger.WarnFormat("Could not parse member access {0}", node.GetText());
                 }
             }
         }
