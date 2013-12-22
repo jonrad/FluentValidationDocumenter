@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FluentValidationWikify.Integration")]
+[assembly: AssemblyTitle("FluentValidationWikify.Console")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FluentValidationWikify.Integration")]
+[assembly: AssemblyProduct("FluentValidationWikify.Console")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("49f6ca08-1a5e-49b6-9f4c-ecbce1d15534")]
+[assembly: Guid("15dafc34-1d99-4f01-abf7-d60cb4aca52f")]
 
 // Version information for an assembly consists of the following four values:
 //

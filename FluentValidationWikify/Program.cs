@@ -7,7 +7,7 @@ namespace FluentValidationWikify
     {
         public static void Main(string[] args)
         {
-            var text = @"
+            const string Text = @"
     public class ModelValidator : AbstractValidator<Model>
     {
         public ModelValidator()
@@ -17,7 +17,7 @@ namespace FluentValidationWikify
         }
     }
 ";
-            var tree = SyntaxTree.ParseText(text);
+            var tree = SyntaxTree.ParseText(Text);
             var printer = new PrintVisitor(new TypeNameVisitor());
             printer.Visit(tree.GetRoot());
             Console.ReadLine();

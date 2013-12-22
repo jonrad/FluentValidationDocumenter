@@ -50,7 +50,7 @@ namespace FluentValidationWikify.Specs
         {
             Establish context = () =>
             {
-                var text = @"
+                const string text = @"
                     public class ModelValidator : AbstractValidator<Model>
                     {
                         public ModelValidator()
