@@ -98,6 +98,7 @@ TestResults
 ClientBin
 [Ss]tyle[Cc]op.*
 ~$*
+*~
 *.dbmdl
 Generated_Code #added for RIA/Silverlight projects
 
@@ -106,3 +107,4 @@ Generated_Code #added for RIA/Silverlight projects
 _UpgradeReport_Files/
 Backup*/
 UpgradeLog*.XML
+.nuget/NuGet.exe

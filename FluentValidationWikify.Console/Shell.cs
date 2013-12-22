@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Castle.Core.Logging;
 using FluentValidationWikify.Documenters;
 using NDesk.Options;
 

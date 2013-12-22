@@ -1,5 +1,6 @@
 ﻿using Castle.Windsor;
-using Castle.Windsor.Installer;
+using FluentValidationWikify.Console.Installers;
+using NDesk.Options;
 
 namespace FluentValidationWikify.Console
 {
@@ -7,8 +8,18 @@ namespace FluentValidationWikify.Console
     {
         public static void Main(string[] args)
         {
+            var verbose = 0;
+            var options = new OptionSet
+            {
+                { "v|verbose", v => verbose++ },
+            };
+
+            options.Parse(args);
+
             var container = new WindsorContainer();
-            container.Install(FromAssembly.This());
+            container.Install(
+                new AppInstaller(),
+                new LoggingInstaller(verbose));
 
             var shell = container.Resolve<IShell>();
             shell.Run(args);

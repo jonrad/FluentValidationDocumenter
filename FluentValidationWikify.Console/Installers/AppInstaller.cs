@@ -11,7 +11,6 @@ namespace FluentValidationWikify.Console.Installers
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            // container.AddFacility<LoggingFacility>(f => f.UseNLog().WithConfig("config.xml"));
             container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
 
             container.Register(
