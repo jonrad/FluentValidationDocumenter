@@ -25,7 +25,7 @@ namespace FluentValidationWikify.Console.Installers
 
         private void Configure()
         {
-            if (verbose == 0)
+            if (verbose <= 0)
             {
                 return;
             }
