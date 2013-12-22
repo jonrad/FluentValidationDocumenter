@@ -79,6 +79,7 @@
     <Compile Include="NodeTokenizers\GreaterThanTokenizer.cs" />
     <Compile Include="NodeTokenizers\EqualsTokenizer.cs" />
     <Compile Include="NodeTokenizers\InclusiveBetweenTokenizer.cs" />
+    <Compile Include="NodeTokenizers\NotEqualsTokenizer.cs" />
     <Compile Include="NodeTokenizers\SingleArgumentTokenizer.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="ITextTokenizer.cs" />

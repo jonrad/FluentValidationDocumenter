@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Logging;
 using FluentValidationWikify.Models;
@@ -108,7 +109,14 @@ namespace FluentValidationWikify
                 }
                 else if (node is InvocationExpressionSyntax)
                 {
-                    Logger.WarnFormat("Could not parse member access {0}", node.GetText());
+                    var identifier = node
+                        .ChildNodes()
+                        .SelectMany(c => c.ChildNodes().OfType<IdentifierNameSyntax>())
+                        .FirstOrDefault();
+
+                    Logger.WarnFormat(
+                        "Could not parse member access {0}", 
+                        identifier == null ? node.GetText().ToString() : identifier.Identifier.Value);
                 }
             }
         }
