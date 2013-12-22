@@ -37,8 +37,6 @@ namespace FluentValidationWikify.Console
             shell.Run(unhandled.ToArray());
 
             container.Dispose();
-
-            System.Console.ReadLine();
         }
 
         public static void Debug()
