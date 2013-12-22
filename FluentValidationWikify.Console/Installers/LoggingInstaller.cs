@@ -32,6 +32,7 @@ namespace FluentValidationWikify.Console.Installers
 
             var config = new LoggingConfiguration();
             var target = new ConsoleTarget();
+            target.Layout = "${message}";
             var rule = new LoggingRule("*", LogLevel.Debug, target);
             config.LoggingRules.Add(rule);
             config.AddTarget("console", target);
