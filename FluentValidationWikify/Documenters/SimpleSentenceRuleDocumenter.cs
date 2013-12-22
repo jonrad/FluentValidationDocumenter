@@ -17,7 +17,8 @@ namespace FluentValidationWikify.Documenters
                 { "required", t => "is required" },
                 { "must", MustParser },
                 { "when", WhenParser },
-                { "equal", EqualParser }
+                { "equal", EqualParser },
+                { "greaterthan", GreaterThan },
             };
         }
 
@@ -63,6 +64,11 @@ namespace FluentValidationWikify.Documenters
         private string EqualParser(Token token)
         {
             return "must equal " + token.Info;
+        }
+
+        private string GreaterThan(Token token)
+        {
+            return "must be greater than " + token.Info;
         }
 
         private string Friendly(string data)

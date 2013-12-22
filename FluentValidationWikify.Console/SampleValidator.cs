@@ -7,7 +7,7 @@ namespace FluentValidationWikify.Console
         public SampleValidator()
         {
             RuleFor(t => t.Name).NotNull();
-            RuleFor(t => t.Age).GreaterThanOrEqualTo(0);
+            RuleFor(t => t.Age).GreaterThan(0);
         }
     }
 }

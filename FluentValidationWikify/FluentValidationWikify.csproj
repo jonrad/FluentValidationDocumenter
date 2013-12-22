@@ -72,7 +72,9 @@
     <Compile Include="Documenters\SimpleSentenceClassDocumenter.cs" />
     <Compile Include="Documenters\SimpleSentenceRuleDocumenter.cs" />
     <Compile Include="Documenters\SimpleSentenceTextDocumenter.cs" />
+    <Compile Include="NodeTokenizers\GreaterThanTokenizer.cs" />
     <Compile Include="NodeTokenizers\EqualsTokenizer.cs" />
+    <Compile Include="NodeTokenizers\SingleArgumentTokenizer.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="ITextTokenizer.cs" />
     <Compile Include="Models\ClassRules.cs" />
