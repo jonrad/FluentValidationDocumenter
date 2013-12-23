@@ -5,26 +5,32 @@ namespace FluentValidationWikify.NodeTokenizers
 {
     public abstract class MemberAccessExpressionTokenizer : INodeTokenizer
     {
-        public abstract string MethodName { get; }
+        public abstract string[] MethodNames { get; }
 
         public abstract bool IsNewRule { get; }
 
         public bool CanProcess(SyntaxNode node)
         {
+            var identifier = Identifier(node);
+            return identifier != null && MethodNames.Contains(identifier);
+        }
+
+        public string Identifier(SyntaxNode node)
+        {
             var invocation = node as InvocationExpressionSyntax;
             if (invocation == null)
             {
-                return false;
+                return null;
             }
 
             var memberAccess = invocation.ChildNodes().OfType<MemberAccessExpressionSyntax>().FirstOrDefault();
             if (memberAccess == null)
             {
-                return false;
+                return null;
             }
 
             var identifier = memberAccess.ChildNodes().OfType<IdentifierNameSyntax>().LastOrDefault();
-            return identifier != null && identifier.Identifier.ValueText == MethodName;
+            return identifier == null ? null : identifier.Identifier.ValueText;
         }
 
         public abstract Token Get(SyntaxNode node);

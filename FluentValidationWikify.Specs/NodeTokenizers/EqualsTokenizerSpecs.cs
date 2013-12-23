@@ -4,9 +4,9 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs.NodeTokenizers
 {
-    public class EqualsTokenizerSpecs
+    public class SingleArgumentTokenizerSpecs
     {
-        [Subject(typeof(EqualsTokenizer))]
+        [Subject(typeof(SingleArgumentTokenizer))]
         public class when_processing
         {
             Establish context = () =>
@@ -24,7 +24,7 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
                                         SyntaxKind.NumericLiteralExpression,
                                         Syntax.Literal("1.23m", 1.23m))))));
 
-                documenter = new EqualsTokenizer();
+                documenter = new SingleArgumentTokenizer();
             };
 
             It should_be_able_to_process = () =>

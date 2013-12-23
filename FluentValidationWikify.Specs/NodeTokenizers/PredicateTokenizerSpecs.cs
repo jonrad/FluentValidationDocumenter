@@ -4,11 +4,10 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs.NodeTokenizers
 {
-    [Subject(typeof (PredicateTokenizer))]
+    [Subject(typeof(PredicateTokenizer))]
     public class PredicateTokenizerSpecs
     {
-
-        [Subject(typeof (PredicateTokenizer))]
+        [Subject(typeof(PredicateTokenizer))]
         private class in_simple_case
         {
             private Establish context = () =>
@@ -47,8 +46,39 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
 
             private static PredicateTokenizer documenter;
 
+            private static SyntaxNode node;
         }
 
-        private static SyntaxNode node;
+        private class when_using_when
+        {
+            private Establish context = () =>
+            {
+                node =
+                    Syntax.InvocationExpression(
+                        Syntax.MemberAccessExpression(
+                            SyntaxKind.MemberAccessExpression,
+                            Syntax.IdentifierName("x"),
+                            Syntax.IdentifierName("When")),
+                        Syntax.ArgumentList(
+                            Syntax.SeparatedList(
+                                Syntax.Argument(
+                                    Syntax.IdentifierName("IsAwesome")))));
+
+                documenter = new PredicateTokenizer();
+            };
+
+            It should_be_able_to_process = () =>
+                documenter.CanProcess(node).ShouldBeTrue();
+
+            It should_return_when = () =>
+                documenter.Get(node).Id.ShouldEqual("when");
+
+            It should_return_isawesome_for_info = () =>
+                documenter.Get(node).Info.ShouldEqual("IsAwesome");
+
+            static PredicateTokenizer documenter;
+
+            static SyntaxNode node;
+        }
     }
 }

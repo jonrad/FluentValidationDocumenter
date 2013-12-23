@@ -4,8 +4,8 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Specs.NodeTokenizers
 {
-    [Subject(typeof(NotNullTokenizer))]
-    public class NotNullTokenizerSpecs
+    [Subject(typeof(RequiredTokenizer))]
+    public class RequredTokenizerSpecs
     {
         Establish context = () =>
         {
@@ -16,14 +16,14 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
                         Syntax.IdentifierName("x"),
                         Syntax.IdentifierName("NotNull")));
 
-            documenter = new NotNullTokenizer();
+            documenter = new RequiredTokenizer();
         };
 
         It should_be_able_to_process = () =>
             documenter.CanProcess(node).ShouldBeTrue();
 
         It should_return_required = () =>
-            documenter.Get(node).Id.ShouldEqual("required");
+            documenter.Get(node).Id.ShouldEqual("notnull");
 
         static INodeTokenizer documenter;
 

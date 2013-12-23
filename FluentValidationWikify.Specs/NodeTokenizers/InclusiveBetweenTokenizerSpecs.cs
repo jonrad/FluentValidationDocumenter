@@ -6,7 +6,7 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
 {
     public class InclusiveBetweenTokenizerSpecs
     {
-        [Subject(typeof(EqualsTokenizer))]
+        [Subject(typeof(InclusiveBetweenTokenizer))]
         public class when_processing
         {
             Establish context = () =>

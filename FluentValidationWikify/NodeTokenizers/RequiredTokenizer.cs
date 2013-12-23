@@ -2,8 +2,16 @@
 
 namespace FluentValidationWikify.NodeTokenizers
 {
-    public abstract class RequiredTokenizer : MemberAccessExpressionTokenizer
+    public class RequiredTokenizer : MemberAccessExpressionTokenizer
     {
+        public override string[] MethodNames
+        {
+            get
+            {
+                return new[] { "NotNull" };
+            }
+        }
+
         public override bool IsNewRule
         {
             get { return false; }
@@ -11,7 +19,7 @@ namespace FluentValidationWikify.NodeTokenizers
 
         public override Token Get(SyntaxNode node)
         {
-            return new Token("required", null);
+            return new Token(Identifier(node).ToLower(), null);
         }
     }
 }

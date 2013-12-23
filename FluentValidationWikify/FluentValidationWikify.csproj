@@ -75,11 +75,7 @@
     <Compile Include="Documenters\SimpleSentenceClassDocumenter.cs" />
     <Compile Include="Documenters\SimpleSentenceRuleDocumenter.cs" />
     <Compile Include="Documenters\SimpleSentenceTextDocumenter.cs" />
-    <Compile Include="NodeTokenizers\GreaterThanOrEqualToTokenizer.cs" />
-    <Compile Include="NodeTokenizers\GreaterThanTokenizer.cs" />
-    <Compile Include="NodeTokenizers\EqualsTokenizer.cs" />
     <Compile Include="NodeTokenizers\InclusiveBetweenTokenizer.cs" />
-    <Compile Include="NodeTokenizers\NotEqualsTokenizer.cs" />
     <Compile Include="NodeTokenizers\SingleArgumentTokenizer.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="ITextTokenizer.cs" />
@@ -90,12 +86,9 @@
     <Compile Include="IRuleTokenizer.cs" />
     <Compile Include="NodeTokenizers\MemberAccessExpressionTokenizer.cs" />
     <Compile Include="NodeTokenizers\PredicateTokenizer.cs" />
-    <Compile Include="NodeTokenizers\PredicateTokenizerBase.cs" />
     <Compile Include="NodeTokenizers\RequiredTokenizer.cs" />
-    <Compile Include="NodeTokenizers\WhenTokenizer.cs" />
     <Compile Include="PrintVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NodeTokenizers\NotNullTokenizer.cs" />
     <Compile Include="Models\Rule.cs" />
     <Compile Include="RuleTokenizer.cs" />
     <Compile Include="NodeTokenizers\RuleForTokenizer.cs" />

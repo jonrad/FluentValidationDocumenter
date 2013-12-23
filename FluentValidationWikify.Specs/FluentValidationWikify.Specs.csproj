@@ -69,7 +69,6 @@
     <Compile Include="SimpleSentenceClassDocumenterSpecs.cs" />
     <Compile Include="SimpleSentenceTextDocumenterSpecs.cs" />
     <Compile Include="Tokens.cs" />
-    <Compile Include="NodeTokenizers\WhenTokenizerSpecs.cs" />
     <Compile Include="NodeTokenizers\NotNullTokenizerSpecs.cs" />
     <Compile Include="NodeTokenizers\PredicateTokenizerSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

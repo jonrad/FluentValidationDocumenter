@@ -4,8 +4,18 @@ using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.NodeTokenizers
 {
-    public abstract class SingleArgumentTokenizer : MemberAccessExpressionTokenizer
+    public class SingleArgumentTokenizer : MemberAccessExpressionTokenizer
     {
+        public override string[] MethodNames
+        {
+            get { return new[] { "Equals", "GreaterThan", "GreaterThanOrEqualTo", "NotEqual" }; }
+        }
+
+        public override bool IsNewRule
+        {
+            get { return false; }
+        }
+
         public override Token Get(SyntaxNode node)
         {
             var invocation = (InvocationExpressionSyntax)node;
@@ -18,7 +28,7 @@ namespace FluentValidationWikify.NodeTokenizers
 
             if (literal != null)
             {
-                return new Token(MethodName.ToLower(), literal.Token.Value);
+                return new Token(Identifier(node).ToLower(), literal.Token.Value);
             }
 
             throw new NotImplementedException();

@@ -5,9 +5,9 @@ namespace FluentValidationWikify.NodeTokenizers
 {
     public class InclusiveBetweenTokenizer : MemberAccessExpressionTokenizer
     {
-        public override string MethodName
+        public override string[] MethodNames
         {
-            get { return "InclusiveBetween"; }
+            get { return new[] { "InclusiveBetween" }; }
         }
 
         public override bool IsNewRule
@@ -25,7 +25,7 @@ namespace FluentValidationWikify.NodeTokenizers
                 .Select(t => t.Token.Value)
                 .ToArray();
 
-            return new Token(MethodName.ToLower(), arguments);
+            return new Token(Identifier(node).ToLower(), arguments);
         }
     }
 }
