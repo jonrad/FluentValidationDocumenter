@@ -15,6 +15,7 @@ namespace FluentValidationWikify.Documenters
             tokenStringifiers = new Dictionary<string, Func<Token, string>>
             {
                 { "notnull", t => "is required" },
+                { "notempty", t => "must not be empty" },
                 { "required", t => "is required" },
                 { "must", MustParser },
                 { "when", WhenParser },

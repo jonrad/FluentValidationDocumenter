@@ -8,7 +8,7 @@ namespace FluentValidationWikify.NodeTokenizers
         {
             get
             {
-                return new[] { "NotNull" };
+                return new[] { "NotNull", "NotEmpty" };
             }
         }
 
