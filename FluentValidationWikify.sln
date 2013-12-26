@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentValidationWikify.Console", "FluentValidationWikify.Console\FluentValidationWikify.Console.csproj", "{8B818081-D597-45A4-BCBA-E4DF6C598017}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentValidationWikify", "FluentValidationWikify\FluentValidationWikify.csproj", "{7B7F8C46-5060-4429-ADBE-26F5147A757E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentValidationWikify.Specs", "FluentValidationWikify.Specs\FluentValidationWikify.Specs.csproj", "{92F9A527-2714-4A6B-A98C-526761D85031}"
@@ -14,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D2326E
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentValidationWikify.Integration", "FluentValidationWikify.Integration\FluentValidationWikify.Integration.csproj", "{51701DB5-EBF6-427B-9A2B-E442815389AF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentValidationWikify.Console", "FluentValidationWikify.Console\FluentValidationWikify.Console.csproj", "{8B818081-D597-45A4-BCBA-E4DF6C598017}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
