@@ -24,6 +24,7 @@ namespace FluentValidationWikify.Documenters
                 { "greaterthan", t => ArgumentParser(t, "greater than") },
                 { "greaterthanorequalto", t => ArgumentParser(t, "greater than or equal to") },
                 { "inclusivebetween", t => BetweenParser(t, "inclusive") },
+                { "length", LengthParser },
             };
         }
 
@@ -69,6 +70,12 @@ namespace FluentValidationWikify.Documenters
         private string ArgumentParser(Token token, string text)
         {
             return string.Concat("must ", text, " ", token.Info);
+        }
+
+        private string LengthParser(Token token)
+        {
+            var args = (object[])token.Info;
+            return string.Format("must have length between {0} and {1}", args[0], args[1]);
         }
 
         private string BetweenParser(Token token, string type)

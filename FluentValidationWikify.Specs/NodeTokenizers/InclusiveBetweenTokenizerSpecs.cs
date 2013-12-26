@@ -6,7 +6,7 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
 {
     public class InclusiveBetweenTokenizerSpecs
     {
-        [Subject(typeof(InclusiveBetweenTokenizer))]
+        [Subject(typeof(MultipleArgumentTokenizer))]
         public class when_processing
         {
             Establish context = () =>
@@ -30,7 +30,7 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
                                         Syntax.Literal("2", 2)))
                                 )));
 
-                documenter = new InclusiveBetweenTokenizer();
+                documenter = new MultipleArgumentTokenizer();
             };
 
             It should_be_able_to_process = () =>
@@ -44,7 +44,7 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
 
             static InvocationExpressionSyntax node;
 
-            static InclusiveBetweenTokenizer documenter;
+            static MultipleArgumentTokenizer documenter;
         }
     }
 }
