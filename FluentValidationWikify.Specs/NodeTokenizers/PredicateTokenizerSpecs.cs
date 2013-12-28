@@ -80,5 +80,51 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
 
             static SyntaxNode node;
         }
+
+        private class when_using_when_with_lamda
+        {
+            private Establish context = () =>
+            {
+                // p => p.Age < 25
+                lamda = Syntax.SimpleLambdaExpression(
+                    Syntax.Parameter(Syntax.Identifier("p")),
+                    Syntax.BinaryExpression(
+                        SyntaxKind.LessThanExpression,
+                        Syntax.MemberAccessExpression(
+                            SyntaxKind.MemberAccessExpression,
+                            Syntax.IdentifierName("p"),
+                            Syntax.IdentifierName("Age")),
+                        Syntax.LiteralExpression(
+                            SyntaxKind.NumericLiteralExpression,
+                            Syntax.Literal("25", 25))));
+
+                node =
+                    Syntax.InvocationExpression(
+                        Syntax.MemberAccessExpression(
+                            SyntaxKind.MemberAccessExpression,
+                            Syntax.IdentifierName("x"),
+                            Syntax.IdentifierName("When")),
+                        Syntax.ArgumentList(
+                            Syntax.SeparatedList(
+                                Syntax.Argument(lamda))));
+
+                documenter = new PredicateTokenizer();
+            };
+
+            It should_be_able_to_process = () =>
+                documenter.CanProcess(node).ShouldBeTrue();
+
+            It should_return_when = () =>
+                documenter.Get(node).Id.ShouldEqual("when");
+
+            It should_return_lamda_details_for_info = () =>
+                documenter.Get(node).Info.ShouldEqual(lamda);
+
+            static PredicateTokenizer documenter;
+
+            static SyntaxNode node;
+
+            static SimpleLambdaExpressionSyntax lamda;
+        }
     }
 }
