@@ -109,6 +109,23 @@ namespace FluentValidationWikify.Specs
         }
 
         [Subject(typeof(SimpleSentenceRuleDocumenter))]
+        public class with_when_token_with_lamda : with_documenter
+        {
+            Establish context = () =>
+                rule = new Rule("Name", new Token("must", "BeAwesome"), new Token("when", Tokens.AgeLessThan25));
+
+            Because of = () =>
+                result = Documenter.ToString(rule);
+
+            It should_return_non_null = () =>
+                result.ShouldNotBeNull();
+
+            static string result;
+
+            static Rule rule;
+        }
+
+        [Subject(typeof(SimpleSentenceRuleDocumenter))]
         public class with_two_when_and_must_tokens : with_documenter
         {
             Establish context = () =>

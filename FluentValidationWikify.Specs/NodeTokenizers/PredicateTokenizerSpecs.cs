@@ -85,18 +85,6 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
         {
             private Establish context = () =>
             {
-                // p => p.Age < 25
-                lamda = Syntax.SimpleLambdaExpression(
-                    Syntax.Parameter(Syntax.Identifier("p")),
-                    Syntax.BinaryExpression(
-                        SyntaxKind.LessThanExpression,
-                        Syntax.MemberAccessExpression(
-                            SyntaxKind.MemberAccessExpression,
-                            Syntax.IdentifierName("p"),
-                            Syntax.IdentifierName("Age")),
-                        Syntax.LiteralExpression(
-                            SyntaxKind.NumericLiteralExpression,
-                            Syntax.Literal("25", 25))));
 
                 node =
                     Syntax.InvocationExpression(
@@ -124,7 +112,7 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
 
             static SyntaxNode node;
 
-            static SimpleLambdaExpressionSyntax lamda;
+            static readonly SimpleLambdaExpressionSyntax lamda = Tokens.AgeLessThan25;
         }
     }
 }
