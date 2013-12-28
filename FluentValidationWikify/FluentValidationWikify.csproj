@@ -73,8 +73,10 @@
     <Compile Include="Documenters\ITextDocumenter.cs" />
     <Compile Include="Documenters\IRuleDocumenter.cs" />
     <Compile Include="Documenters\SimpleSentenceClassDocumenter.cs" />
+    <Compile Include="Documenters\SimpleSentenceLamdaDocumenter.cs" />
     <Compile Include="Documenters\SimpleSentenceRuleDocumenter.cs" />
     <Compile Include="Documenters\SimpleSentenceTextDocumenter.cs" />
+    <Compile Include="Documenters\ILamdaDocumenter.cs" />
     <Compile Include="NodeTokenizers\MultipleArgumentTokenizer.cs" />
     <Compile Include="NodeTokenizers\SingleArgumentTokenizer.cs" />
     <Compile Include="Token.cs" />
