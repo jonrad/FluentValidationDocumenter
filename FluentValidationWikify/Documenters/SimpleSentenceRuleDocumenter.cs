@@ -13,11 +13,14 @@ namespace FluentValidationWikify.Documenters
 
         private readonly ILamdaDocumenter lamdaDocumenter;
 
+        private readonly IFriendly friendly;
+
         private readonly Dictionary<string, Func<Token, string>> tokenStringifiers;
 
-        public SimpleSentenceRuleDocumenter(ILamdaDocumenter lamdaDocumenter)
+        public SimpleSentenceRuleDocumenter(ILamdaDocumenter lamdaDocumenter, IFriendly friendly)
         {
             this.lamdaDocumenter = lamdaDocumenter;
+            this.friendly = friendly;
 
             tokenStringifiers = new Dictionary<string, Func<Token, string>>
             {
@@ -95,7 +98,7 @@ namespace FluentValidationWikify.Documenters
 
         private string Friendly(string data)
         {
-            return new Regex("([a-z])([A-Z])").Replace(data, "$1 $2").ToLower();
+            return friendly.Get(data);
         }
     }
 }

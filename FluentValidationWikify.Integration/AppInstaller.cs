@@ -16,6 +16,7 @@ namespace FluentValidationWikify.Integration
 
             container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
             container.Register(
+                Component.For<IFriendly>().ImplementedBy<Friendly>(),
                 Component.For<ILamdaDocumenter>().ImplementedBy<SimpleSentenceLamdaDocumenter>(),
                 Component.For<ITextTokenizer>().ImplementedBy<TextTokenizer>(),
                 Component.For<IClassTokenizer>().ImplementedBy<ClassTokenizer>(),
