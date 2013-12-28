@@ -35,7 +35,7 @@ namespace FluentValidationWikify.Console.Installers
             var config = new LoggingConfiguration();
             var target = new ConsoleTarget
             {
-                Layout = "${message}"
+                Layout = @"${message}${onexception:${newline}EXCEPTION OCCURRED\: ${exception:format=tostring}}"
             };
 
             var rule = new LoggingRule("*", level, target);
