@@ -1,19 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Documenters
 {
     public class SimpleSentenceLamdaDocumenter : ILamdaDocumenter
     {
-        private readonly string ruleName;
-
-        public SimpleSentenceLamdaDocumenter(string ruleName)
-        {
-            this.ruleName = ruleName;
-        }
-
-        public string Document(SimpleLambdaExpressionSyntax lamdaExpression)
+        public string Document(string ruleName, SimpleLambdaExpressionSyntax lamdaExpression)
         {
             var parameter = lamdaExpression.ChildNodes().OfType<ParameterSyntax>().First().Identifier.ValueText;
             SyntaxNode body = lamdaExpression.Body;

@@ -30,8 +30,8 @@ namespace FluentValidationWikify.Specs
         {
             Establish context = () =>
             {
-                The<IRuleDocumenter>().WhenToldTo(d => d.ToString(Param.IsAny<Rule>()))
-                    .Return<Rule>(r => r.Name);
+                The<IRuleDocumenter>().WhenToldTo(d => d.Document(Param.IsAny<string>(), Param.IsAny<Rule>()))
+                    .Return<string, Rule>((c, r) => r.Name);
 
                 classRules = new ClassRules("Person")
                 {

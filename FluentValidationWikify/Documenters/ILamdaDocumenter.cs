@@ -4,6 +4,6 @@ namespace FluentValidationWikify.Documenters
 {
     public interface ILamdaDocumenter
     {
-        string Document(SimpleLambdaExpressionSyntax lamdaExpression);
+        string Document(string ruleName, SimpleLambdaExpressionSyntax lamdaExpression);
     }
 }

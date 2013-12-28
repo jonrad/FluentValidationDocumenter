@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using FluentValidationWikify.Models;
+using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.Documenters
 {
     public class SimpleSentenceRuleDocumenter : IRuleDocumenter
     {
+        private string currentClassName = null;
+
+        private readonly ILamdaDocumenter lamdaDocumenter;
+
         private readonly Dictionary<string, Func<Token, string>> tokenStringifiers;
 
-        public SimpleSentenceRuleDocumenter()
+        public SimpleSentenceRuleDocumenter(ILamdaDocumenter lamdaDocumenter)
         {
+            this.lamdaDocumenter = lamdaDocumenter;
+
             tokenStringifiers = new Dictionary<string, Func<Token, string>>
             {
                 { "notnull", t => "is required" },
@@ -29,8 +36,11 @@ namespace FluentValidationWikify.Documenters
             };
         }
 
-        public string ToString(Rule rule)
+        public string Document(string className, Rule rule)
         {
+            // This destroys multi threading, which can be easily rectified
+            currentClassName = className;
+
             var tokens = rule.Details.ToArray();
             if (tokens.Length == 0)
             {
@@ -60,7 +70,10 @@ namespace FluentValidationWikify.Documenters
 
         private string WhenParser(Token token)
         {
-            return "when " + Friendly(token.Info.ToString());
+            var info = token.Info as SimpleLambdaExpressionSyntax;
+            string friendly = info != null ? lamdaDocumenter.Document(Friendly(currentClassName), info) : Friendly(token.Info.ToString());
+
+            return "when " + friendly;
         }
 
         private string ArgumentParser(Token token, string text)

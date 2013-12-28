@@ -4,6 +4,6 @@ namespace FluentValidationWikify.Documenters
 {
     public interface IRuleDocumenter
     {
-        string ToString(Rule rule);
+        string Document(string className, Rule rule);
     }
 }
