@@ -69,7 +69,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassTokenizer.cs" />
+    <Compile Include="Documenters\Friendly.cs" />
     <Compile Include="Documenters\IClassDocumenter.cs" />
+    <Compile Include="Documenters\IFriendly.cs" />
     <Compile Include="Documenters\ITextDocumenter.cs" />
     <Compile Include="Documenters\IRuleDocumenter.cs" />
     <Compile Include="Documenters\SimpleSentenceClassDocumenter.cs" />

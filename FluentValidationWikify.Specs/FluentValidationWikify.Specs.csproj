@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassTokenizerSpecs.cs" />
+    <Compile Include="Documenters\FriendlySpecs.cs" />
     <Compile Include="Documenters\SimpleSentenceLamdaDocumenterSpecs.cs" />
     <Compile Include="NodeTokenizers\SingleArgumentTokenizerSpecs.cs" />
     <Compile Include="NodeTokenizers\InclusiveBetweenTokenizerSpecs.cs" />
