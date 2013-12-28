@@ -9,13 +9,13 @@ namespace FluentValidationWikify.Specs.Documenters
         public class when_documenting
         {
             Establish context = () =>
-                documenter = new SimpleSentenceLamdaDocumenter("Person");
+                documenter = new SimpleSentenceLamdaDocumenter("person");
 
             Because of = () =>
                 result = documenter.Document(Tokens.AgeLessThan25);
 
             It should_be_friendly = () =>
-                result.ShouldEqual("Person's age < 25");
+                result.ShouldEqual("person.age<25");
 
             static SimpleSentenceLamdaDocumenter documenter;
 
