@@ -21,9 +21,10 @@ namespace FluentValidationWikify.Documenters
                 { "when", WhenParser },
                 { "equal", t => ArgumentParser(t, "equal") },
                 { "notequal", t => ArgumentParser(t, "not equal") },
-                { "greaterthan", t => ArgumentParser(t, "greater than") },
-                { "greaterthanorequalto", t => ArgumentParser(t, "greater than or equal to") },
+                { "greaterthan", t => ArgumentParser(t, "be greater than") },
+                { "greaterthanorequalto", t => ArgumentParser(t, "be greater than or equal to") },
                 { "inclusivebetween", t => BetweenParser(t, "inclusive") },
+                { "exclusivebetween", t => BetweenParser(t, "exclusive") },
                 { "length", LengthParser },
             };
         }

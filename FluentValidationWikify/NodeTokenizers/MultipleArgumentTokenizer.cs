@@ -7,7 +7,7 @@ namespace FluentValidationWikify.NodeTokenizers
     {
         public override string[] MethodNames
         {
-            get { return new[] { "InclusiveBetween", "Length" }; }
+            get { return new[] { "InclusiveBetween", "ExclusiveBetween", "Length" }; }
         }
 
         public override bool IsNewRule
