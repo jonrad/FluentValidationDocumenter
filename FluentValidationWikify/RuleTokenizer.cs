@@ -10,10 +10,13 @@ namespace FluentValidationWikify
 {
     public class RuleTokenizer : IRuleTokenizer
     {
+        private readonly bool force;
+
         private readonly Visitor visitor;
 
-        public RuleTokenizer(IEnumerable<INodeTokenizer> documenters)
+        public RuleTokenizer(IEnumerable<INodeTokenizer> documenters, bool force = false)
         {
+            this.force = force;
             visitor = new Visitor(documenters);
 
             Logger = NullLogger.Instance;
@@ -30,7 +33,30 @@ namespace FluentValidationWikify
 
             foreach (var handler in visitor.Visit(tree))
             {
+                Token token;
+
                 Logger.DebugFormat("Using {0}", handler.Tokenizer.GetType());
+
+                if (rule == null && !handler.Tokenizer.IsNewRule)
+                {
+                    Logger.WarnFormat("Unexpected node {0}", handler.Node);
+                    continue;
+                }
+
+                try
+                {
+                    token = handler.Tokenizer.Get(handler.Node);
+                }
+                catch (Exception ex)
+                {
+                    Logger.ErrorFormat(ex, "Could not parse node {0}", handler.Node);
+                    if (force)
+                    {
+                        continue;
+                    }
+
+                    throw;
+                }
 
                 if (handler.Tokenizer.IsNewRule)
                 {
@@ -42,13 +68,13 @@ namespace FluentValidationWikify
                     details = new List<Token>();
                     rule = new Rule
                     {
-                        Name = handler.Tokenizer.Get(handler.Node).Info.ToString(), // FIX
+                        Name = token.Info.ToString(), // FIX
                         Details = details
                     };
                 }
                 else if (rule != null)
                 {
-                    details.Add(handler.Tokenizer.Get(handler.Node));
+                    details.Add(token);
                 }
             }
 

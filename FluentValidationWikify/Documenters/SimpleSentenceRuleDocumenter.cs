@@ -50,12 +50,7 @@ namespace FluentValidationWikify.Documenters
             Func<Token, string> handler;
             tokenStringifiers.TryGetValue(token.Id, out handler);
 
-            if (handler != null)
-            {
-                return handler(token);
-            }
-
-            return null;
+            return handler != null ? handler(token) : null;
         }
 
         private string MustParser(Token token)
