@@ -60,7 +60,7 @@ namespace FluentValidationWikify.Documenters
 
         private string WhenParser(Token token)
         {
-            return "when " + Friendly(token.Info as string);
+            return "when " + Friendly(token.Info.ToString());
         }
 
         private string ArgumentParser(Token token, string text)
