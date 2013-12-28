@@ -21,17 +21,34 @@ namespace FluentValidationWikify.NodeTokenizers
                 .ChildNodes().OfType<ArgumentListSyntax>().First()
                 .ChildNodes().OfType<ArgumentSyntax>().First();
 
+            var tokenDetails = GetDetails(argument);
+
+            return new Token(Identifier(node).ToLower(), tokenDetails);
+        }
+
+        private object GetDetails(ArgumentSyntax argument)
+        {
             var identifier = argument.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault();
             if (identifier == null)
             {
                 // this is really quite crap
                 SyntaxNode child = argument.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault() ??
-                                   (SyntaxNode)argument.ChildNodes().OfType<InvocationExpressionSyntax>().First();
+                                   (SyntaxNode)argument.ChildNodes().OfType<InvocationExpressionSyntax>().FirstOrDefault();
 
-                identifier = child.ChildNodes().OfType<IdentifierNameSyntax>().First();
+                if (child != null)
+                {
+                    identifier = child.ChildNodes().OfType<IdentifierNameSyntax>().First();
+                }
             }
 
-            return new Token(Identifier(node).ToLower(), identifier.Identifier.ValueText);
+            if (identifier != null)
+            {
+                return identifier.Identifier.ValueText;
+            }
+
+            var lamda = argument.ChildNodes().OfType<SimpleLambdaExpressionSyntax>().FirstOrDefault();
+
+            return lamda;
         }
     }
 }

@@ -118,7 +118,7 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
                 documenter.Get(node).Id.ShouldEqual("when");
 
             It should_return_lamda_details_for_info = () =>
-                documenter.Get(node).Info.ShouldEqual(lamda);
+                documenter.Get(node).Info.ToString().ShouldEqual(lamda.ToString());
 
             static PredicateTokenizer documenter;
 
