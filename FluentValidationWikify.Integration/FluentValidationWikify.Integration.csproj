@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppInstaller.cs" />
-    <Compile Include="TheClassDocumenter.cs" />
     <Compile Include="TheTextDocumenter.cs" />
     <Compile Include="WithApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

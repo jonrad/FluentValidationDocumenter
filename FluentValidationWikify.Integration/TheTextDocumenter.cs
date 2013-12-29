@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NUnit.Framework;
 
 namespace FluentValidationWikify.Integration
@@ -7,7 +8,7 @@ namespace FluentValidationWikify.Integration
     public class TheTextDocumenter : WithApi
     {
         [Test]
-        public void ShouldWork()
+        public void ForSingleModelAndRule()
         {
             const string Text = @"
                 public class ModelValidator : AbstractValidator<Model>
@@ -17,24 +18,41 @@ namespace FluentValidationWikify.Integration
                         RuleFor(m => m.Name).NotNull();
                     }
                 }";
-            var documenter = InitTokenizer();
 
-            var results =
-                documenter.Get(Text).ToArray();
+            var documenter = InitDocumenter();
 
-            Assert.That(results.Length, Is.EqualTo(1));
+            var results = documenter.ToString(Text);
 
-            var result = results[0];
+            Assert.That(results, Is.EqualTo(@"Rules for Model" + Environment.NewLine + "Name is required"));
+        }
 
-            Assert.That(result.Name, Is.EqualTo("Model"));
+        [Test]
+        public void ForMultipleRules()
+        {
+            const string Text = @"
+                public class ModelValidator : AbstractValidator<Model>
+                {
+                    public ModelValidator()
+                    {
+                        RuleFor(m => m.A).NotNull();
+                        RuleFor(m => m.B).NotNull();
+                        RuleFor(m => m.C).NotNull();
+                        RuleFor(m => m.D).NotNull();
+                        RuleFor(m => m.E).NotNull();
+                    }
+                }";
 
-            Assert.That(result.Count, Is.EqualTo(1));
+            var documenter = InitDocumenter();
 
-            Assert.That(result[0].Name, Is.EqualTo("Name"));
+            var results = documenter.ToString(Text);
 
-            Assert.That(result[0].Details.Count(), Is.EqualTo(1));
-
-            Assert.That(result[0].Details.First().Id, Is.EqualTo("notnull"));
+            Assert.That(
+                results,
+                Is.EqualTo(
+                    "Rules for Model" + Environment.NewLine +
+                    string.Join(
+                        Environment.NewLine,
+                        Enumerable.Range(0, 5).Select(i => string.Format("{0} is required", (char)('A' + i))))));
         }
     }
 }
