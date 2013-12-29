@@ -16,6 +16,8 @@ namespace FluentValidationWikify.Documenters
 
         private string currentClassName;
 
+        private string currentRuleName;
+
         public SimpleSentenceRuleDocumenter(ILamdaDocumenter lamdaDocumenter, IFriendly friendly)
         {
             this.lamdaDocumenter = lamdaDocumenter;
@@ -42,6 +44,7 @@ namespace FluentValidationWikify.Documenters
         {
             // This destroys multi threading, which can be easily rectified
             currentClassName = className;
+            currentRuleName = rule.Name;
 
             var tokens = rule.Details.ToArray();
             if (tokens.Length == 0)
@@ -67,10 +70,13 @@ namespace FluentValidationWikify.Documenters
 
         private string MustParser(Token token)
         {
-            return string.Concat(
-                "must ",
-                token.Info is SimpleLambdaExpressionSyntax ? "satisfy " : string.Empty,
-                Friendly(token.Info));
+            var info = token.Info as SimpleLambdaExpressionSyntax;
+
+            var details = 
+                info != null ?
+                "satisfy " + lamdaDocumenter.Document(friendly.Get(currentRuleName), info) :
+                friendly.Get(token.Info.ToString());
+            return "must " + details;
         }
 
         private string WhenParser(Token token)
@@ -98,7 +104,7 @@ namespace FluentValidationWikify.Documenters
         private string Friendly(object data)
         {
             var info = data as SimpleLambdaExpressionSyntax;
-            return info != null ? lamdaDocumenter.Document(Friendly(currentClassName), info) : friendly.Get(data.ToString());
+            return info != null ? lamdaDocumenter.Document(friendly.Get(currentClassName), info) : friendly.Get(data.ToString());
         }
     }
 }

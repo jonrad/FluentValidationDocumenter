@@ -6,6 +6,13 @@ namespace FluentValidationWikify.Specs.Documenters
     public class FriendlySpecs
     {
         [Subject(typeof(Friendly))]
+        class when_parsing_simple : with_friendly
+        {
+            It should_return_friendly = () =>
+                Friendly.Get("Age").ShouldEqual("age");
+        }
+
+        [Subject(typeof(Friendly))]
         class when_parsing_camel_case : with_friendly
         {
             It should_return_friendly = () =>

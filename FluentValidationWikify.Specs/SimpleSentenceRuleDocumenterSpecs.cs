@@ -117,11 +117,14 @@ namespace FluentValidationWikify.Specs
         {
             Establish context = () =>
             {
+                The<IFriendly>()
+                    .WhenToldTo(l => l.Get("Age")).Return("age");
+
                 The<ILamdaDocumenter>()
-                    .WhenToldTo(l => l.Document(Param.IsAny<string>(), Param.IsAny<SimpleLambdaExpressionSyntax>()))
+                    .WhenToldTo(l => l.Document("age", Param.IsAny<SimpleLambdaExpressionSyntax>()))
                     .Return("age < 25");
 
-                rule = new Rule("Name", new Token("must", Tokens.AgeLessThan25));
+                rule = new Rule("Age", new Token("must", paramLessThan25));
             };
 
             Because of = () =>
@@ -131,11 +134,21 @@ namespace FluentValidationWikify.Specs
                 result.ShouldNotBeNull();
 
             It should_return_semi_friendly_name = () =>
-                result.ShouldEqual("Name must satisfy age < 25");
+                result.ShouldEqual("Age must satisfy age < 25");
 
             static string result;
 
             static Rule rule;
+
+            //p => p < 25
+            static readonly SimpleLambdaExpressionSyntax paramLessThan25 = Syntax.SimpleLambdaExpression(
+                Syntax.Parameter(Syntax.Identifier("p")),
+                Syntax.BinaryExpression(
+                    SyntaxKind.LessThanExpression,
+                    Syntax.IdentifierName("p"),
+                    Syntax.LiteralExpression(
+                        SyntaxKind.NumericLiteralExpression,
+                        Syntax.Literal("25", 25))));
         }
 
         [Subject(typeof(SimpleSentenceRuleDocumenter))]

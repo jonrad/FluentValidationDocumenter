@@ -111,6 +111,37 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
             static SyntaxNode node;
         }
 
+        private class when_using_block_lamda
+        {
+            Establish context = () =>
+            {
+                node =
+                    Syntax.InvocationExpression(
+                        Syntax.MemberAccessExpression(
+                            SyntaxKind.MemberAccessExpression,
+                            Syntax.IdentifierName("x"),
+                            Syntax.IdentifierName("Must")),
+                        Syntax.ArgumentList(
+                            Syntax.SeparatedList(
+                                Syntax.Argument(Tokens.AgeLessThan25))));
+
+                documenter = new PredicateTokenizer();
+            };
+
+            It should_be_able_to_process = () =>
+                documenter.CanProcess(node).ShouldBeTrue();
+
+            It should_return_when = () =>
+                documenter.Get(node).Id.ShouldEqual("must");
+
+            It should_return_isawesome_for_info = () =>
+                documenter.Get(node).Info.ToString().ShouldEqual(Tokens.AgeLessThan25.ToString());
+
+            static PredicateTokenizer documenter;
+
+            static SyntaxNode node;
+        }
+
         private class when_using_when
         {
             private Establish context = () =>
