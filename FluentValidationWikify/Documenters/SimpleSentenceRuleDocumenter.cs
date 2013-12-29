@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using FluentValidationWikify.Models;
 using Roslyn.Compilers.CSharp;
 
@@ -9,13 +8,13 @@ namespace FluentValidationWikify.Documenters
 {
     public class SimpleSentenceRuleDocumenter : IRuleDocumenter
     {
-        private string currentClassName = null;
-
         private readonly ILamdaDocumenter lamdaDocumenter;
 
         private readonly IFriendly friendly;
 
         private readonly Dictionary<string, Func<Token, string>> tokenStringifiers;
+
+        private string currentClassName;
 
         public SimpleSentenceRuleDocumenter(ILamdaDocumenter lamdaDocumenter, IFriendly friendly)
         {
@@ -74,9 +73,9 @@ namespace FluentValidationWikify.Documenters
         private string WhenParser(Token token)
         {
             var info = token.Info as SimpleLambdaExpressionSyntax;
-            string friendly = info != null ? lamdaDocumenter.Document(Friendly(currentClassName), info) : Friendly(token.Info.ToString());
+            string details = info != null ? lamdaDocumenter.Document(Friendly(currentClassName), info) : Friendly(token.Info.ToString());
 
-            return "when " + friendly;
+            return "when " + details;
         }
 
         private string ArgumentParser(Token token, string text)
