@@ -67,15 +67,15 @@ namespace FluentValidationWikify.Documenters
 
         private string MustParser(Token token)
         {
-            return "must " + Friendly(token.Info as string);
+            return string.Concat(
+                "must ",
+                token.Info is SimpleLambdaExpressionSyntax ? "satisfy " : string.Empty,
+                Friendly(token.Info));
         }
 
         private string WhenParser(Token token)
         {
-            var info = token.Info as SimpleLambdaExpressionSyntax;
-            string details = info != null ? lamdaDocumenter.Document(Friendly(currentClassName), info) : Friendly(token.Info.ToString());
-
-            return "when " + details;
+            return "when " + Friendly(token.Info);
         }
 
         private string ArgumentParser(Token token, string text)
@@ -95,9 +95,10 @@ namespace FluentValidationWikify.Documenters
             return string.Format("must be between {0} and {1} ({2})", args[0], args[1], type);
         }
 
-        private string Friendly(string data)
+        private string Friendly(object data)
         {
-            return friendly.Get(data);
+            var info = data as SimpleLambdaExpressionSyntax;
+            return info != null ? lamdaDocumenter.Document(Friendly(currentClassName), info) : friendly.Get(data.ToString());
         }
     }
 }

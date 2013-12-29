@@ -8,11 +8,10 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
     public class PredicateTokenizerSpecs
     {
         [Subject(typeof(PredicateTokenizer))]
-        private class in_simple_case
+        private class when_using_must_with_func
         {
             private Establish context = () =>
             {
-
                 var lamda = Syntax.SimpleLambdaExpression(
                     Syntax.Parameter(Syntax.Identifier("t")),
                     Syntax.ObjectCreationExpression(Syntax.ParseTypeName("Person")));
@@ -41,12 +40,75 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
             It should_return_must = () =>
                 documenter.Get(node).Id.ShouldEqual("must");
 
-            It should_return_be_aweomse = () =>
+            It should_return_exist = () =>
                 documenter.Get(node).Info.ShouldEqual("Exist");
 
             private static PredicateTokenizer documenter;
 
             private static SyntaxNode node;
+        }
+
+        private class when_using_method_group
+        {
+            private Establish context = () =>
+            {
+                node =
+                    Syntax.InvocationExpression(
+                        Syntax.MemberAccessExpression(
+                            SyntaxKind.MemberAccessExpression,
+                            Syntax.IdentifierName("x"),
+                            Syntax.IdentifierName("Must")),
+                        Syntax.ArgumentList(
+                            Syntax.SeparatedList(
+                                Syntax.Argument(
+                                    Syntax.IdentifierName("BeAwesome")))));
+
+                documenter = new PredicateTokenizer();
+            };
+
+            It should_be_able_to_process = () =>
+                documenter.CanProcess(node).ShouldBeTrue();
+
+            It should_return_when = () =>
+                documenter.Get(node).Id.ShouldEqual("must");
+
+            It should_return_isawesome_for_info = () =>
+                documenter.Get(node).Info.ShouldEqual("BeAwesome");
+
+            static PredicateTokenizer documenter;
+
+            static SyntaxNode node;
+        }
+
+        private class when_using_simple_lamda
+        {
+            private Establish context = () =>
+            {
+                node =
+                    Syntax.InvocationExpression(
+                        Syntax.MemberAccessExpression(
+                            SyntaxKind.MemberAccessExpression,
+                            Syntax.IdentifierName("x"),
+                            Syntax.IdentifierName("Must")),
+                        Syntax.ArgumentList(
+                            Syntax.SeparatedList(
+                                Syntax.Argument(Tokens.AgeLessThan25))));
+
+                documenter = new PredicateTokenizer();
+            };
+
+            It should_be_able_to_process = () =>
+                documenter.CanProcess(node).ShouldBeTrue();
+
+            It should_return_when = () =>
+                documenter.Get(node).Id.ShouldEqual("must");
+
+            It should_return_isawesome_for_info = () =>
+                documenter.Get(node).Info.ToString().ShouldEqual(Tokens.AgeLessThan25.ToString());
+
+            static PredicateTokenizer documenter;
+
+            static SyntaxNode node;
         }
 
         private class when_using_when
