@@ -37,7 +37,9 @@ namespace FluentValidationWikify.Documenters
             {
                 if (node.Identifier.ValueText == search)
                 {
-                    return Syntax.IdentifierName(replace);
+                    return Syntax.IdentifierName(replace)
+                        .WithLeadingTrivia(node.GetLeadingTrivia())
+                        .WithTrailingTrivia(node.GetTrailingTrivia());
                 }
 
                 return Syntax.IdentifierName(node.Identifier.ValueText.ToLower());
