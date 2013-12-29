@@ -1,7 +1,8 @@
 ﻿using System.IO;
+using FluentValidationWikify.Visitors;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Console
+namespace FluentValidationWikify.Console.Shells
 {
     public class DebugShell : IShell
     {
@@ -16,8 +17,6 @@ namespace FluentValidationWikify.Console
             }
 
             System.Console.WriteLine();
-            System.Console.WriteLine("Press any key");
-            System.Console.Read();
         }
     }
 }

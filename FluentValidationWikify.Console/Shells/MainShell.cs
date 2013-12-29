@@ -1,13 +1,13 @@
 ﻿using System.IO;
 using FluentValidationWikify.Documenters;
 
-namespace FluentValidationWikify.Console
+namespace FluentValidationWikify.Console.Shells
 {
-    public class Shell : IShell
+    public class MainShell : IShell
     {
         private readonly ITextDocumenter documenter;
 
-        public Shell(ITextDocumenter documenter)
+        public MainShell(ITextDocumenter documenter)
         {
             this.documenter = documenter;
         }

@@ -4,6 +4,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using FluentValidationWikify.Documenters;
 using FluentValidationWikify.NodeTokenizers;
+using FluentValidationWikify.Tokenizers;
 
 namespace FluentValidationWikify.Integration
 {

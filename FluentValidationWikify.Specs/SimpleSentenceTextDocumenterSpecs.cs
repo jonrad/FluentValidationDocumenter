@@ -1,6 +1,7 @@
 using System;
 using FluentValidationWikify.Documenters;
 using FluentValidationWikify.Models;
+using FluentValidationWikify.Tokenizers;
 using Machine.Fakes;
 using Machine.Specifications;
 

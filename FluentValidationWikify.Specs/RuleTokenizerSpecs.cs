@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FluentValidationWikify.Models;
 using FluentValidationWikify.NodeTokenizers;
+using FluentValidationWikify.Tokenizers;
 using Machine.Fakes;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;

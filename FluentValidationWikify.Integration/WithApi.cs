@@ -2,6 +2,7 @@
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using FluentValidationWikify.Documenters;
+using FluentValidationWikify.Tokenizers;
 
 namespace FluentValidationWikify.Integration
 {

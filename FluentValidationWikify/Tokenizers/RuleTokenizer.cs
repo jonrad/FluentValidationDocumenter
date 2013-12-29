@@ -6,7 +6,7 @@ using FluentValidationWikify.Models;
 using FluentValidationWikify.NodeTokenizers;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify
+namespace FluentValidationWikify.Tokenizers
 {
     public class RuleTokenizer : IRuleTokenizer
     {

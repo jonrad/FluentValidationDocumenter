@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FluentValidationWikify.Models;
 using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.NodeTokenizers

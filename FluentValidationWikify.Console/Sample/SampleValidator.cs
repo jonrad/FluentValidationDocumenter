@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace FluentValidationWikify.Console
+namespace FluentValidationWikify.Console.Sample
 {
     public class SampleValidator : AbstractValidator<Person>
     {

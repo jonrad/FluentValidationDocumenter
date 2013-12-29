@@ -2,6 +2,7 @@
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using FluentValidationWikify.Console.Installers;
+using FluentValidationWikify.Console.Shells;
 using NDesk.Options;
 
 namespace FluentValidationWikify.Console

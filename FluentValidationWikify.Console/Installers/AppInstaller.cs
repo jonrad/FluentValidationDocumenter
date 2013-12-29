@@ -2,8 +2,10 @@
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using FluentValidationWikify.Console.Shells;
 using FluentValidationWikify.Documenters;
 using FluentValidationWikify.NodeTokenizers;
+using FluentValidationWikify.Tokenizers;
 
 namespace FluentValidationWikify.Console.Installers
 {
@@ -23,7 +25,7 @@ namespace FluentValidationWikify.Console.Installers
             container.Register(
                 Component.For<IFriendly>().ImplementedBy<Friendly>(),
                 Component.For<ILamdaDocumenter>().ImplementedBy<SimpleSentenceLamdaDocumenter>(),
-                Component.For<IShell>().ImplementedBy<Shell>(),
+                Component.For<IShell>().ImplementedBy<MainShell>(),
                 Component.For<ITextTokenizer>().ImplementedBy<TextTokenizer>(),
                 Component.For<IClassTokenizer>().ImplementedBy<ClassTokenizer>(),
                 Component.For<IRuleTokenizer>().ImplementedBy<RuleTokenizer>().DependsOn(Dependency.OnValue("force", force)),

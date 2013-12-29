@@ -68,7 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassTokenizer.cs" />
+    <Compile Include="Tokenizers\ClassTokenizer.cs" />
     <Compile Include="Documenters\Friendly.cs" />
     <Compile Include="Documenters\IClassDocumenter.cs" />
     <Compile Include="Documenters\IFriendly.cs" />
@@ -81,23 +81,23 @@
     <Compile Include="Documenters\ILamdaDocumenter.cs" />
     <Compile Include="NodeTokenizers\MultipleArgumentTokenizer.cs" />
     <Compile Include="NodeTokenizers\SingleArgumentTokenizer.cs" />
-    <Compile Include="Token.cs" />
-    <Compile Include="ITextTokenizer.cs" />
+    <Compile Include="Models\Token.cs" />
+    <Compile Include="Tokenizers\ITextTokenizer.cs" />
     <Compile Include="Models\ClassRules.cs" />
-    <Compile Include="IClassTokenizer.cs" />
+    <Compile Include="Tokenizers\IClassTokenizer.cs" />
     <Compile Include="NodeTokenizers\INodeTokenizer.cs" />
     <Compile Include="NodeTokenizers\InvocationExpressionTokenizer.cs" />
-    <Compile Include="IRuleTokenizer.cs" />
+    <Compile Include="Tokenizers\IRuleTokenizer.cs" />
     <Compile Include="NodeTokenizers\MemberAccessExpressionTokenizer.cs" />
     <Compile Include="NodeTokenizers\PredicateTokenizer.cs" />
     <Compile Include="NodeTokenizers\RequiredTokenizer.cs" />
-    <Compile Include="PrintVisitor.cs" />
+    <Compile Include="Visitors\PrintVisitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Rule.cs" />
-    <Compile Include="RuleTokenizer.cs" />
+    <Compile Include="Tokenizers\RuleTokenizer.cs" />
     <Compile Include="NodeTokenizers\RuleForTokenizer.cs" />
-    <Compile Include="TextTokenizer.cs" />
-    <Compile Include="TypeNameVisitor.cs" />
+    <Compile Include="Tokenizers\TextTokenizer.cs" />
+    <Compile Include="Visitors\TypeNameVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

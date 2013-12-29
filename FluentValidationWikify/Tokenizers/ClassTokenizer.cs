@@ -3,7 +3,7 @@ using System.Linq;
 using FluentValidationWikify.Models;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify
+namespace FluentValidationWikify.Tokenizers
 {
     public class ClassTokenizer : IClassTokenizer
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify
+namespace FluentValidationWikify.Visitors
 {
     public class PrintVisitor : SyntaxVisitor
     {
