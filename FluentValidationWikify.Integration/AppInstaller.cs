@@ -1,5 +1,4 @@
-﻿using Castle.Facilities.Logging;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
@@ -12,8 +11,6 @@ namespace FluentValidationWikify.Integration
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.AddFacility<LoggingFacility>(f => f.UseNLog().WithConfig("config.xml"));
-
             container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
             container.Register(
                 Component.For<IFriendly>().ImplementedBy<Friendly>(),
