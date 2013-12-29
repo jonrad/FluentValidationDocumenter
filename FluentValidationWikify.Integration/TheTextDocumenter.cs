@@ -87,8 +87,6 @@ namespace FluentValidationWikify.Integration
                     public PersonValidator()
                     {
                         RuleFor(m => m.Age).Must(x => x == 25).When(m => m.Name == ""Jon"");
-                        //RuleFor(m => m.Name).Must(x => x == ""Jon"").When(m => m.Age == 25);
-                        //RuleFor(m => m.City).Must(x => x == ""New York"").When(m => m.State == ""NY"");
                     }
                 }";
 

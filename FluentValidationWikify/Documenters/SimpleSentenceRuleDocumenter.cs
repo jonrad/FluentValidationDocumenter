@@ -12,76 +12,70 @@ namespace FluentValidationWikify.Documenters
 
         private readonly IFriendly friendly;
 
-        private readonly Dictionary<string, Func<Token, string>> tokenStringifiers;
-
-        private string currentClassName;
-
-        private string currentRuleName;
+        private readonly Dictionary<string, Func<string, Rule, Token, string>> tokenStringifiers;
 
         public SimpleSentenceRuleDocumenter(ILamdaDocumenter lamdaDocumenter, IFriendly friendly)
         {
             this.lamdaDocumenter = lamdaDocumenter;
             this.friendly = friendly;
 
-            tokenStringifiers = new Dictionary<string, Func<Token, string>>
+            tokenStringifiers = new Dictionary<string, Func<string, Rule, Token, string>>
             {
-                { "notnull", t => "is required" },
-                { "notempty", t => "must not be empty" },
-                { "required", t => "is required" },
+                { "notnull", (_, _2, t) => "is required" },
+                { "notempty", (_, _2, t) => "must not be empty" },
+                { "required", (_, _2, t) => "is required" },
                 { "must", MustParser },
                 { "when", WhenParser },
-                { "equal", t => ArgumentParser(t, "equal") },
-                { "notequal", t => ArgumentParser(t, "not equal") },
-                { "greaterthan", t => ArgumentParser(t, "be greater than") },
-                { "greaterthanorequalto", t => ArgumentParser(t, "be greater than or equal to") },
-                { "inclusivebetween", t => BetweenParser(t, "inclusive") },
-                { "exclusivebetween", t => BetweenParser(t, "exclusive") },
-                { "length", LengthParser },
+                { "equal", (_, _2, t) => ArgumentParser(t, "equal") },
+                { "notequal", (_, _2, t) => ArgumentParser(t, "not equal") },
+                { "greaterthan", (_, _2, t) => ArgumentParser(t, "be greater than") },
+                { "greaterthanorequalto", (_, _2, t) => ArgumentParser(t, "be greater than or equal to") },
+                { "inclusivebetween", (_, _2, t) => BetweenParser(t, "inclusive") },
+                { "exclusivebetween", (_, _2, t) => BetweenParser(t, "exclusive") },
+                { "length", (_, _2, t) => LengthParser(t) },
             };
         }
 
         public string Document(string className, Rule rule)
         {
-            // This destroys multi threading, which can be easily rectified
-            currentClassName = className;
-            currentRuleName = rule.Name;
-
             var tokens = rule.Details.ToArray();
             if (tokens.Length == 0)
             {
                 return string.Empty;
             }
 
-            var ruleDetails = string.Join(" and ", tokens.Where(w => w.Id != "when").Select(HandleToken));
-            var conditionalDetails = string.Join(" and ", tokens.Where(w => w.Id == "when").Select(HandleToken));
+            var ruleDetails = string.Join(" and ", tokens.Where(w => w.Id != "when").Select(t => HandleToken(className, rule, t)));
+            var conditionalDetails = string.Join(" and ", tokens.Where(w => w.Id == "when").Select(t => HandleToken(className, rule, t)));
             return rule.Name + " " +
                    ruleDetails +
                    (ruleDetails != string.Empty && conditionalDetails != string.Empty ? " " : string.Empty) +
                    conditionalDetails;
         }
 
-        private string HandleToken(Token token)
+        private string HandleToken(string className, Rule rule, Token token)
         {
-            Func<Token, string> handler;
+            Func<string, Rule, Token, string> handler;
             tokenStringifiers.TryGetValue(token.Id, out handler);
 
-            return handler != null ? handler(token) : null;
+            return handler != null ? handler(className, rule, token) : null;
         }
 
-        private string MustParser(Token token)
+        private string MustParser(string className, Rule rule, Token token)
         {
             var info = token.Info as SimpleLambdaExpressionSyntax;
 
             var details = 
                 info != null ?
-                "satisfy " + lamdaDocumenter.Document(friendly.Get(currentRuleName), info) :
+                "satisfy " + lamdaDocumenter.Document(friendly.Get(rule.Name), info) :
                 friendly.Get(token.Info.ToString());
             return "must " + details;
         }
 
-        private string WhenParser(Token token)
+        private string WhenParser(string className, Rule rule, Token token)
         {
-            return "when " + Friendly(token.Info);
+            var info = token.Info as SimpleLambdaExpressionSyntax;
+            var details = info != null ? lamdaDocumenter.Document(friendly.Get(className), info) : friendly.Get(token.Info.ToString());
+            return "when " + details;
         }
 
         private string ArgumentParser(Token token, string text)
@@ -99,12 +93,6 @@ namespace FluentValidationWikify.Documenters
         {
             var args = (object[])token.Info;
             return string.Format("must be between {0} and {1} ({2})", args[0], args[1], type);
-        }
-
-        private string Friendly(object data)
-        {
-            var info = data as SimpleLambdaExpressionSyntax;
-            return info != null ? lamdaDocumenter.Document(friendly.Get(currentClassName), info) : friendly.Get(data.ToString());
         }
     }
 }
