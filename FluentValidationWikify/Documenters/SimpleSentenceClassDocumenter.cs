@@ -23,7 +23,7 @@ namespace FluentValidationWikify.Documenters
             return "Rules for " + classRules.Name + Environment.NewLine +
                    string.Join(
                        Environment.NewLine,
-                       classRules.Select(r => ruleDocumenter.Document(classRules.Name, r)));
+                       classRules.AsParallel().AsOrdered().Select(r => ruleDocumenter.Document(classRules.Name, r)));
         }
     }
 }

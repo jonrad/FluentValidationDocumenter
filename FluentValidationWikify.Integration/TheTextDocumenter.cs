@@ -54,5 +54,28 @@ namespace FluentValidationWikify.Integration
                         Environment.NewLine,
                         Enumerable.Range(0, 5).Select(i => string.Format("{0} is required", (char)('A' + i))))));
         }
+
+        [Test]
+        public void ForSinglePredicate()
+        {
+            const string Text = @"
+                public class ModelValidator : AbstractValidator<Model>
+                {
+                    public ModelValidator()
+                    {
+                        RuleFor(m => m.Age).Must(x => x == 25);
+                    }
+                }";
+
+            var documenter = InitDocumenter();
+
+            var results = documenter.ToString(Text);
+
+            Assert.That(
+                results,
+                Is.EqualTo(
+                    "Rules for Model" + Environment.NewLine +
+                    "Age must satisfy age == 25"));
+        }
     }
 }
