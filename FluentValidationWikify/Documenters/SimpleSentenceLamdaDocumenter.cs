@@ -35,14 +35,12 @@ namespace FluentValidationWikify.Documenters
 
             public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
             {
-                if (node.Identifier.ValueText == search)
-                {
-                    return Syntax.IdentifierName(replace)
+                var newIdentifier =
+                    node.Identifier.ValueText == search ? replace : node.Identifier.ValueText.ToLower();
+
+                return Syntax.IdentifierName(newIdentifier)
                         .WithLeadingTrivia(node.GetLeadingTrivia())
                         .WithTrailingTrivia(node.GetTrailingTrivia());
-                }
-
-                return Syntax.IdentifierName(node.Identifier.ValueText.ToLower());
             }
 
             public override SyntaxNode Visit(SyntaxNode node)

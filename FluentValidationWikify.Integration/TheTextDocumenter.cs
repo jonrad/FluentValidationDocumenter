@@ -77,5 +77,57 @@ namespace FluentValidationWikify.Integration
                     "Rules for Model" + Environment.NewLine +
                     "Age must satisfy age == 25"));
         }
+
+        [Test]
+        public void ForPredicateAndWhere()
+        {
+            const string Text = @"
+                public class PersonValidator : AbstractValidator<Person>
+                {
+                    public PersonValidator()
+                    {
+                        RuleFor(m => m.Age).Must(x => x == 25).When(m => m.Name == ""Jon"");
+                        //RuleFor(m => m.Name).Must(x => x == ""Jon"").When(m => m.Age == 25);
+                        //RuleFor(m => m.City).Must(x => x == ""New York"").When(m => m.State == ""NY"");
+                    }
+                }";
+
+            var documenter = InitDocumenter();
+
+            var results = documenter.ToString(Text);
+
+            Assert.That(
+                results,
+                Is.EqualTo(
+                    "Rules for Person" + Environment.NewLine +
+                    @"Age must satisfy age == 25 when person.name == ""Jon"""));
+        }
+
+        [Test]
+        public void ForMultiplePredicateAndWhere()
+        {
+            const string Text = @"
+                public class PersonValidator : AbstractValidator<Person>
+                {
+                    public PersonValidator()
+                    {
+                        RuleFor(m => m.Age).Must(x => x == 25).When(m => m.Name == ""Jon"");
+                        RuleFor(m => m.Name).Must(x => x == ""Jon"").When(m => m.Age == 25);
+                        RuleFor(m => m.City).Must(x => x == ""New York"").When(m => m.State == ""NY"");
+                    }
+                }";
+
+            var documenter = InitDocumenter();
+
+            var results = documenter.ToString(Text);
+
+            Assert.That(
+                results,
+                Is.EqualTo(
+                    "Rules for Person"
+                    + Environment.NewLine + @"Age must satisfy age == 25 when person.name == ""Jon""" 
+                    + Environment.NewLine + @"Name must satisfy name == ""Jon"" when person.age == 25"
+                    + Environment.NewLine + @"City must satisfy city == ""New York"" when person.state == ""NY"""));
+        }
     }
 }
