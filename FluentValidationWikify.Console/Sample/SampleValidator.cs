@@ -6,14 +6,12 @@ namespace FluentValidationWikify.Console.Sample
     {
         public SampleValidator()
         {
-            RuleFor(t => t.Name).Must(n => n == "Jon");
-            /*When(
+            When(
                 p => p.Age > 25,
                 () =>
                 {
                     RuleFor(t => t.Name).NotNull();
-                    RuleFor(t => t.Age).GreaterThanOrEqualTo(0);
-                });*/
+                });
         }
     }
 }

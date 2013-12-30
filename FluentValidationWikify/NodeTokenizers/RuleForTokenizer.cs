@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using FluentValidationWikify.Models;
+using FluentValidationWikify.Tokenizers;
 using Roslyn.Compilers.CSharp;
 
 namespace FluentValidationWikify.NodeTokenizers

@@ -9,9 +9,9 @@ namespace FluentValidationWikify.Tokenizers
     {
         private readonly Visitor visitor;
 
-        public ClassTokenizer(IRuleTokenizer ruleDocumenter)
+        public ClassTokenizer(IRuleTokenizer ruleTokenizer)
         {
-            visitor = new Visitor(ruleDocumenter);
+            visitor = new Visitor(ruleTokenizer);
         }
 
         public bool CanProcess(ClassDeclarationSyntax node)
@@ -36,11 +36,11 @@ namespace FluentValidationWikify.Tokenizers
 
         private class Visitor : SyntaxVisitor<IEnumerable<Rule>>
         {
-            private readonly IRuleTokenizer ruleDocumenter;
+            private readonly IRuleTokenizer ruleTokenizer;
 
-            public Visitor(IRuleTokenizer ruleDocumenter)
+            public Visitor(IRuleTokenizer ruleTokenizer)
             {
-                this.ruleDocumenter = ruleDocumenter;
+                this.ruleTokenizer = ruleTokenizer;
             }
 
             public override IEnumerable<Rule> VisitClassDeclaration(ClassDeclarationSyntax node)
@@ -55,7 +55,7 @@ namespace FluentValidationWikify.Tokenizers
 
             public override IEnumerable<Rule> VisitBlock(BlockSyntax node)
             {
-                return ruleDocumenter.Get(node);
+                return ruleTokenizer.Get(node);
             }
 
             private IEnumerable<Rule> RecursivelyVisit(SyntaxNode node)

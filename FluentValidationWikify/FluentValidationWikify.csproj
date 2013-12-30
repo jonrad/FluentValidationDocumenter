@@ -68,6 +68,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\WhenClosureDetails.cs" />
+    <Compile Include="NodeTokenizers\WhenClosureTokenizer.cs" />
     <Compile Include="Tokenizers\ClassTokenizer.cs" />
     <Compile Include="Documenters\Friendly.cs" />
     <Compile Include="Documenters\IClassDocumenter.cs" />
