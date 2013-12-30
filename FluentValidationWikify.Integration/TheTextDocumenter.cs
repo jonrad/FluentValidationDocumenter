@@ -127,5 +127,38 @@ namespace FluentValidationWikify.Integration
                     + Environment.NewLine + @"Name must satisfy name == ""Jon"" when person.age == 25"
                     + Environment.NewLine + @"City must satisfy city == ""New York"" when person.state == ""NY"""));
         }
+
+        [Test]
+        public void ForNestedWhen()
+        {
+            const string Text = @"
+                public class PersonValidator : AbstractValidator<Person>
+                {
+                    public PersonValidator()
+                    {
+                        When(x => x.Id > 0, () => {
+                           RuleFor(x => x.Surname).NotNull();
+                           RuleFor(x => x.Forename).NotNull();
+                        });
+                    }
+                }";
+
+            const string EquivalentText = @"
+                public class PersonValidator : AbstractValidator<Person>
+                {
+                    public PersonValidator()
+                    {
+                       RuleFor(x => x.Surname).NotNull().When(x => x.Id > 0);
+                       RuleFor(x => x.Forename).NotNull().When(x => x.Id > 0);
+                    }
+                }";
+
+            var documenter = InitDocumenter();
+
+            var results = documenter.ToString(Text);
+            var expectedResults = documenter.ToString(EquivalentText);
+
+            Assert.That(results, Is.EqualTo(expectedResults));
+        }
     }
 }
