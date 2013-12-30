@@ -14,10 +14,10 @@ namespace FluentValidationWikify.Tokenizers
 
         private readonly Visitor visitor;
 
-        public RuleTokenizer(IEnumerable<INodeTokenizer> documenters, bool force = false)
+        public RuleTokenizer(IEnumerable<INodeTokenizer> nodeTokenizers, bool force = false)
         {
             this.force = force;
-            visitor = new Visitor(documenters);
+            visitor = new Visitor(nodeTokenizers);
 
             Logger = NullLogger.Instance;
         }
@@ -86,11 +86,11 @@ namespace FluentValidationWikify.Tokenizers
 
         private class Visitor : SyntaxVisitor<IEnumerable<Handler>>
         {
-            private readonly IEnumerable<INodeTokenizer> documenters;
+            private readonly IEnumerable<INodeTokenizer> nodeTokenizers;
 
-            public Visitor(IEnumerable<INodeTokenizer> documenters)
+            public Visitor(IEnumerable<INodeTokenizer> nodeTokenizers)
             {
-                this.documenters = documenters;
+                this.nodeTokenizers = nodeTokenizers;
                 Logger = NullLogger.Instance;
             }
 
@@ -123,14 +123,14 @@ namespace FluentValidationWikify.Tokenizers
                     yield return result;
                 }
 
-                var documenter = documenters.FirstOrDefault(d => d.CanProcess(node));
+                var tokenizer = nodeTokenizers.FirstOrDefault(d => d.CanProcess(node));
 
-                if (documenter != null)
+                if (tokenizer != null)
                 {
                     yield return new Handler
                     {
                         Node = node,
-                        Tokenizer = documenter
+                        Tokenizer = tokenizer
                     };
                 }
                 else if (node is InvocationExpressionSyntax)
