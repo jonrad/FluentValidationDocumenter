@@ -26,16 +26,12 @@ namespace FluentValidationWikify.Tokenizers
 
         public IEnumerable<Rule> Get(SyntaxNode tree)
         {
-            return Get(tree, new Token[0]);
-        }
-
-        public IEnumerable<Rule> Get(SyntaxNode tree, IEnumerable<Token> additionalTokens)
-        {
             Rule rule = null;
             List<Token> details = null;
 
             visitor.Logger = Logger;
 
+            // This entire method is full of disgusting
             foreach (var handler in visitor.Visit(tree))
             {
                 Token token;
