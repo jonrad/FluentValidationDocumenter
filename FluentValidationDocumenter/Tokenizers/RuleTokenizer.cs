@@ -66,9 +66,9 @@ namespace FluentValidationWikify.Tokenizers
                     }
 
                     details = new List<Token>();
-                    if (token.Info is WhenClosureDetails)
+                    var whenClosureDetails = token.Info as WhenClosureDetails;
+                    if (whenClosureDetails != null)
                     {
-                        var whenClosureDetails = (WhenClosureDetails)token.Info;
                         var rules = Get(whenClosureDetails.Block);
 
                         foreach (var closureRule in rules)

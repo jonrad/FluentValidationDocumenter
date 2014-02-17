@@ -21,18 +21,18 @@ namespace FluentValidationWikify.Documenters
 
             tokenStringifiers = new Dictionary<string, Func<string, Rule, Token, string>>
             {
-                { "notnull", (_, _2, t) => "is required" },
-                { "notempty", (_, _2, t) => "must not be empty" },
-                { "required", (_, _2, t) => "is required" },
+                { "notnull", (unused, unused2, t) => "is required" },
+                { "notempty", (unused, unused2, t) => "must not be empty" },
+                { "required", (unused, unused2, t) => "is required" },
                 { "must", MustParser },
                 { "when", WhenParser },
-                { "equal", (_, _2, t) => ArgumentParser(t, "equal") },
-                { "notequal", (_, _2, t) => ArgumentParser(t, "not equal") },
-                { "greaterthan", (_, _2, t) => ArgumentParser(t, "be greater than") },
-                { "greaterthanorequalto", (_, _2, t) => ArgumentParser(t, "be greater than or equal to") },
-                { "inclusivebetween", (_, _2, t) => BetweenParser(t, "inclusive") },
-                { "exclusivebetween", (_, _2, t) => BetweenParser(t, "exclusive") },
-                { "length", (_, _2, t) => LengthParser(t) },
+                { "equal", (unused, unused2, t) => ArgumentParser(t, "equal") },
+                { "notequal", (unused, unused2, t) => ArgumentParser(t, "not equal") },
+                { "greaterthan", (unused, unused2, t) => ArgumentParser(t, "be greater than") },
+                { "greaterthanorequalto", (unused, unused2, t) => ArgumentParser(t, "be greater than or equal to") },
+                { "inclusivebetween", (unused, unused2, t) => BetweenParser(t, "inclusive") },
+                { "exclusivebetween", (unused, unused2, t) => BetweenParser(t, "exclusive") },
+                { "length", (unused, unused2, t) => LengthParser(t) },
             };
         }
 

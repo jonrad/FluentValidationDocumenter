@@ -16,11 +16,6 @@ namespace FluentValidationWikify.Documenters
             return replaced.ToString();
         }
 
-        private SyntaxNode Replace(SyntaxNode syntaxNode)
-        {
-            return syntaxNode;
-        }
-
         private class ReplacementVisitor : SyntaxVisitor<SyntaxNode>
         {
             private readonly string search;
