@@ -34,7 +34,13 @@ namespace FluentValidationWikify.NodeTokenizers
             var args = node.ChildNodes().OfType<ArgumentListSyntax>().First()
                 .ChildNodes().OfType<ArgumentSyntax>().ToArray();
 
-            var details = new WhenClosureDetails(args.First().ChildNodes().First(), null);
+            var whenClause = args[0].ChildNodes().First();
+
+            var block = args[1]
+                .ChildNodes().OfType<ParenthesizedLambdaExpressionSyntax>().First()
+                .ChildNodes().OfType<BlockSyntax>().First();
+
+            var details = new WhenClosureDetails(whenClause, block);
 
             return new Token("WhenClosure", details);
         }

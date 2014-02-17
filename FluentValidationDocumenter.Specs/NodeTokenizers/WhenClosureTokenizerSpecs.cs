@@ -39,6 +39,7 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
         {
             Establish context = () =>
             {
+                block = Syntax.Block(Syntax.ExpressionStatement(Tokens.RuleForName));
                 node =
                     Syntax.InvocationExpression(
                         Syntax.IdentifierName("When"),
@@ -49,8 +50,7 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
                                 Syntax.Argument(
                                     Syntax.ParenthesizedLambdaExpression(
                                         Syntax.ParameterList(),
-                                        Syntax.Block(
-                                            Syntax.ExpressionStatement(Tokens.RuleForName))))))); 
+                                        block))))); 
 
                 tokenizer = new WhenClosureTokenizer();
             };
@@ -67,11 +67,19 @@ namespace FluentValidationWikify.Specs.NodeTokenizers
             It should_return_proper_details_type = () =>
                 results.Info.ShouldBeOfType<WhenClosureDetails>();
 
+            It should_have_a_when_clause_as_expected = () =>
+                ((WhenClosureDetails) results.Info).WhenDetails.ToString().ShouldEqual(Tokens.AgeLessThan25.ToString());
+
+            It should_have_a_block_in_details = () =>
+                ((WhenClosureDetails) results.Info).Block.ToString().ShouldEqual(block.ToString());
+
             static INodeTokenizer tokenizer;
 
             static SyntaxNode node;
 
             static Token results;
+
+            static BlockSyntax block;
         }
     }
 }

@@ -66,11 +66,26 @@ namespace FluentValidationWikify.Tokenizers
                     }
 
                     details = new List<Token>();
-                    rule = new Rule
+                    if (token.Info is WhenClosureDetails)
                     {
-                        Name = token.Info.ToString(), // FIX
-                        Details = details
-                    };
+                        var whenClosureDetails = (WhenClosureDetails)token.Info;
+                        var rules = Get(whenClosureDetails.Block);
+
+                        foreach (var closureRule in rules)
+                        {
+                            yield return closureRule;
+                        }
+
+                        rule = null;
+                    }
+                    else
+                    {
+                        rule = new Rule
+                        {
+                            Name = token.Info.ToString(), // FIX
+                            Details = details
+                        };
+                    }
                 }
                 else if (rule != null)
                 {
