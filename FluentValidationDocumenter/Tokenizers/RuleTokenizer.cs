@@ -72,27 +72,17 @@ namespace FluentValidationWikify.Tokenizers
                     var whenClosureDetails = token.Info as WhenClosureDetails;
                     if (whenClosureDetails != null)
                     {
-                        var rules = Get(whenClosureDetails.Block);
-
-                        foreach (var closureRule in rules)
+                        var whenClosureRules = ProcessWhenClosure(whenClosureDetails);
+                        foreach (var r in whenClosureRules)
                         {
-                            yield return new Rule
-                            {
-                                Name = closureRule.Name,
-                                Details = closureRule.Details.Concat(new[]
-                                {
-                                    new Token("when", whenClosureDetails.WhenDetails) 
-                                }).ToArray()
-                            };
+                            yield return r;
                         }
-
-                        rule = null;
                     }
                     else
                     {
                         rule = new Rule
                         {
-                            Name = token.Info.ToString(), // FIX
+                            Name = token.Info.ToString(), // This is a bad way to get the rule name
                             Details = details
                         };
                     }
@@ -107,6 +97,20 @@ namespace FluentValidationWikify.Tokenizers
             {
                 yield return rule;
             }
+        }
+
+        private IEnumerable<Rule> ProcessWhenClosure(WhenClosureDetails whenClosureDetails)
+        {
+            var rules = Get(whenClosureDetails.Block);
+
+            return rules.Select(closureRule => new Rule
+            {
+                Name = closureRule.Name,
+                Details = closureRule.Details.Concat(new[]
+                {
+                    new Token("when", whenClosureDetails.WhenDetails)
+                }).ToArray()
+            });
         }
 
         private class Visitor : SyntaxVisitor<IEnumerable<Handler>>
