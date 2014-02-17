@@ -62,7 +62,7 @@ namespace FluentValidationWikify.Console
 
         private static void ShowHelp()
         {
-            throw new NotImplementedException();
+            System.Console.WriteLine(@"Try: {0} Sample/SampleValidator.cs", AppDomain.CurrentDomain.FriendlyName);
         }
     }
 }

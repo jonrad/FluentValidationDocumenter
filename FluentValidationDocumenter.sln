@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D2326E
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentValidationDocumenter", "FluentValidationDocumenter\FluentValidationDocumenter.csproj", "{7B7F8C46-5060-4429-ADBE-26F5147A757E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentValidationDocumenter.Console", "FluentValidationDocumenter.Console\FluentValidationDocumenter.Console.csproj", "{8B818081-D597-45A4-BCBA-E4DF6C598017}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentValidationDocumenter", "FluentValidationDocumenter\FluentValidationDocumenter.csproj", "{7B7F8C46-5060-4429-ADBE-26F5147A757E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentValidationDocumenter.Integration", "FluentValidationDocumenter.Integration\FluentValidationDocumenter.Integration.csproj", "{51701DB5-EBF6-427B-9A2B-E442815389AF}"
 EndProject
