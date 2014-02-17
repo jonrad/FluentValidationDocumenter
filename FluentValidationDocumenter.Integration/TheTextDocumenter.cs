@@ -143,22 +143,15 @@ namespace FluentValidationWikify.Integration
                     }
                 }";
 
-            const string EquivalentText = @"
-                public class PersonValidator : AbstractValidator<Person>
-                {
-                    public PersonValidator()
-                    {
-                       RuleFor(x => x.Surname).NotNull().When(x => x.Id > 0);
-                       RuleFor(x => x.Forename).NotNull().When(x => x.Id > 0);
-                    }
-                }";
-
             var documenter = InitDocumenter();
-
             var results = documenter.ToString(Text);
-            var expectedResults = documenter.ToString(EquivalentText);
 
-            Assert.That(results, Is.EqualTo(expectedResults));
+            const string ExpectedResults = 
+@"Rules for Person
+Surname is required when person.id > 0
+Forename is required when person.id > 0";
+
+            Assert.That(results, Is.EqualTo(ExpectedResults));
         }
     }
 }

@@ -19,6 +19,7 @@ namespace FluentValidationWikify.Documenters
             {
                 return string.Empty;
             }
+            Console.WriteLine("CLASS");
 
             return "Rules for " + classRules.Name + Environment.NewLine +
                    string.Join(
