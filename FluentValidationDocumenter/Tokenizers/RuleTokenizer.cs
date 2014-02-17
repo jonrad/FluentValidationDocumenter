@@ -26,6 +26,11 @@ namespace FluentValidationWikify.Tokenizers
 
         public IEnumerable<Rule> Get(SyntaxNode tree)
         {
+            return Get(tree, new Token[0]);
+        }
+
+        public IEnumerable<Rule> Get(SyntaxNode tree, IEnumerable<Token> additionalTokens)
+        {
             Rule rule = null;
             List<Token> details = null;
 
@@ -66,6 +71,8 @@ namespace FluentValidationWikify.Tokenizers
                     }
 
                     details = new List<Token>();
+
+                    // ewwww
                     var whenClosureDetails = token.Info as WhenClosureDetails;
                     if (whenClosureDetails != null)
                     {
@@ -73,7 +80,14 @@ namespace FluentValidationWikify.Tokenizers
 
                         foreach (var closureRule in rules)
                         {
-                            yield return closureRule;
+                            yield return new Rule
+                            {
+                                Name = closureRule.Name,
+                                Details = closureRule.Details.Concat(new[]
+                                {
+                                    new Token("when", whenClosureDetails.WhenDetails) 
+                                }).ToArray()
+                            };
                         }
 
                         rule = null;

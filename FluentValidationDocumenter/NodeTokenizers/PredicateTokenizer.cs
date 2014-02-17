@@ -33,7 +33,7 @@ namespace FluentValidationWikify.NodeTokenizers
             if (identifier == null)
             {
                 // this is really quite crap
-                SyntaxNode child = argument.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault() ??
+                var child = argument.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault() ??
                                    (SyntaxNode)argument.ChildNodes().OfType<InvocationExpressionSyntax>().FirstOrDefault();
 
                 if (child != null)
