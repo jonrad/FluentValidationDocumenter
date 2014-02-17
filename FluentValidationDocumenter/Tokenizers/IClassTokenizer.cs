@@ -1,7 +1,7 @@
-﻿using FluentValidationWikify.Models;
+﻿using FluentValidationDocumenter.Models;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Tokenizers
+namespace FluentValidationDocumenter.Tokenizers
 {
     public interface IClassTokenizer
     {

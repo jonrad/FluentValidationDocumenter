@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using FluentValidationWikify.Models;
+using FluentValidationDocumenter.Models;
 
-namespace FluentValidationWikify.Documenters
+namespace FluentValidationDocumenter.Documenters
 {
     public class SimpleSentenceClassDocumenter : IClassDocumenter
     {

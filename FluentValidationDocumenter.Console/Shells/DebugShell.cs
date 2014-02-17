@@ -1,8 +1,8 @@
 ﻿using System.IO;
-using FluentValidationWikify.Visitors;
+using FluentValidationDocumenter.Visitors;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Console.Shells
+namespace FluentValidationDocumenter.Console.Shells
 {
     public class DebugShell : IShell
     {

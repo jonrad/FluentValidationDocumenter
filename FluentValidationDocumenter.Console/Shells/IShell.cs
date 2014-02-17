@@ -1,4 +1,4 @@
-﻿namespace FluentValidationWikify.Console.Shells
+﻿namespace FluentValidationDocumenter.Console.Shells
 {
     public interface IShell
     {

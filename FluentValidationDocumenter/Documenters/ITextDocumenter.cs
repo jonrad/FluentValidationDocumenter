@@ -1,4 +1,4 @@
-﻿namespace FluentValidationWikify.Documenters
+﻿namespace FluentValidationDocumenter.Documenters
 {
     public interface ITextDocumenter
     {

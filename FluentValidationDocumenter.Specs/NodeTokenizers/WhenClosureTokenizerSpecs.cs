@@ -1,9 +1,9 @@
-﻿using FluentValidationWikify.Models;
-using FluentValidationWikify.NodeTokenizers;
+﻿using FluentValidationDocumenter.Models;
+using FluentValidationDocumenter.NodeTokenizers;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Specs.NodeTokenizers
+namespace FluentValidationDocumenter.Specs.NodeTokenizers
 {
     public class WhenClosureTokenizerSpecs
     {

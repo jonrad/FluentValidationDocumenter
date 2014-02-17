@@ -1,8 +1,8 @@
-﻿using FluentValidationWikify.NodeTokenizers;
+﻿using FluentValidationDocumenter.NodeTokenizers;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Specs.NodeTokenizers
+namespace FluentValidationDocumenter.Specs.NodeTokenizers
 {
     [Subject(typeof(RequiredTokenizer))]
     public class RequredTokenizerSpecs

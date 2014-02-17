@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Logging;
-using FluentValidationWikify.Models;
-using FluentValidationWikify.NodeTokenizers;
+using FluentValidationDocumenter.Models;
+using FluentValidationDocumenter.NodeTokenizers;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Tokenizers
+namespace FluentValidationDocumenter.Tokenizers
 {
     public class RuleTokenizer : IRuleTokenizer
     {

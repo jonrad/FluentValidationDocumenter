@@ -7,8 +7,8 @@
     <ProjectGuid>{51701DB5-EBF6-427B-9A2B-E442815389AF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FluentValidationWikify.Integration</RootNamespace>
-    <AssemblyName>FluentValidationWikify.Integration</AssemblyName>
+    <RootNamespace>FluentValidationDocumenter.Integration</RootNamespace>
+    <AssemblyName>FluentValidationDocumenter.Integration</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

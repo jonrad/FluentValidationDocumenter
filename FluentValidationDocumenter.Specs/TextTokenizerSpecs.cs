@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using FluentValidationWikify.Tokenizers;
+using FluentValidationDocumenter.Tokenizers;
 using Machine.Fakes;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Specs
+namespace FluentValidationDocumenter.Specs
 {
     public class TextTokenizerSpecs
     {

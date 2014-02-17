@@ -1,4 +1,4 @@
-﻿namespace FluentValidationWikify.Models
+﻿namespace FluentValidationDocumenter.Models
 {
     public class Token
     {

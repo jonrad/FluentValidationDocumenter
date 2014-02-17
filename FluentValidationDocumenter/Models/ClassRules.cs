@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FluentValidationWikify.Models
+namespace FluentValidationDocumenter.Models
 {
     public class ClassRules : List<Rule>
     {

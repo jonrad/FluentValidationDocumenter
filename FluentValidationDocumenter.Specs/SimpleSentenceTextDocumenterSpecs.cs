@@ -1,11 +1,11 @@
 using System;
-using FluentValidationWikify.Documenters;
-using FluentValidationWikify.Models;
-using FluentValidationWikify.Tokenizers;
+using FluentValidationDocumenter.Documenters;
+using FluentValidationDocumenter.Models;
+using FluentValidationDocumenter.Tokenizers;
 using Machine.Fakes;
 using Machine.Specifications;
 
-namespace FluentValidationWikify.Specs
+namespace FluentValidationDocumenter.Specs
 {
     public class SimpleSentenceTextDocumenterSpecs
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
-using FluentValidationWikify.Documenters;
-using FluentValidationWikify.Tokenizers;
+using FluentValidationDocumenter.Documenters;
+using FluentValidationDocumenter.Tokenizers;
 
-namespace FluentValidationWikify.Integration
+namespace FluentValidationDocumenter.Integration
 {
     public class WithApi
     {

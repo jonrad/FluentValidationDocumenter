@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using FluentValidationWikify.Documenters;
+using FluentValidationDocumenter.Documenters;
 
-namespace FluentValidationWikify.Console.Shells
+namespace FluentValidationDocumenter.Console.Shells
 {
     public class MainShell : IShell
     {

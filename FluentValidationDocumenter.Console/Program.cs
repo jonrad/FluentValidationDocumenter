@@ -1,11 +1,11 @@
 ﻿using System;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using FluentValidationWikify.Console.Installers;
-using FluentValidationWikify.Console.Shells;
+using FluentValidationDocumenter.Console.Installers;
+using FluentValidationDocumenter.Console.Shells;
 using NDesk.Options;
 
-namespace FluentValidationWikify.Console
+namespace FluentValidationDocumenter.Console
 {
     public class Program
     {

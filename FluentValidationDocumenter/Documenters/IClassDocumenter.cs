@@ -1,6 +1,6 @@
-﻿using FluentValidationWikify.Models;
+﻿using FluentValidationDocumenter.Models;
 
-namespace FluentValidationWikify.Documenters
+namespace FluentValidationDocumenter.Documenters
 {
     public interface IClassDocumenter
     {

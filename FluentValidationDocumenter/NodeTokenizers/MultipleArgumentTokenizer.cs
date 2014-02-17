@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using FluentValidationWikify.Models;
+using FluentValidationDocumenter.Models;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.NodeTokenizers
+namespace FluentValidationDocumenter.NodeTokenizers
 {
     public class MultipleArgumentTokenizer : MemberAccessExpressionTokenizer
     {

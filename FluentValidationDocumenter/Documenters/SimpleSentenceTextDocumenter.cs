@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using FluentValidationWikify.Tokenizers;
+using FluentValidationDocumenter.Tokenizers;
 
-namespace FluentValidationWikify.Documenters
+namespace FluentValidationDocumenter.Documenters
 {
     public class SimpleSentenceTextDocumenter : ITextDocumenter
     {

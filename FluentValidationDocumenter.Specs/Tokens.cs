@@ -1,6 +1,6 @@
 ﻿using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Specs
+namespace FluentValidationDocumenter.Specs
 {
     public class Tokens
     {

@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace FluentValidationWikify.Documenters
+namespace FluentValidationDocumenter.Documenters
 {
     public class Friendly : IFriendly
     {

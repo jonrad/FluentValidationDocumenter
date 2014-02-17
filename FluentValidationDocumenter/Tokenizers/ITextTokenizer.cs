@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using FluentValidationWikify.Models;
+using FluentValidationDocumenter.Models;
 
-namespace FluentValidationWikify.Tokenizers
+namespace FluentValidationDocumenter.Tokenizers
 {
     public interface ITextTokenizer
     {

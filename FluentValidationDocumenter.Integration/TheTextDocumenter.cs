@@ -2,7 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 
-namespace FluentValidationWikify.Integration
+namespace FluentValidationDocumenter.Integration
 {
     [TestFixture]
     public class TheTextDocumenter : WithApi

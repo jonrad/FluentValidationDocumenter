@@ -2,9 +2,9 @@
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using FluentValidationWikify.Console.Shells;
+using FluentValidationDocumenter.Console.Shells;
 
-namespace FluentValidationWikify.Console.Installers
+namespace FluentValidationDocumenter.Console.Installers
 {
     public class DebugInstaller : IWindsorInstaller
     {

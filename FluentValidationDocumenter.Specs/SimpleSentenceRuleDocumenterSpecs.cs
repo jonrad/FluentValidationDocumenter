@@ -1,10 +1,10 @@
-﻿using FluentValidationWikify.Documenters;
-using FluentValidationWikify.Models;
+﻿using FluentValidationDocumenter.Documenters;
+using FluentValidationDocumenter.Models;
 using Machine.Fakes;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Specs
+namespace FluentValidationDocumenter.Specs
 {
     public class SimpleSentenceRuleDocumenterSpecs
     {

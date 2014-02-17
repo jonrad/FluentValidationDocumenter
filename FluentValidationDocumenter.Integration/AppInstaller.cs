@@ -2,11 +2,11 @@
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using FluentValidationWikify.Documenters;
-using FluentValidationWikify.NodeTokenizers;
-using FluentValidationWikify.Tokenizers;
+using FluentValidationDocumenter.Documenters;
+using FluentValidationDocumenter.NodeTokenizers;
+using FluentValidationDocumenter.Tokenizers;
 
-namespace FluentValidationWikify.Integration
+namespace FluentValidationDocumenter.Integration
 {
     public class AppInstaller : IWindsorInstaller
     {

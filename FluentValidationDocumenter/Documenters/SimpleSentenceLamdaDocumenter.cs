@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Documenters
+namespace FluentValidationDocumenter.Documenters
 {
     public class SimpleSentenceLamdaDocumenter : ILamdaDocumenter
     {

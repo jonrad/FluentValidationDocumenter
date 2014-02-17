@@ -1,6 +1,6 @@
 ﻿using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Models
+namespace FluentValidationDocumenter.Models
 {
     public class WhenClosureDetails
     {

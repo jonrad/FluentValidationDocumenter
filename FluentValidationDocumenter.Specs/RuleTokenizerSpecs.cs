@@ -1,12 +1,12 @@
 ﻿using System.Linq;
-using FluentValidationWikify.Models;
-using FluentValidationWikify.NodeTokenizers;
-using FluentValidationWikify.Tokenizers;
+using FluentValidationDocumenter.Models;
+using FluentValidationDocumenter.NodeTokenizers;
+using FluentValidationDocumenter.Tokenizers;
 using Machine.Fakes;
 using Machine.Specifications;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Specs
+namespace FluentValidationDocumenter.Specs
 {
     public class RuleTokenizerSpecs : WithFakes
     {

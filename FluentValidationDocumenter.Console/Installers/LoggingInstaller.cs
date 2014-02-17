@@ -6,7 +6,7 @@ using NLog;
 using NLog.Config;
 using NLog.Targets;
 
-namespace FluentValidationWikify.Console.Installers
+namespace FluentValidationDocumenter.Console.Installers
 {
     public class LoggingInstaller : IWindsorInstaller
     {

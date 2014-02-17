@@ -1,4 +1,4 @@
-﻿namespace FluentValidationWikify.Console.Sample
+﻿namespace FluentValidationDocumenter.Console.Sample
 {
     public class Person
     {

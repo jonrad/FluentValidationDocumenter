@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FluentValidationWikify.Models;
+using FluentValidationDocumenter.Models;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Documenters
+namespace FluentValidationDocumenter.Documenters
 {
     public class SimpleSentenceRuleDocumenter : IRuleDocumenter
     {

@@ -1,10 +1,10 @@
 using System;
-using FluentValidationWikify.Documenters;
-using FluentValidationWikify.Models;
+using FluentValidationDocumenter.Documenters;
+using FluentValidationDocumenter.Models;
 using Machine.Fakes;
 using Machine.Specifications;
 
-namespace FluentValidationWikify.Specs
+namespace FluentValidationDocumenter.Specs
 {
     public class SimpleSentenceClassDocumenterSpecs
     {

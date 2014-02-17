@@ -1,7 +1,7 @@
-﻿using FluentValidationWikify.Documenters;
+﻿using FluentValidationDocumenter.Documenters;
 using Machine.Specifications;
 
-namespace FluentValidationWikify.Specs.Documenters
+namespace FluentValidationDocumenter.Specs.Documenters
 {
     public class FriendlySpecs
     {

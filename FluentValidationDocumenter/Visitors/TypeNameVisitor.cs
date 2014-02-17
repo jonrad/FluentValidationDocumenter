@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Roslyn.Compilers.CSharp;
 
-namespace FluentValidationWikify.Visitors
+namespace FluentValidationDocumenter.Visitors
 {
     public class TypeNameVisitor : SyntaxVisitor<string>
     {
